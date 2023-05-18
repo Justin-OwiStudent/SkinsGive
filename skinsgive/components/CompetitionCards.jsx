@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#393B3F',
         alignSelf: 'center',
         marginTop: 10,
-        borderRadius: 20
+        borderRadius: 20,
+        border: 5
     },
     skin: {
         height: 65,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginRight: 5,
         borderRadius: 25,
-        backgroundColor: '#A12895',
+        backgroundColor: '#00A2E2',
         position: 'absolute',
         right: 0
     },

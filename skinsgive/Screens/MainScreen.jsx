@@ -7,6 +7,10 @@ const MainScreen = () => {
     dummyData = [
         {title: 'Project 1', year: 2023, creator: 'Armand', tech: ["React Native", 'Firebase']},
         {title: 'Project 2', year: 2023, creator: 'Armand', tech: ["React Native", 'Firebase']},
+        {title: 'Project 2', year: 2023, creator: 'Armand', tech: ["React Native", 'Firebase']},
+        {title: 'Project 2', year: 2023, creator: 'Armand', tech: ["React Native", 'Firebase']},
+        {title: 'Project 2', year: 2023, creator: 'Armand', tech: ["React Native", 'Firebase']},
+
     ]
 
   return (
@@ -41,7 +45,8 @@ export default MainScreen
 
 const styles = StyleSheet.create({
  container: {
-    padding: 20   
+    padding: 20,
+    
  },
  bar: {
     width: 100,
@@ -70,18 +75,23 @@ const styles = StyleSheet.create({
  },
  navBar: {
     width: 300,
-    height: 80,
+    height: 60,
     backgroundColor: '#393B3F',
-    marginBottom: 25,
+    marginBottom: 1,
     alignSelf: 'center',
     borderRadius: 25,
     zIndex: 999,
     flexDirection: 'row',
-    paddingLeft: 5
+    paddingLeft: 25,
+    marginTop: 5,
+    
  },
  navIcon: {
-    width: 75,
-    height: 75,
+    width: 60,
+    height: 60,
     marginRight: 35
  }
 })
+
+//TODO: make colours a global style 
+//TODO: make the navbar a global style (do research on navbar)
