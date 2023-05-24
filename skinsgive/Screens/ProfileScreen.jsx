@@ -3,15 +3,15 @@ import React from 'react'
 
 const ProfileScreen = () => {
     return (
-        <View style={styles.comntainer}>
+        <View style={styles.container}>
 
             <View style={styles.ProfileSection}>
                 <Text style={styles.ProfileText}> Profile </Text>
                 <View style={styles.profilePicture}>
 
                 </View>
-                <Text style={styles.username}> Xxtreamdeath </Text>
-                
+                <Text style={styles.username}> Justino </Text>
+
                 <Image style={styles.Rank} source={require("../assets/DMG.png")} />
             </View>
 
@@ -29,14 +29,6 @@ const ProfileScreen = () => {
 
             </View>
 
-
-            <View style={styles.navBar}> 
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-
-    </View>
-
         </View>
     )
 }
@@ -51,7 +43,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#A12895',
         fontSize: 20,
-        marginBottom: 15
+        marginBottom: 15,
+        marginTop: 35
     },
     profilePicture: {
         width: 150,
@@ -65,7 +58,7 @@ const styles = StyleSheet.create({
     },
     username: {
         textAlign: 'center',
-        color: 'white',
+        color: 'black',
         fontSize: 25,
         marginTop: 5
     },
@@ -135,10 +128,12 @@ const styles = StyleSheet.create({
         zIndex: 999,
         flexDirection: 'row',
         paddingLeft: 25
-     },
-     navIcon: {
+    },
+    navIcon: {
         width: 60,
         height: 60,
         marginRight: 35
-     }
+    }
 })
+
+

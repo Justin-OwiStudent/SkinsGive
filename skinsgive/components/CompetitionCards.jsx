@@ -1,7 +1,14 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import EnterCompetitionScreen from '../Screens/EnterCompetitionScreen'
+import { useNavigation } from '@react-navigation/core'
 
-const CompetitionCards = () => {
+const CompetitionCards = ( props ) => {
+
+  const {data} = props
+
+  const navigation = useNavigation()
+
   return (
     <View style={styles.card}>
         <View style={styles.timer}>
@@ -9,18 +16,15 @@ const CompetitionCards = () => {
         </View>
         <View style={styles.skinSection}>
             <Image style={styles.skin} source={require("../assets/Howl.png")}/>
-            <Text style={styles.skinName}> M4A4 Howl</Text>
+            <Text style={styles.skinName}> {data.title}</Text>
         </View>
         <View style={styles.enties}>
-            <Text style={styles.entriesText}> Entries: 0</Text>
-            <View style={styles.btn}>
+            <Text style={styles.entriesText}> Entries: {data.Entries}</Text>
+            <TouchableOpacity style={styles.btn} activeOpacity={0.75}  onPress={() => navigation.push("Enter")}  >
                 <Text style={styles.enterText}> Enter Competition</Text>
-            </View>
+            </TouchableOpacity>
 
         </View>
-        {/* <View style={styles.timer}>  </View> */}
-        {/* <View style={styles.skinSection}></View> */}
-      {/* <Text>CompetitionCards</Text> */}
     </View>
   )
 }

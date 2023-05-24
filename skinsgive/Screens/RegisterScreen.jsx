@@ -1,39 +1,55 @@
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } from 'react-native'
 
-import React from 'react'
+import React, { useState } from 'react'
+import { registerNewUser } from '../services/firebaseAuth'
 
-const RegisterScreen = () => {
-  return (
-    <View style={styles.container}>
-    <Image style={styles.logo} source={require("../assets/Howl.png")}/>
-    <Text style={styles.intro}>Lets get you Signed up !</Text>
-   
-<View style={styles.inputView}>
-    <Text style={styles.inputLabel}>Username </Text>
-    <TextInput style={styles.input}/>
+const RegisterScreen = ({ navigation }) => {
 
-    <Text style={styles.inputLabel}>E-mail</Text>
-    <TextInput style={styles.input} />
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    <Text style={styles.inputLabel}>Rank</Text>
-    <TextInput style={styles.input} />
 
-    <Text style={styles.inputLabel}>Password</Text>
-    <TextInput style={styles.input} />
+    const registerUser = () => {
+        console.log("Registering...")
+        registerNewUser(email, password)
+    }
 
-    <Text style={styles.inputLabel}>Confirm Password</Text>
-    <TextInput style={styles.input} />
-</View>
-<View>
-    <TouchableOpacity title="Login" style={styles.loginbtn}>
-        <Text style={styles.loginbtnText}>Register</Text>
-    </TouchableOpacity>
-</View>
-<View style={styles.dontHaveText}> 
-    <Text style={styles.NoAccount}>Already have an Account? <Text style={styles.goReg}>Login</Text> </Text>
-</View>
-</View>
-  )
+
+    return (
+        <View style={styles.container}>
+            <Image style={styles.logo} source={require("../assets/Howl.png")} />
+            <Text style={styles.intro}>Lets get you Signed up !</Text>
+
+            <View style={styles.inputView}>
+                <Text style={styles.inputLabel}>Username </Text>
+                <TextInput style={styles.input} />
+
+                <Text style={styles.inputLabel}>E-mail</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(newValue) => setEmail(newValue)}
+                />
+
+                <Text style={styles.inputLabel}>Rank</Text>
+                <TextInput style={styles.input} />
+
+                <Text style={styles.inputLabel}>Password</Text>
+                <TextInput style={styles.input}
+                    onChangeText={(newValue) => setPassword(newValue)}
+                />
+
+                <Text style={styles.inputLabel}>Confirm Password</Text>
+                <TextInput style={styles.input} />
+            </View>
+            <View>
+                <TouchableOpacity title="Register" style={styles.loginbtn} onPress={registerUser}>
+                    <Text style={styles.loginbtnText}>Register</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.dontHaveText}>
+                <Text style={styles.NoAccount}>Already have an Account? <Text style={styles.goReg} onPress={() => navigation.goBack()}>Login</Text> </Text>
+            </View>
+        </View>
+    )
 }
 
 export default RegisterScreen
@@ -46,7 +62,7 @@ const styles = StyleSheet.create({
         width: 200,
         alignSelf: 'center',
         height: 100,
-        
+
     },
     intro: {
         textAlign: 'center',
@@ -56,14 +72,15 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     inputView: {
-        marginBottom: 10
+        marginBottom: 10,
+        // backgroundColor: 'red'
     },
     inputLabel: {
         fontSize: 12,
         marginTop: 10,
         paddingLeft: 5,
         marginBottom: 5,
-        color: 'white'
+        color: 'black'
     },
     input: {
         backgroundColor: '#393B3F',
@@ -71,6 +88,8 @@ const styles = StyleSheet.create({
         width: 300,
         borderRadius: 20,
         color: 'white',
+        alignSelf: 'center',
+        paddingLeft: 20
     },
 
     loginbtn: {
@@ -94,7 +113,7 @@ const styles = StyleSheet.create({
     },
     goReg: {
         color: '#A12895',
-        
+
     },
     dontHaveText: {
         // textAlign: 'center'

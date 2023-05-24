@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 // import Markdown from 'react-native-markdown-display';
 
-const EnterCompetitionScreen = () => {
+const EnterCompetitionScreen = ({ navigation }) => {
 
     const copy = `
     Follow these easy steps:
@@ -14,11 +14,10 @@ const EnterCompetitionScreen = () => {
     `
 
     return (
-        // <View style={styles.container}>
-
             <View style={styles.EnterDetails}>
                 <Text style={styles.WantEnter}>Want to take part in the M4 competition?</Text>
-                <Text style={styles.Followsteps}>Follow these easy steps</Text>
+                <Text style={styles.Followsteps}>Follow these easy steps:</Text>
+                
                 <Text style={styles.steps}>
                     1.
                 </Text>
@@ -38,9 +37,6 @@ const EnterCompetitionScreen = () => {
 
                 <View style={styles.upload}></View>
             </View>
-
-        
-
     )
 }
 
@@ -51,21 +47,22 @@ const styles = StyleSheet.create({
         // marginLeft: -100
     },
     EnterDetails: {
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        marginTop: 10
     },
     WantEnter: {
-        color: 'white',
+        color: 'black',
         marginBottom: 20,
         marginLeft: 20
     },
     Followsteps: {
-        color: 'white',
+        color: 'black',
         marginBottom: 20,
         marginLeft: 20
 
     },
     steps: {
-        color: 'white',
+        color: 'black',
         textAlign: "left",
         marginLeft: 25
 
@@ -76,14 +73,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingLeft: 30,
         marginBottom: 5,
-        color: 'white'
+        color: 'blacks'
     },
     SkinName: {
         backgroundColor: '#393B3F',
         height: 50,
         width: 300,
         borderRadius: 20,
-        color: 'white',
+        color: 'black',
         marginLeft: 30
     },
     SkinUploadLabel: {
@@ -91,14 +88,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingLeft: 30,
         marginBottom: 5,
-        color: 'white'
+        color: 'black'
     },
     SkinImage: {
         backgroundColor: '#393B3F',
         height: 200,
         width: 325,
         borderRadius: 20,
-        color: 'white',
+        color: 'black',
         marginLeft: 30
     },
     upload: {
