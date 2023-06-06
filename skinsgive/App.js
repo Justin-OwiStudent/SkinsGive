@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import CompetitionDetailsScreen from './Screens/CompetitionDetailsScreen';
 import ProfileScreen from './Screens/ProfileScreen';
+import { auth } from './firebase';
 
 
 
@@ -81,7 +82,7 @@ export default function App() {
            />  
 
           <Stack.Screen 
-           name="Enter" 
+           name="Enter"
            component={EnterCompetitionScreen}
            options={{headerShown: true}}
            />  

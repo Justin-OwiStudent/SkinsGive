@@ -9,6 +9,11 @@ const CompetitionCards = ( props ) => {
 
   const navigation = useNavigation()
 
+  const addNew = () => {
+    navigation.navigate("Enter")
+  }
+  //make an ifstatement for the timer and then show the winner on time donw
+
   return (
     <View style={styles.card}>
         <View style={styles.timer}>
@@ -20,7 +25,7 @@ const CompetitionCards = ( props ) => {
         </View>
         <View style={styles.enties}>
             <Text style={styles.entriesText}> Entries: {data.Entries}</Text>
-            <TouchableOpacity style={styles.btn} activeOpacity={0.75}  onPress={() => navigation.push("Enter")}  >
+            <TouchableOpacity style={styles.btn} activeOpacity={0.75}  onPress={addNew}  >
                 <Text style={styles.enterText}> Enter Competition</Text>
             </TouchableOpacity>
 

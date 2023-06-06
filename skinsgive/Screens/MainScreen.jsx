@@ -1,19 +1,55 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { Image, Pressable, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
 import CompetitionCards from '../components/CompetitionCards'
+import { useFocusEffect } from '@react-navigation/native'
+import { getAllCompetitionsFromCollection } from '../services/firebasedb'
 
 const MainScreen = ({ navigation }) => {
 
-   dummyData = [
-      { title: 'M4A4 Skin Competition', gun: "M4A4", Entries: 2, EntryOne: "Howl", EntryTwo: "DesolateSpace", EntryThree: "BuzzKill" },
-      { title: 'AK-47 Skin Competition', gun: "AK-47", Entries: 10, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-      { title: 'AWP Skin Competition', gun: "AWP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-      { title: 'USP Skin Competition', gun: "USP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-   ]
+   // dummyData = [
+   //    { title: 'M4A4 Skin Competition', gun: "M4A4", Entries: 2, EntryOne: "Howl", EntryTwo: "DesolateSpace", EntryThree: "BuzzKill" },
+   //    { title: 'AK-47 Skin Competition', gun: "AK-47", Entries: 10, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
+   //    { title: 'AWP Skin Competition', gun: "AWP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
+   //    { title: 'USP Skin Competition', gun: "USP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
+   // ]
+ const [competitions, setCompetitions] = useState([])
+ const [refreshing, setRefreshing] = useState(false)
+
+
+ //used to refresh when viewing screen eveytime
+//  useFocusEffect(
+//    useCallback(() => {
+//       //get data when viewing screen
+//       getAllCompeitions()
+//       return () => {
+//          //cleanup when not viewing
+//          console.log("home sreen not in view...")
+//       }
+
+//    }, [])
+//  );
+
+// get data first time viewing screen
+useEffect(async () => {
+   await getAllCompeitions()
+}, [])
+
+ //get for all competitions
+ const getAllCompeitions = async () => {
+   setRefreshing(true)
+   console.log("getting data")
+   const allCompetitions = await getAllCompetitionsFromCollection()
+   setCompetitions(allCompetitions)
+   setRefreshing(false)
+ }
+
+   
 
    return (
       <View style={styles.container}>
-         <ScrollView style={styles.scroll}>
+         <ScrollView style={styles.scroll} refreshControl={
+         <RefreshControl refreshing={refreshing} onRefresh={getAllCompeitions} />
+         }> 
 
          <View style={styles.bar} >
             <Image style={styles.logo} source={require("../assets/CompLogo.png")} />
@@ -22,7 +58,7 @@ const MainScreen = ({ navigation }) => {
 
          <Text style={styles.title}> Ongoing Competitions </Text>
 
-            {dummyData.map((project, index) => (
+            {competitions.map((project, index) => (
                <TouchableOpacity key={index}
                   onPress={() => navigation.navigate("Details", { project })}
                   activeOpacity={0.75}>

@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, SafeAreaView, Alert } from 'react-native'
 import React, { useState } from 'react'
+import { signInUser } from '../services/firebaseAuth'
 
 const LoginScreen = ({ navigation }) => {
 
@@ -9,21 +10,21 @@ const LoginScreen = ({ navigation }) => {
     // const [loading, setLoading] = useState(false)
 
 
-    const logOn = () => {
+
+    const logOn = async () => {
 
         setLoading(true)
 
         if (!email || !password) {
-            Alert.alert("try again"), [
+            Alert.alert("try again", [
                 { text: 'Try again', onPress: () => { setLoading(false) } }
-            ]
+            ])
         } else {
             //make auth call
-
-            setLoading(true)
-            Alert.alert("your in"), [
-                { text: 'Thanks', onPress: () => { setLoading(false) } }
-            ]
+            await signInUser(email, password)
+            setLoading(false)
+            // setLoading(true)
+       
 
         }
     }
@@ -49,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
                     />
                 </View>
                 <View>
-                    <TouchableOpacity title="Login" style={styles.loginbtn}>
+                    <TouchableOpacity title="Login" style={styles.loginbtn} onPress={logOn}>
                         <Text style={styles.loginbtnText}>Login</Text>
                     </TouchableOpacity>
                 </View>
