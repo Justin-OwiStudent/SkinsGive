@@ -7,13 +7,13 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
 
     const logOn = async () => {
 
-        setLoading(true)
+        // setLoading(true)
 
         if (!email || !password) {
             Alert.alert("try again", [
@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
         } else {
             //make auth call
             await signInUser(email, password)
-            setLoading(false)
+            // setLoading(false)
             // setLoading(true)
        
 
@@ -78,7 +78,9 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        backgroundColor: "#202226",
+      height: "110%"
     },
     logo: {
         width: 200,
@@ -100,9 +102,9 @@ const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 12,
         marginTop: 20,
-        paddingLeft: 5,
+        paddingLeft: 25,
         marginBottom: 5,
-        color: 'black'
+        color: 'white'
     },
     input: {
         backgroundColor: '#393B3F',

@@ -9,11 +9,12 @@ export const registerNewUser = (email, password) => {
     .then(async (userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log("ser:" + user)
+        console.log("user:" + user)
 
-        updateAuthProfile(usernmae)
+        // updateAuthProfile(usernmae)
 
-        await createUserInDb(usernmae, email, user.uid)
+        await createUserInDb(username, email, user.uid)
+
 
       })
       .catch((error) => {

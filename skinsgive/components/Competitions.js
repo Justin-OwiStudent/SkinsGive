@@ -1,62 +1,42 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import EnterCompetitionScreen from '../Screens/EnterCompetitionScreen'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
-const CompetitionCards = ( props ) => {
+const Competitions = (props) => {
 
-  const {data} = props
+    const {data} = props
 
-  const navigation = useNavigation()
+    //TODO: count the amount of entries and show on card
 
-  const addNew = () => {
-    navigation.navigate("Enter")
-  }
-  //make an ifstatement for the timer and then show the winner on time donw
-
-// const [Score, setScore] = useState("")
-
-//   const upscore = () => {
-//     currentScore = data.score += 1;
-//     // currentScore += 1
-//     // data.score.save()
-//     setScore(currentScore)
-//     console.log(currentScore)
-
-//   }
-
-//   const downScore = () => {
-//     currentScore = data.score -= 1;
-//     // currentScore -- 1
-
-//     // data.score.save()
-//     setScore(currentScore)
-//     console.log(currentScore)
-//   }
+    //TODO: do the timestamp
 
 
   return (
     <View style={styles.card}>
         <View style={styles.timer}>
-            <Text style={styles.time}> 00:00:00 </Text>
+            <Text style={styles.time}>{data.name}</Text>
         </View>
         <View style={styles.skinSection}>
-            <Image style={styles.skin} source={require("../assets/Howl.png")}/>
-            <Text style={styles.skinName}> {data.name}</Text>
+            <Image style={styles.skin} source={require("../assets/M4.png")}/>
+            {/* <Text style={styles.skinName}> {data.name}</Text> */}
         </View>
         <View style={styles.enties}>
 
-            {/* <TouchableOpacity onPress={upscore}>
+
+<View style={styles.voting}> 
+<TouchableOpacity  >
                 <Ionicons name="arrow-up-circle-outline" size={35} color="green" />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={downScore}>
+            <TouchableOpacity >
                 <Ionicons name="arrow-down-circle-outline" size={35} color="red" />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
+</View>
+           
 
-            <Text style={styles.scoreText}>Score: {data.score}</Text>
+            <Text style={styles.scoreText}>Score: {data.score} </Text>
 
             {/* <Text style={styles.entriesText}> Entries: {data.Entries}</Text> */}
 
@@ -69,7 +49,7 @@ const CompetitionCards = ( props ) => {
   )
 }
 
-export default CompetitionCards
+export default Competitions
 
 const styles = StyleSheet.create({
     card: {
@@ -80,7 +60,7 @@ const styles = StyleSheet.create({
         borderRadius: 25
     },
     timer: {
-        width: 100,
+        width: 200,
         height: 30,
         backgroundColor: '#A12895',
         alignSelf: 'center',
@@ -103,16 +83,18 @@ const styles = StyleSheet.create({
         border: 5
     },
     skin: {
-        height: 65,
+        height: 100,
         width: 300,
         alignSelf: 'center',
         marginBottom: 20,
-        marginTop: 20,
-        resizeMode: 'cover'
+        marginTop: 10,
+        resizeMode: 'contain',
+        // backgroundColor: "red"
     },
     skinName: {
         textAlign: 'center',
         color: 'white',
+        fontSize: 20
         // textDecorationLine: 'underline'
     },
     enties: {
@@ -146,8 +128,14 @@ const styles = StyleSheet.create({
     },
     scoreText: {
         color: "white",
-        marginTop: 15,
+        marginTop: 0,
         position: "absolute",
-        right: 20
+        right: 20,
+        top: 30
+    },
+    voting: {
+        flexDirection: "row",
+        position: "absolute",
+        top: 20
     }
 })

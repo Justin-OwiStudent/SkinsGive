@@ -12,6 +12,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import CompetitionDetailsScreen from './Screens/CompetitionDetailsScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import { auth } from './firebase';
+import SniperScreen from './Screens/SniperScreen';
+import M4Screen from './Screens/M4Screen';
+import AkScreen from './Screens/AkScreen';
 
 
 
@@ -71,7 +74,7 @@ export default function App() {
           component={CompetitionDetailsScreen}
           options={({route}) => ({
             headerShown: true,
-            title: route.params.project.title
+            // name: route.params.project.name
           })}
           />  
            <Stack.Screen 
@@ -84,6 +87,25 @@ export default function App() {
           <Stack.Screen 
            name="Enter"
            component={EnterCompetitionScreen}
+           options={{headerShown: true}}
+           />  
+
+
+          <Stack.Screen 
+           name="AWP"
+           component={SniperScreen}
+           options={{headerShown: true}}
+           />  
+
+          <Stack.Screen 
+           name="M4"
+           component={M4Screen}
+           options={{headerShown: true}}
+           />  
+
+          <Stack.Screen 
+           name="AK"
+           component={AkScreen}
            options={{headerShown: true}}
            />  
           

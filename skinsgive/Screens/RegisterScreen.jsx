@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, SafeAreaView } from 'react-native'
 
 import React, { useState } from 'react'
 import { registerNewUser } from '../services/firebaseAuth'
@@ -16,7 +16,7 @@ const RegisterScreen = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Image style={styles.logo} source={require("../assets/Howl.png")} />
             <Text style={styles.intro}>Lets get you Signed up !</Text>
 
@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
             <View style={styles.dontHaveText}>
                 <Text style={styles.NoAccount}>Already have an Account? <Text style={styles.goReg} onPress={() => navigation.goBack()}>Login</Text> </Text>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -56,7 +56,9 @@ export default RegisterScreen
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        backgroundColor: "#202226",
+      height: "100%"
     },
     logo: {
         width: 200,
@@ -78,9 +80,9 @@ const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 12,
         marginTop: 10,
-        paddingLeft: 5,
+        paddingLeft: 50,
         marginBottom: 5,
-        color: 'black'
+        color: 'white'
     },
     input: {
         backgroundColor: '#393B3F',

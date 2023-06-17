@@ -2,87 +2,130 @@ import { Image, Pressable, RefreshControl, ScrollView, StyleSheet, Text, Touchab
 import React, { useCallback, useEffect, useState } from 'react'
 import CompetitionCards from '../components/CompetitionCards'
 import { useFocusEffect } from '@react-navigation/native'
-import { getAllCompetitionsFromCollection } from '../services/firebasedb'
+import { getAllCompetitionsFromCollection, getAwp } from '../services/firebasedb'
+import { getAllSkins } from '../services/firebasedb'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Competitions from '../components/Competitions'
+getAllSkins
 
 const MainScreen = ({ navigation }) => {
+   const [refreshing, setRefreshing] = useState(false)
 
-   // dummyData = [
-   //    { title: 'M4A4 Skin Competition', gun: "M4A4", Entries: 2, EntryOne: "Howl", EntryTwo: "DesolateSpace", EntryThree: "BuzzKill" },
-   //    { title: 'AK-47 Skin Competition', gun: "AK-47", Entries: 10, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-   //    { title: 'AWP Skin Competition', gun: "AWP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-   //    { title: 'USP Skin Competition', gun: "USP", Entries: 2, EntryDetails: ["Howl", "Desolate Space", "Neon Rider"] },
-   // ]
- const [competitions, setCompetitions] = useState([])
- const [refreshing, setRefreshing] = useState(false)
+   const [competitions, setCompetitions] = useState([])
+   //  const [path, setPath] = useState([])
 
 
- //used to refresh when viewing screen eveytime
-//  useFocusEffect(
-//    useCallback(() => {
-//       //get data when viewing screen
-//       getAllCompeitions()
-//       return () => {
-//          //cleanup when not viewing
-//          console.log("home sreen not in view...")
-//       }
 
-//    }, [])
-//  );
+   // get data first time viewing screen
+   useEffect(() => {
+      getAllCompeitions()
+   }, [])
 
-// get data first time viewing screen
-useEffect(async () => {
-   await getAllCompeitions()
-}, [])
+   //get for all competitions
+   const getAllCompeitions = async () => {
+      setRefreshing(true)
+      console.log("getting data")
+      const allCompetitions = await getAwp()
+      setCompetitions(allCompetitions)
+      console.log(allCompetitions)
+      setRefreshing(false)
+   }
 
- //get for all competitions
- const getAllCompeitions = async () => {
-   setRefreshing(true)
-   console.log("getting data")
-   const allCompetitions = await getAllCompetitionsFromCollection()
-   setCompetitions(allCompetitions)
-   setRefreshing(false)
- }
+   const addNew = () => {
+      navigation.navigate("Enter")
+   }
 
-   
 
    return (
       <View style={styles.container}>
          <ScrollView style={styles.scroll} refreshControl={
-         <RefreshControl refreshing={refreshing} onRefresh={getAllCompeitions} />
-         }> 
+            <RefreshControl refreshing={refreshing} onRefresh={getAllCompeitions} />
+         }>
 
-         <View style={styles.bar} >
-            <Image style={styles.logo} source={require("../assets/CompLogo.png")} />
+            <View style={styles.bar} >
+               <Image style={styles.logo} source={require("../assets/CompLogo.png")} />
 
-         </View>
+            </View>
 
-         <Text style={styles.title}> Ongoing Competitions </Text>
+            <Text style={styles.title}> Ongoing Competitions </Text>
 
-            {competitions.map((project, index) => (
+            {/* <TouchableOpacity style={styles.add} onPress={addNew}>
+            <Ionicons name="add-circle-outline" size={50} color="#A12895" />
+         </TouchableOpacity> */}
+
+
+            {/* {competitions.map((Competition, index) => (
                <TouchableOpacity key={index}
-                  onPress={() => navigation.navigate("Details", { project })}
+                  onPress={() => navigation.navigate("Details", { Competition })}
                   activeOpacity={0.75}>
-                  <CompetitionCards data={project} />
+                  <Competitions data={Competition} />
                </TouchableOpacity>
+            ))} */}
 
-            ))}
+
+
+            <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("AWP")} activeOpacity={1}>
+               <Image style={styles.image} source={require("../assets/Awp.png")} />
+               <Text style={styles.CompName}>AWP Competition</Text>
+               <View style={styles.timer}>
+                  <Text style={styles.time}> 00:00:00 </Text>
+               </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("M4")} activeOpacity={1}>
+               <Image style={styles.image} source={require("../assets/M4.png")} />
+               <Text style={styles.CompName}>M4A4 Competition</Text>
+               <View style={styles.timer}>
+                  <Text style={styles.time}> 00:00:00 </Text>
+               </View>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("AK")} activeOpacity={1}>
+               <Image style={styles.image} source={require("../assets/AK.png")} />
+               <Text style={styles.CompName}>AK-47 Competition</Text>
+               <View style={styles.timer}>
+                  <Text style={styles.time}> 00:00:00 </Text>
+               </View>
+            </TouchableOpacity>
+
+
+            {/* <View style={styles.Comp}>
+
+            </View> */}
+
+
+
+
          </ScrollView>
+
+
+
+
          {/* <View style={styles.navBar}> 
       <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
       <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
       <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
 
     </View> */}
-      </View> 
+      </View>
    )
 }
 
 export default MainScreen
 
 const styles = StyleSheet.create({
+   Comp: {
+      width: "90%",
+      height: 130,
+      backgroundColor: "#A12895",
+      alignSelf: "center",
+      marginTop: 20,
+      borderRadius: 20
+   },
    container: {
       padding: 20,
-
+      backgroundColor: "#202226"
    },
    bar: {
       width: 80,
@@ -106,7 +149,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 18,
       color: '#A12895',
-      marginBottom: 15,
+      marginBottom: 30,
 
    },
    scroll: {
@@ -132,7 +175,44 @@ const styles = StyleSheet.create({
       width: 60,
       height: 60,
       marginRight: 35
-   }
+   },
+   add: {
+      width: 50,
+      height: 50,
+      // borderRadius: 30,
+      // borderWidth: 2,
+      // borderColor: "black",
+      // backgroundColor: "#A12895"
+   },
+   image: {
+      width: 250,
+      height: 70,
+      padding: 20,
+      resizeMode: "contain",
+      backgroundColor: "#A12895",
+      alignSelf: "center",
+      marginTop: 5,
+      borderRadius: 10
+      // #2E3034
+      // #A12895
+   },
+   CompName: {
+      textAlign: "center",
+      color: "black"
+   },
+   timer: {
+      width: 100,
+      height: 25,
+      backgroundColor: '#2E3034',
+      alignSelf: 'center',
+      marginTop: 10,
+      borderRadius: 20,
+      padding: 5
+   },
+   time: {
+      textAlign: 'center',
+      color: 'white'
+   },
 })
 
 //TODO: make colours a global style 

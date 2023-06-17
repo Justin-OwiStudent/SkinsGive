@@ -1,4 +1,4 @@
-import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc } from "firebase/firestore"
+import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp } from "firebase/firestore"
 import { db } from "../firebase"
 
 
@@ -11,7 +11,7 @@ export const createUserInDb = async (username, email, uid) => {
             username,
             email,
             rank: "dmg",
-            createdAt: Timestamp.now()
+            // createdAt: Timestamp.now()
         })
 
     } catch (e) {
@@ -21,13 +21,14 @@ export const createUserInDb = async (username, email, uid) => {
 }
 
 
-export const addCompetitionCollection = async (competition) => {
+export const addAwpSkin = async (competition) => {
     try {
         // console.log(competition)
-        const docRef = await addDoc(collection(db, "competitions"), competition)
+        const docRef = await addDoc(collection(db, "competitions", "AWP", "Skins"), competition, serverTimestamp())
         console.log("added project successfully..." + docRef.id)
         if(docRef.id) {
             return true 
+            console.log(docRef.id)
         } else {
             return false
         }
@@ -37,24 +38,121 @@ export const addCompetitionCollection = async (competition) => {
     }
 }
 
-export const getAllCompetitionsFromCollection = async () => {
+//ADD M$
+export const addM4Skin = async (competition) => {
     try {
-        var competitions = []
+        // console.log(competition)
+        const docRef = await addDoc(collection(db, "competitions", "M4A4", "Skins"), competition)
+        console.log("added M4A4 successfully..." + docRef.id)
+        if(docRef.id) {
+            return true 
+            console.log(docRef.id)
+        } else {
+            return false
+        }
+
+    } catch (e) {
+      console.log("something went wrong: " + e)  
+    }
+}
+
+//ak add
+export const addAkSkin = async (competition) => {
+    try {
+        // console.log(competition)
+        const docRef = await addDoc(collection(db, "competitions", "AK-47", "Skins"), competition)
+        console.log("added AK-47 successfully..." + docRef.id)
+        if(docRef.id) {
+            return true 
+            console.log(docRef.id)
+        } else {
+            return false
+        }
+
+    } catch (e) {
+      console.log("something went wrong: " + e)  
+    }
+}
+
+
+
+//KEEP HERE FOR TESTING
+
+
+// export const getAllCompetitionsFromCollection = async () => {
+//     try {
+//         var competitions = []
         
-        const snapshot = await getDocs(collection(db, "competitions"))
+//         const snapshot = await getDocs(collection(db, "competitions"))
 
-        //here is a way to order by when getting the data from db
-        // const snapshot = await getDocs( query( collection(db, "competitions"), orderBy("year", "desc")))
+//         //here is a way to order by when getting the data from db
+//         // const snapshot = await getDocs( query( collection(db, "competitions"), orderBy("year", "desc")))
 
+
+//         snapshot.forEach((doc) => {
+//             // console.log(doc.id, "=> ", doc.data())
+
+//             competitions.push(doc.data())
+//             // competitions.push({...doc.data(), id: doc.id})   //this is to get the id for the competition if i want to edit anything 
+
+//         })
+//         return competitions
+//     } catch (e) {
+//         console.log("something went wrong" + e)
+//         return[]
+//     }
+// }
+
+
+
+
+
+
+export const getAwp = async () => {
+    try {
+        var Competitions = []
+        
+        const snapshot = await getDocs(collection(db, "competitions", "AWP", "Skins"))
 
         snapshot.forEach((doc) => {
-            // console.log(doc.id, "=> ", doc.data())
-
-            competitions.push(doc.data())
-            // competitions.push({...doc.data(), id: doc.id})   //this is to get the id for the competition if i want to edit anything 
-
+            Competitions.push({ ...doc.data(), id: doc.id })
         })
-        return competitions
+
+        return Competitions
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return[]
+    }
+}
+
+export const getM4 = async () => {
+    try {
+        var Competitions = []
+        
+        const snapshot = await getDocs(collection(db, "competitions", "M4A4", "Skins"))
+
+        snapshot.forEach((doc) => {
+            Competitions.push({ ...doc.data(), id: doc.id })
+        })
+
+        return Competitions
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return[]
+    }
+}
+
+export const getAk = async () => {
+    try {
+        var Competitions = []
+        
+        const snapshot = await getDocs(collection(db, "competitions", "AK-47", "Skins"))
+
+        snapshot.forEach((doc) => {
+            Competitions.push({ ...doc.data(), id: doc.id })
+        })
+
+        return Competitions
     } catch (e) {
         console.log("something went wrong" + e)
         return[]

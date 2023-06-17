@@ -37,7 +37,9 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+      backgroundColor: "#202226",
+        height: "100%"
     },
     ProfileText: {
         textAlign: 'center',
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     },
     username: {
         textAlign: 'center',
-        color: 'black',
+        color: '#A12895',
         fontSize: 25,
         marginTop: 5
     },
