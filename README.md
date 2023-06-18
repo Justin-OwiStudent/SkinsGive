@@ -19,7 +19,7 @@
 <p align="center">
 
   <a href="https://github.com/username/projectname">
-    <img src="../Mockups/LOGO.png" alt="Logo" width="140" height="140">
+    <img src="Mockups/LOGO.png" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">Counter SKins</h3>
