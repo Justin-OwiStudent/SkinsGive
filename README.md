@@ -19,7 +19,7 @@
 <p align="center">
 
   <a href="https://github.com/username/projectname">
-    <img src="../../skinsgive/assets/LOGO.png" alt="Logo" width="140" height="140">
+    <img src="../skinsgive/assets/LOGO.png" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">Counter SKins</h3>
@@ -90,7 +90,7 @@ The following instructions will get you a copy of the project up and running on 
 
 ### Prerequisites
 
-Ensure that you have the latest version of [Visual Studio Code](path/to/where/they/can/download/software) and [Node](path/to/where/they/can/download/software)installed on your machine. The [Expo](path/to/where/they/can/download/plugin) plugin will also be required.
+Ensure that you have the latest version of [Visual Studio Code](path/to/where/they/can/download/software) and [Node](path/to/where/they/can/download/software) installed on your machine. The [Expo](path/to/where/they/can/download/plugin) plugin will also be required.
 
 ### How to install
 
@@ -99,12 +99,12 @@ Here are a couple of ways to clone this repo:
 
 1. Software </br>
 `Android Studio` -> `File` -> `New` -> `From Version Control` -> `Git`</br>
-Enter `https://github.com/username/projectname.git` into the URL field and press the `Clone` button.
+Enter `https://github.com/Justin-OwiStudent/SkinsGive` into the URL field and press the `Clone` button.
 
 2. Clone Repository </br>
 Run the following in the command-line to clone the project:
    ```sh
-   git clone https://github.com/username/projectname.git
+   git clone https://github.com/Justin-OwiStudent/SkinsGive
    ```
     Open `Software` and select `File | Open...` from the menu. Select cloned directory and press `Open` button
 
@@ -112,11 +112,6 @@ Run the following in the command-line to clone the project:
 Run the following in the command-line to install all the required dependencies:
    ```sh
    npm install
-   ```
-
-4. Get a free API Key at [https://example.com](https://example.com) and enter it in the `config.js` file:
-   ```js
-   const API_KEY = 'ENTER YOUR API';
    ```
 
 
@@ -127,17 +122,17 @@ Run the following in the command-line to install all the required dependencies:
 ![image2][image2]
 ### Feature 1
 
-Description of Feature
+Login and Registration, here you are presented with the first Screen of the application where you can create a new account or sign in if you already have an account.
 
 ![image3][image3]
 ### Feature 2
 
-Description of Feature
+Here you are presented with the competitions available for you as the user to enter, for this application it usually hosts only up to 3 competitions.
 
 ![image4][image4]
 ### Feature 3
 
-Description of Feature
+The Competitions and how to enter them, here we have the competition entries based on the chosen competition and then also we have the form and a way for you as the user to enter the competition,
 
 ![image5][image5]
 
@@ -146,7 +141,7 @@ Description of Feature
 <!-- Briefly explain your concept ideation process -->
 ## Concept Process
 
-The `Conceptual Process` is the set of actions, activities and research that was done when starting this project.
+starting off with this competition i looked at all kinds of CSGO websites and got the general feel for them, they all had bold colors that definitly attracted your eye. i created a moodboard, then went on to create the high and low fidelity wireframes and then proceeded to implement everything!
 
 ### Ideation
 
@@ -165,48 +160,41 @@ The `Conceptual Process` is the set of actions, activities and research that was
 <!-- DEVELOPMENT PROCESS -->
 ## Development Process
 
-The `Development Process` is the technical implementations and functionality done in the frontend and backend of the application.
+the application makes use of firebase as a backend service and all the dat present in the application is all pulled from the backend. 
+there is login and registration functionality which adds a new user to the firebase backend or logs them in.
+each competition is a collection and withing that i have subcollections which hold the entries for each competition.
 
 ### Implementation Process
 <!-- stipulate all of the functionality you included in the project -->
 
-* Made use of both `functionality` to implement a specific feature.
-* `MVC/MVVM` design architecture implemented.
-* `Plugin` for this.
-* ETC.
+* Login and Registration
+* Read and Write of subcollection competitions
+* Adding competitions.
+* profile screen where user can access their details
+* image upload using firestore storage
+
 
 #### Highlights
 <!-- stipulated the highlight you experienced with the project -->
-* Sunshine.
-* Rainbows.
+* Learning react native -  i think react native is a great platform to work on and to work with, i had a great time learning how the mobile side of react works aswell as being able to understand how this works as a normal react project.
+* Learning how to work with firebase, i think firebase is a great backen service to make use of , its very user friendly and it defnitly sped up the development proccess by alot.
 
 #### Challenges
 <!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
-* Bugs.
-* Bugs.
+* image, what more can i say, i had a tough time with the image upload and displaying them, with a bit more time i think i can get it working now porblem, regarding the images i also had a infinite loop running at some point which completly broke the app.
+* sub collections, i had a difficulty trying to add and read data from different subcollections, i dont think the way i did it is correct, i will investigate and find a more dynamic way to read my data from the backend.
 
-### Reviews & Testing
-<!-- stipulate how you've conducted testing in the form of peer reviews, feedback and also functionality testing, like unit tests (if applicable) -->
 
-#### Feedback from Reviews
 
-`Peer Reviews` were conducted by my fellow students and lecturer. The following feedback I found useful:
-
-* Feedback one.
-* Feedback two.
-
-#### Unit Tests
-
-`Unit Tests` were conducted to establish working functionality. Here are all the tests that were ran:
-
-* Test 1 of this functionality
-* Test 2 of this functionality
 
 ### Future Implementation
 <!-- stipulate functionality and improvements that can be implemented in the future. -->
 
-* Future 1.
-* Future 2.
+* Proper Image uploading.
+* Time for competitions to end and showcase a winnder.
+* showing user how many entries they have in competitions aswell as how many competitions they have won.
+* Rank displaying based on user rank.
+* more refined and appealing UI 
 
 <!-- MOCKUPS -->
 ## Final Outcome
@@ -217,20 +205,13 @@ The `Development Process` is the technical implementations and functionality don
 <br>
 ![image10][image10]
 
-<!-- VIDEO DEMONSTRATION -->
-### Video Demonstration
-
-To see a run through of the application, click below:
-
-[View Demonstration](path/to/video/demonstration)
-
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/username/projectname/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Justin-OwiStudent/SkinsGive/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
-## Contributing
+<!-- ## Contributing
 
 Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -238,12 +219,12 @@ Contributions are what makes the open-source community such an amazing place to 
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+5. Open a Pull Request -->
 
 <!-- AUTHORS -->
 ## Authors
 
-* **Your Name & Surname** - [username](https://github.com/username)
+* **Justin Ksoster** - [username](https://github.com/Justin-OwiStudent)
 
 <!-- LICENSE -->
 ## License
@@ -253,8 +234,8 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 <!-- LICENSE -->
 ## Contact
 
-* **Your Name & Surname** - [email@address](mailto:email@address) - [@instagram_handle](https://www.instagram.com/instagram_handle/) 
-* **Project Link** - https://github.com/username/projectname
+* **Justin Koster** - [email@address](200100@virtualwindow.co.za) 
+* **Project Link** - https://github.com/Justin-OwiStudent/SkinsGive
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
