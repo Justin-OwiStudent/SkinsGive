@@ -14,22 +14,22 @@
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Justin Koster</h5>
 <h5 align="center" style="padding:0;margin:0;">200100</h5>
-<h6 align="center">Subject Name & Year</h6>
+<h6 align="center">Interactive Development - 300</h6>
 </br>
 <p align="center">
 
   <a href="https://github.com/username/projectname">
-    <img src="path/to/logo" alt="Logo" width="140" height="140">
+    <img src="../../assets/LOGO/png" alt="Logo" width="140" height="140">
   </a>
   
-  <h3 align="center">Project Name</h3>
+  <h3 align="center">Counter SKins</h3>
 
   <p align="center">
-    Short Project Slogan / Description <br>
+    Counter skins is a mobile application where enthusiasts of Counter Strike can go and enter a skins competition, users can enter and vote for other skins, the competitions are time based, once the time is up the winner of the competition will be declared, and who knows, maybe well see your skin in the next Counter Strike update ! <br>
       <a href="https://github.com/username/projectname"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="path/to/demonstration/video">View Demo</a>
+   <!-- <a href="path/to/demonstration/video">View Demo</a> -->
     ·
     <a href="https://github.com/username/projectname/issues">Report Bug</a>
     ·
@@ -74,13 +74,13 @@
 
 ### Project Description
 
-A nice introduction to this amazing project of mine.
+Counter skins is a mobile application where enthusiasts of Counter Strike can go and enter a skins competition, users can enter and vote for other skins, the competitions are time based, once the time is up the winner of the competition will be declared, and who knows, maybe well see your skin in the next Counter Strike update ! 
 
 ### Built With
 
-* [Technology Name](path/to/technology/website)
-* [Technology Name](path/to/technology/website)
-* [Technology Name](path/to/technology/website)
+* [React Native](path/to/technology/website)
+* [Node JS](path/to/technology/website)
+* [FireBase](path/to/technology/website)
 
 <!-- GETTING STARTED -->
 <!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
@@ -90,7 +90,7 @@ The following instructions will get you a copy of the project up and running on 
 
 ### Prerequisites
 
-Ensure that you have the latest version of [Software](path/to/where/they/can/download/software) installed on your machine. The [Plugin](path/to/where/they/can/download/plugin) plugin will also be required.
+Ensure that you have the latest version of [Visual Studio Code](path/to/where/they/can/download/software) and [Node](path/to/where/they/can/download/software)installed on your machine. The [Expo](path/to/where/they/can/download/plugin) plugin will also be required.
 
 ### How to install
 
