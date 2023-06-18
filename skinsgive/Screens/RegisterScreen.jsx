@@ -7,12 +7,17 @@ const RegisterScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [rank, setRank] = useState('')
+    const [username, setUsername] = useState('')
 
 
-    const registerUser = () => {
+
+
+    const registerUser = async () => {
         console.log("Registering...")
-        registerNewUser(email, password)
-    }
+        registerNewUser(username, email, password, rank)
+        // navigation.goBack()
+        }
 
 
     return (
@@ -22,7 +27,10 @@ const RegisterScreen = ({ navigation }) => {
 
             <View style={styles.inputView}>
                 <Text style={styles.inputLabel}>Username </Text>
-                <TextInput style={styles.input} />
+                <TextInput style={styles.input}
+                    onChangeText={(newValue) => setUsername(newValue)}
+                
+                />
 
                 <Text style={styles.inputLabel}>E-mail</Text>
                 <TextInput style={styles.input}
@@ -30,7 +38,8 @@ const RegisterScreen = ({ navigation }) => {
                 />
 
                 <Text style={styles.inputLabel}>Rank</Text>
-                <TextInput style={styles.input} />
+                <TextInput style={styles.input} 
+                onChangeText={(newValue) => setRank(newValue)}/>
 
                 <Text style={styles.inputLabel}>Password</Text>
                 <TextInput style={styles.input}

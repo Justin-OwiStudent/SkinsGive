@@ -2,8 +2,9 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, up
 import {  auth } from '../firebase'
 import { Alert } from 'react-native';
 import { createUserInDb } from './firebasedb';
+// import { createUserInDb } from './firebasedb';
 
-export const registerNewUser = (email, password) => {
+export const registerNewUser = (username, email, password, rank) => {
 
     createUserWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
@@ -11,10 +12,12 @@ export const registerNewUser = (email, password) => {
         const user = userCredential.user;
         console.log("user:" + user)
 
-        // updateAuthProfile(usernmae)
+        updateAuthProfile(username)
 
-        await createUserInDb(username, email, user.uid)
+        //had to be in order, very weird
+        await createUserInDb(email, rank, username, user.uid)
 
+        Alert.alert("created user", user)
 
       })
       .catch((error) => {
@@ -22,27 +25,30 @@ export const registerNewUser = (email, password) => {
         const errorMessage = error.message;
         console.log(errorCode + ": " + errorMessage)
 
-        Alert.alert("Whoops!", [
-          { text: 'Try Again', onPress: () => {  } }
-        ])
+        Alert.alert("Whoops", errorMessage)
+
+        // Alert.alert("Whoops!","something went wrong trying to add user" [
+        //   { text: 'Try Again', onPress: () => { } }
+        // ])
       });
 }
 
 
 
-export const signInUser = async () => {
+export const signInUser = async (email, password) => {
 
   await signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
     // ...
-
     console.log("User signed in" + user.email)
 
-    Alert.alert("your in", [
-      { text: 'Thanks', onPress: () => {  } }
-    ])
+    Alert.alert("your In", "successfully logged")
+
+    // Alert.alert("your in", "successfully logged in." [
+    //   { text: 'Thanks', onPress: () => { setLoading(false) }}
+    // ])
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -50,9 +56,13 @@ export const signInUser = async () => {
 
     console.log(errorCode + ": " + errorMessage)
 
-    Alert.alert("whoops!", errorMessage [
-      { text: 'Try again', onPress: () => {  } }
-    ])
+    Alert.alert("Whoops!", errorCode)
+
+    //if based on password wrong of whatever
+
+    // Alert.alert("whoops!", errorMessage [
+    //   { text: 'Try again', onPress: () => {  } }
+    // ])
 
   });
 }

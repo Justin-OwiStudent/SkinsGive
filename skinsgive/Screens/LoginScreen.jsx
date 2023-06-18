@@ -8,23 +8,30 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('')
 
     const [loading, setLoading] = useState(false)
-
+// console.log(email)
 
 
     const logOn = async () => {
 
-        // setLoading(true)
+        setLoading(true)
 
         if (!email || !password) {
-            Alert.alert("try again", [
-                { text: 'Try again', onPress: () => { setLoading(false) } }
-            ])
+            Alert.alert("whoops", "please fill in all the feilds")
+
+            // Alert.alert("try again", [
+            //     { text: 'Try again', onPress: () => { } }
+            // ])
+            // console.log("none")
         } else {
             //make auth call
             await signInUser(email, password)
-            // setLoading(false)
-            // setLoading(true)
-       
+            setLoading(false)
+            // Alert.alert("okeh", [
+            //     { text: 'Try again', onPress: () => {  } }
+            // ])
+            // Alert.alert("noice",)
+
+            console.log("done")
 
         }
     }

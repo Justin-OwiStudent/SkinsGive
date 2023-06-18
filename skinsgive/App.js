@@ -15,6 +15,9 @@ import { auth } from './firebase';
 import SniperScreen from './Screens/SniperScreen';
 import M4Screen from './Screens/M4Screen';
 import AkScreen from './Screens/AkScreen';
+import AwpDetailScreen from './Screens/AwpDetailScreen';
+import M4DetailsScreen from './Screens/M4DetailsScreen';
+import AkDetailsScreen from './Screens/AkDetailsScreen';
 
 
 
@@ -22,26 +25,26 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const LoggedIn = true
+  // const LoggedIn = false
 
-  // const [LoggedIn, setLoggedIn] = useState(false) //variable to view screens for auth
+  const [LoggedIn, setLoggedIn] = useState(false) //variable to view screens for auth
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     console.log("checking if logged In...")
-  //     if(user){
-  //       //user is logged in
-  //       setLoggedIn(true)
-  //     } else {
-  //       //user doesn't exist, meaing they are logged out
-  //       setLoggedIn(false)
-  //     }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("checking if logged In...")
+      if(user){
+        //user is logged in
+        setLoggedIn(true)
+      } else {
+        //user doesn't exist, meaing they are logged out
+        setLoggedIn(false)
+      }
 
-  //   })
-  //   return unsubscribe;
+    })
+    return unsubscribe;
     
-  // }, [])
+  }, [])
 
 
 
@@ -87,28 +90,45 @@ export default function App() {
           <Stack.Screen 
            name="Enter"
            component={EnterCompetitionScreen}
-           options={{headerShown: true}}
+           options={{headerShown: false}}
            />  
 
 
           <Stack.Screen 
            name="AWP"
            component={SniperScreen}
-           options={{headerShown: true}}
+           options={{headerShown: false}}
            />  
 
           <Stack.Screen 
            name="M4"
            component={M4Screen}
-           options={{headerShown: true}}
+           options={{headerShown: false}}
            />  
 
           <Stack.Screen 
            name="AK"
            component={AkScreen}
-           options={{headerShown: true}}
+           options={{headerShown: false}}
            />  
           
+          <Stack.Screen 
+           name="AwpDetails"
+           component={AwpDetailScreen}
+           options={{headerShown: false}}
+           />  
+
+          <Stack.Screen 
+           name="M4Details"
+           component={M4DetailsScreen}
+           options={{headerShown: false}}
+           />  
+
+          <Stack.Screen 
+           name="AkDetails"
+           component={AkDetailsScreen}
+           options={{headerShown: false}}
+           /> 
         </>
      
 

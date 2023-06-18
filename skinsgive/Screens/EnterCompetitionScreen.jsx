@@ -1,4 +1,4 @@
-import { Alert, Button, Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Button, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { getCurrentUser } from '../services/firebaseAuth'
 import { addAkSkin, addAwpSkin, addCompetitionCollection, addM4Skin } from '../services/firebasedb'
@@ -17,7 +17,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
     const [items, setItems] = useState([
         { label: 'AWP', value: 'AWP' },
         { label: 'M4A4', value: 'M4A4' },
-        { label: 'AK-47', value: 'AK-47'}
+        { label: 'AK-47', value: 'AK-47' }
 
     ]);
 
@@ -34,15 +34,14 @@ const EnterCompetitionScreen = ({ navigation }) => {
             var competition = {
                 name,
                 value,
-                
-                // creator: creatorInfo.displayName,
-                // userId: creatorInfo.uid,
+                creator: creatorInfo.displayName,
+                userId: creatorInfo.uid,
                 score: 0
             }
 
             const success = await addAwpSkin(competition)
             if (success) {
-                console.log("added Skin successfully")
+                console.log("added AWP Skin successfully")
                 navigation.goBack()
                 uploadImageTest()
             } else {
@@ -50,43 +49,43 @@ const EnterCompetitionScreen = ({ navigation }) => {
                 Alert.alert("whoops", "something went wrong when trying to add Skin")
             }
         } else if (value === "M4A4") {
+            var creatorInfo = getCurrentUser()
+
             var competition = {
                 name,
                 value,
-                
-
-                // creator: creatorInfo.displayName,
-                // userId: creatorInfo.uid,
+                creator: creatorInfo.displayName,
+                userId: creatorInfo.uid,
                 score: 0
             }
             const success = await addM4Skin(competition)
             if (success) {
-                console.log("added M4 successfully")
+                console.log("added M4A4 Skin Successfully")
                 navigation.goBack()
                 uploadImageTest()
             } else {
-                console.log("Whoops... adding M4 failed.")
-                Alert.alert("whoops", "something went wrong when trying to add M4")
+                console.log("Whoops... adding Skin failed.")
+                Alert.alert("whoops", "something went wrong when trying to add Skin")
             }
-        } else if(value === "AK-47") {
+        } else if (value === "AK-47") {
+            var creatorInfo = getCurrentUser()
+
             var competition = {
                 name,
                 value,
-                
-
-                // creator: creatorInfo.displayName,
-                // userId: creatorInfo.uid,
+                creator: creatorInfo.displayName,
+                userId: creatorInfo.uid,
                 score: 0
             }
 
             const success = await addAkSkin(competition)
             if (success) {
-                console.log("added comp successfully")
+                console.log("added Ak-47 successfully")
                 navigation.goBack()
                 uploadImageTest()
             } else {
-                console.log("Whoops... adding project failed.")
-                Alert.alert("whoops", "something went wrong when trying to add project")
+                console.log("Whoops... adding Skin failed.")
+                Alert.alert("whoops", "something went wrong when trying to add Skin")
             }
         }
 
@@ -126,7 +125,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
     // }
 
 
-   
+
 
     //IMAGE PICKER ---
     const [image, setImage] = useState(null)
@@ -153,41 +152,48 @@ const EnterCompetitionScreen = ({ navigation }) => {
         console.log(result)
     }
 
+    const back = () => {
+        navigation.goBack()
+    }
 
     return (
-        <View style={styles.EnterDetails}>
-            <Text style={styles.WantEnter}>Want to take part in the M4 competition?</Text>
-            <Text style={styles.Followsteps}>Follow these easy steps:</Text>
+        <View style={styles.container}>
+            <TouchableOpacity onPress={back}>
+                <Ionicons name="arrow-back-outline" size={50} color="#A12895" />
+            </TouchableOpacity>
+            <View style={styles.EnterDetails}>
+                <Text style={styles.WantEnter}>Want to take part in the M4 competition?</Text>
+                <Text style={styles.Followsteps}>Follow these easy steps:</Text>
 
-            <Text style={styles.steps}>
-                1. Enter the full name of skin.
-            </Text>
-            <Text style={styles.steps}>
-                2. Enter catagory for given skin.
-            </Text>
-            <Text style={styles.steps}>
-                3. Enter a clear image of the skin.
-            </Text>
+                <Text style={styles.steps}>
+                    1. Enter the full name of skin.
+                </Text>
+                <Text style={styles.steps}>
+                    2. Enter category for given skin.
+                </Text>
+                <Text style={styles.steps}>
+                    3. Enter a clear image of the skin.
+                </Text>
 
-            <Text style={styles.SkinNameLabel}>Gun type:</Text>
-            <DropDownPicker
-            style={styles.dropdown}
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                disableBorderRadius={true}
-            />
+                <Text style={styles.SkinNameLabel}>Gun type:</Text>
+                <DropDownPicker
+                    style={styles.dropdown}
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    disableBorderRadius={true}
+                />
 
-            <Text style={styles.SkinNameLabel}>Skin name:</Text>
-            <TextInput style={styles.SkinName}
-                keyboardType='default'
-                defaultValue={name}
-                onChangeText={(newValue) => setName(newValue)} />
+                <Text style={styles.SkinNameLabel}>Skin name:</Text>
+                <TextInput style={styles.SkinName}
+                    keyboardType='default'
+                    defaultValue={name}
+                    onChangeText={(newValue) => setName(newValue)} />
 
-            {/* <Text style={styles.SkinNameLabel}>gun type:</Text>
+                {/* <Text style={styles.SkinNameLabel}>gun type:</Text>
             <TextInput style={styles.SkinName}
                 keyboardType='default'
                 // defaultValue={gun}
@@ -196,46 +202,48 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
 
 
-            <Text style={styles.SkinUploadLabel}>Select Image:</Text>
-            <View style={styles.SkinImage}>
-                {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: 200, height: 200, marginTop: 5, borderRadius: 20 }} />}
-            </View>
-            {/* <TextInput style={styles.SkinImage} /> */}
-            <View style={styles.inputGroup}>
-                {/* <TextInput 
+                <Text style={styles.SkinUploadLabel}>Select Image:</Text>
+                <View style={styles.SkinImage}>
+                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: 200, height: 200, marginTop: 5, borderRadius: 20 }} />}
+                </View>
+                {/* <TextInput style={styles.SkinImage} /> */}
+                <View style={styles.inputGroup}>
+                    {/* <TextInput 
                 style={[styles.input, styles.SkinName]}
                 placeholder="Feature One Title"
                 onChangeText={newText => setFeature(newText)}
                 defaultValue={feature}
                 returnKeyType='next'/> */}
 
-                {/* <View style={styles.SkinImage}>
+                    {/* <View style={styles.SkinImage}>
                     <Image url={image} />
                 </View> */}
-                {image ? (
-                    <Pressable onPress={() => setImage(null)}>
-                        <Ionicons name="trash-outline" size={32} color="red" />
-                    </Pressable>
-                ) : (
-                    <>
-                        <Pressable style={styles.uploadImgaeButton} onPress={() => pickImageFromLibrary(1)}>
-                            <Ionicons name="images-outline" size={32} color="black" />
+                    {image ? (
+                        <Pressable onPress={() => setImage(null)}>
+                            <Ionicons name="trash-outline" size={32} color="red" />
                         </Pressable>
-                        <Pressable onPress={() => { }}>
-                            <Ionicons name="camera-outline" size={34} color="black" />
-                        </Pressable>
-                    </>
-                )}
+                    ) : (
+                        <>
+                            <Pressable style={styles.uploadImgaeButton} onPress={() => pickImageFromLibrary(1)}>
+                                <Ionicons name="images-outline" size={32} color="white" />
+                            </Pressable>
+                            <Pressable onPress={() => { }}>
+                                <Ionicons name="camera-outline" size={34} color="white" />
+                            </Pressable>
+                        </>
+                    )}
+                </View>
+
+
+
+                {/* <Button title="upload" onPress={uploadImageTest}/> */}
+
+                <TouchableOpacity style={styles.upload} onPress={createEntry}>
+                    <Text style={styles.Enter}>Enter Comp</Text>
+                </TouchableOpacity>
             </View>
-
-
-
-            {/* <Button title="upload" onPress={uploadImageTest}/> */}
-
-            <TouchableOpacity style={styles.upload} onPress={createEntry}>
-                <Text style={styles.Enter}>Enter Comp</Text>
-            </TouchableOpacity>
         </View>
+
     )
 }
 
@@ -243,25 +251,31 @@ export default EnterCompetitionScreen
 
 const styles = StyleSheet.create({
     container: {
-        // marginLeft: -100
+        backgroundColor: "#202226",
+        height: "100%",
+        paddingTop: 50
     },
     EnterDetails: {
         alignSelf: 'flex-start',
-        marginTop: 10
+        marginTop: 10,
+
+        // backgroundColor: "#A12895",
+
     },
     WantEnter: {
-        color: 'black',
+
+        color: 'white',
         marginBottom: 20,
         marginLeft: 20
     },
     Followsteps: {
-        color: 'black',
+        color: 'white',
         marginBottom: 20,
         marginLeft: 20
 
     },
     steps: {
-        color: 'black',
+        color: 'white',
         textAlign: "left",
         marginLeft: 25
 
@@ -272,7 +286,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingLeft: 30,
         marginBottom: 5,
-        color: 'black'
+        color: 'white'
     },
     SkinName: {
         backgroundColor: '#393B3F',
@@ -288,7 +302,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingLeft: 30,
         marginBottom: 15,
-        color: 'black'
+        color: 'white'
     },
     SkinImage: {
         backgroundColor: '#393B3F',
@@ -331,6 +345,6 @@ const styles = StyleSheet.create({
         height: 50,
         marginLeft: 30,
         color: 'white',
-       
+
     }
 })

@@ -1,16 +1,23 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { getCurrentUser, signOutUser } from '../services/firebaseAuth'
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 const ProfileScreen = () => {
+
+    const user = getCurrentUser()
+    console.log(user)
+
     return (
         <View style={styles.container}>
 
             <View style={styles.ProfileSection}>
                 <Text style={styles.ProfileText}> Profile </Text>
                 <View style={styles.profilePicture}>
-
+                    {/* {user.photoURL} */}
                 </View>
-                <Text style={styles.username}> Justino </Text>
+                <Text style={styles.username}> {user.displayName} </Text>
 
                 <Image style={styles.Rank} source={require("../assets/DMG.png")} />
             </View>
@@ -28,6 +35,10 @@ const ProfileScreen = () => {
                 </View>
 
             </View>
+            <TouchableOpacity style={styles.logout} onPress={() => signOutUser()}>
+                {/* <Ionicons name="person-circle-outline" size={30} color="black" /> */}
+                <Text style={styles.logoutText}>Logout!</Text>
+            </TouchableOpacity>
 
         </View>
     )
@@ -36,9 +47,22 @@ const ProfileScreen = () => {
 export default ProfileScreen
 
 const styles = StyleSheet.create({
+    logout: {
+        width: 150,
+        height: 50,
+        backgroundColor: "red",
+        marginLeft: "60%",
+        borderRadius: 10,
+        marginTop: 80
+    },
+    logoutText: {
+        fontSize: 25,
+        marginLeft: 35,
+        marginTop: 10
+    },
     container: {
         padding: 20,
-      backgroundColor: "#202226",
+        backgroundColor: "#202226",
         height: "100%"
     },
     ProfileText: {

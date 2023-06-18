@@ -12,6 +12,7 @@ import MainScreen from '../Screens/MainScreen';
 import CompetitionDetailsScreen from '../Screens/CompetitionDetailsScreen';
 import EnterCompetitionScreen from '../Screens/EnterCompetitionScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
+import AwpDetailScreen from '../Screens/AwpDetailScreen';
 
 // const Tab = createBottomTabNavigator();
 
@@ -62,6 +63,16 @@ const HomeTab = () => {
                 <Ionicons name="flame-outline" size={30} color="black" />      
                 ),
               }}/> */}
+              
+              {/* <Tab.Screen name="AwpDetails" 
+            component={AwpDetailScreen}
+            options={{
+                tabBarColor: '#A12895',
+                tabBarLabel: 'Details',
+                tabBarIcon: ({ color }) => (
+                <Ionicons name="flame-outline" size={30} color="black" />      
+                ),
+              }}/> */}
 
             <Tab.Screen name="Profile"
                 component={ProfileScreen}
@@ -71,6 +82,7 @@ const HomeTab = () => {
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person-circle-outline" size={30} color="black" />
                     ),
+                   
                 }} />
         </Tab.Navigator>
 

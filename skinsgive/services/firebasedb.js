@@ -1,18 +1,19 @@
-import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp } from "firebase/firestore"
+import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp, updateDoc } from "firebase/firestore"
 import { db } from "../firebase"
 
 
 //--USER COLLCTION
-export const createUserInDb = async (username, email, uid) => {
+export const createUserInDb = async (email, rank, username, uid) => {
 
     try {
         console.log("creating user in db..." + uid);
         const docRef = await setDoc(doc(db, "users", uid), {
-            username,
             email,
-            rank: "dmg",
-            // createdAt: Timestamp.now()
+            rank,
+            username,
+            createdAt: Timestamp.now()
         })
+        // console.log("user added doc id" + docRef.id);
 
     } catch (e) {
         console.log("something went wromg: " + e)
@@ -156,5 +157,42 @@ export const getAk = async () => {
     } catch (e) {
         console.log("something went wrong" + e)
         return[]
+    }
+}
+
+
+export const updateAwpScore = async (CompetitionDetails, CompId) => {
+    try {
+
+        await updateDoc(doc(db, "competitions", "AWP", "Skins", CompId), CompetitionDetails);
+        console.log("updated Score success")
+
+    } catch (e) {
+        console.log("something went wrong updating")
+
+    }
+}
+
+export const updateM4Score = async (CompetitionDetails, CompId) => {
+    try {
+
+        await updateDoc(doc(db, "competitions", "M4A4", "Skins", CompId), CompetitionDetails);
+        console.log("updated Score success")
+
+    } catch (e) {
+        console.log("something went wrong updating")
+
+    }
+}
+
+export const updateAkScore = async (CompetitionDetails, CompId) => {
+    try {
+
+        await updateDoc(doc(db, "competitions", "AK-47", "Skins", CompId), CompetitionDetails);
+        console.log("updated Score success")
+
+    } catch (e) {
+        console.log("something went wrong updating")
+
     }
 }

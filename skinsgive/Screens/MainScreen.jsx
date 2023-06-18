@@ -6,6 +6,7 @@ import { getAllCompetitionsFromCollection, getAwp } from '../services/firebasedb
 import { getAllSkins } from '../services/firebasedb'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Competitions from '../components/Competitions'
+import { getCurrentUser } from '../services/firebaseAuth'
 getAllSkins
 
 const MainScreen = ({ navigation }) => {
@@ -27,13 +28,13 @@ const MainScreen = ({ navigation }) => {
       console.log("getting data")
       const allCompetitions = await getAwp()
       setCompetitions(allCompetitions)
-      console.log(allCompetitions)
+      console.log("got data")
       setRefreshing(false)
    }
 
-   const addNew = () => {
-      navigation.navigate("Enter")
-   }
+   // const addNew = () => {
+   //    navigation.navigate("Enter")
+   // }
 
 
    return (

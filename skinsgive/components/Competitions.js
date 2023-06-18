@@ -1,12 +1,52 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { updateScore } from '../services/firebasedb';
 
 
-const Competitions = (props) => {
+const Competitions = (props, {navigation}) => {
 
     const {data} = props
+
+    const CompId = data.id;
+    console.log(CompId)
+
+//     const [score, setScore] = useState("")
+
+//   const upscore = () => {
+//     data.score += 1;
+//     // currentScore += 1
+//     // data.score.save()
+//     // setScore(currentScore)
+//     // console.log(currentScore)
+//     // console.log(score)
+//     UpdateTheScore()
+
+//   }
+
+//   const downScore = () => {
+//     currentScore = data.score -= 1;
+//     // currentScore -- 1
+
+//     // data.score.save()
+//     setScore(currentScore)
+//     console.log(currentScore)
+//     console.log(score)
+//     UpdateTheScore()
+//   }
+
+
+//   const UpdateTheScore = async () => {
+//     var CompetitionDetails = {
+//        score
+//     };
+//     await updateScore(CompetitionDetails, CompId).then(() => {
+//         Alert.alert("Score updated!");
+//         // navigation.goBack();
+//     })
+// }
+
 
     //TODO: count the amount of entries and show on card
 
@@ -25,15 +65,15 @@ const Competitions = (props) => {
         <View style={styles.enties}>
 
 
-<View style={styles.voting}> 
-<TouchableOpacity  >
+{/* <View style={styles.voting}> 
+<           TouchableOpacity  onPress={upscore}>
                 <Ionicons name="arrow-up-circle-outline" size={35} color="green" />
             </TouchableOpacity>
 
-            <TouchableOpacity >
+            <TouchableOpacity onPress={downScore} >
                 <Ionicons name="arrow-down-circle-outline" size={35} color="red" />
             </TouchableOpacity>
-</View>
+</View> */}
            
 
             <Text style={styles.scoreText}>Score: {data.score} </Text>
