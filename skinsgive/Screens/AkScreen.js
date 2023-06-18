@@ -23,7 +23,7 @@ const AkScreen = ({navigation}) => {
       console.log("getting data")
       const allCompetitions = await getAk()
       setAk(allCompetitions)
-      console.log(allCompetitions)
+      // console.log(allCompetitions)
     //   setRefreshing(false)
     }
 

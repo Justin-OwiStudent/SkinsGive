@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('')
 
     const [loading, setLoading] = useState(false)
-// console.log(email)
+
 
 
     const logOn = async () => {
@@ -18,28 +18,21 @@ const LoginScreen = ({ navigation }) => {
         if (!email || !password) {
             Alert.alert("whoops", "please fill in all the feilds")
 
-            // Alert.alert("try again", [
-            //     { text: 'Try again', onPress: () => { } }
-            // ])
-            // console.log("none")
+
         } else {
             //make auth call
             await signInUser(email, password)
             setLoading(false)
-            // Alert.alert("okeh", [
-            //     { text: 'Try again', onPress: () => {  } }
-            // ])
-            // Alert.alert("noice",)
-
-            console.log("done")
+        
+         
 
         }
     }
 
     return (
-        <SafeAreaView>
-            <View style={styles.container}>
-                <Image style={styles.logo} source={require("../assets/Howl.png")} />
+        <SafeAreaView style={styles.container}>
+            <View >
+                <Image style={styles.logo} source={require("../assets/LOGO.png")} />
                 <Text style={styles.intro}>Lets get you Logged in !</Text>
 
                 <View style={styles.inputView}>
@@ -66,17 +59,6 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             </View>
 
-            {/* { !loading ? (
-    <View>
-            <TouchableOpacity style={styles.submitButton} onPress={logOn}>
-                <Text style={styles.submitButtonText}>Login</Text>
-            </TouchableOpacity>
-
-            
-            <Button title="Need an account?" color={'red'} onPress={() => navigation.push('Register')}/>
-        </View>
-    ) : <ActivityIndicator animating={loading} size={40}/> } */}
-
         </SafeAreaView>
     )
 }
@@ -87,12 +69,14 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         backgroundColor: "#202226",
-      height: "110%"
+      height: "110%",
+      
     },
     logo: {
         width: 200,
         alignSelf: 'center',
         height: 100,
+        resizeMode: "contain"
 
     },
     intro: {
@@ -104,7 +88,6 @@ const styles = StyleSheet.create({
     },
     inputView: {
         marginBottom: 75,
-        // backgroundColor: 'red'
     },
     inputLabel: {
         fontSize: 12,

@@ -6,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 const SniperScreen = ({ navigation }) => {
+   
    //MAAK N POPUP VIR AS JY IN N COMP GAN VIR UX, iets soos "here you can vote for comps"
 
    // maak n date, en dan doen calc van timestamp van skin met die timestamp van comp, comp timestamp maak ek in frontend
@@ -20,12 +21,10 @@ const SniperScreen = ({ navigation }) => {
 
    //get for all competitions
    const getAllCompeitions = async () => {
-      //   setRefreshing(true)
-      console.log("getting data")
+     
       const allCompetitions = await getAwp()
       setAwp(allCompetitions)
-      console.log("here")
-      //   setRefreshing(false)
+
    }
 
    const allcomps = awp.length;

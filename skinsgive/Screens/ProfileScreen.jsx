@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     logout: {
         width: 150,
         height: 50,
-        backgroundColor: "red",
+        backgroundColor: "#A12895",
         marginLeft: "60%",
         borderRadius: 10,
         marginTop: 80

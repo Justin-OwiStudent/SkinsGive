@@ -27,9 +27,7 @@ export const registerNewUser = (username, email, password, rank) => {
 
         Alert.alert("Whoops", errorMessage)
 
-        // Alert.alert("Whoops!","something went wrong trying to add user" [
-        //   { text: 'Try Again', onPress: () => { } }
-        // ])
+      
       });
 }
 
@@ -46,9 +44,7 @@ export const signInUser = async (email, password) => {
 
     Alert.alert("your In", "successfully logged")
 
-    // Alert.alert("your in", "successfully logged in." [
-    //   { text: 'Thanks', onPress: () => { setLoading(false) }}
-    // ])
+  
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -58,12 +54,7 @@ export const signInUser = async (email, password) => {
 
     Alert.alert("Whoops!", errorCode)
 
-    //if based on password wrong of whatever
-
-    // Alert.alert("whoops!", errorMessage [
-    //   { text: 'Try again', onPress: () => {  } }
-    // ])
-
+  
   });
 }
 

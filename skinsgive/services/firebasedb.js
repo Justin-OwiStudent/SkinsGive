@@ -1,5 +1,6 @@
 import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp, updateDoc } from "firebase/firestore"
 import { db } from "../firebase"
+import { uploadToStorage } from "./firebaseStorage";
 
 
 //--USER COLLCTION
@@ -13,7 +14,7 @@ export const createUserInDb = async (email, rank, username, uid) => {
             username,
             createdAt: Timestamp.now()
         })
-        // console.log("user added doc id" + docRef.id);
+       
 
     } catch (e) {
         console.log("something went wromg: " + e)
@@ -22,14 +23,29 @@ export const createUserInDb = async (email, rank, username, uid) => {
 }
 
 
-export const addAwpSkin = async (competition) => {
+export const addAwpSkin = async (competition, skins = []) => {
     try {
         // console.log(competition)
-        const docRef = await addDoc(collection(db, "competitions", "AWP", "Skins"), competition, serverTimestamp())
-        console.log("added project successfully..." + docRef.id)
+        console.log(skins)
+        const docRef = await addDoc(collection(db, "competitions", "AWP", "Skins"), competition)
+        console.log("added skin successfully..." + docRef.id)
         if(docRef.id) {
+            skins.forEach(async (skin) => {
+                //first upload image
+                console.log("uploading skin..." + skin)
+                const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.name}`)
+                //add skins as sub collection to project
+                console.log("IMAGE: " + imageUrl)
+                const skinRef = await addDoc(collection(db, `competitions/AWP/Skins/${docRef.id}/skin`), {
+                    name: skin.name,
+                    imageUrl: imageUrl
+                })
+
+                console.log("added skin successfully..." + skinRef.id)
+            })
+
+            // Alert.alert("Added AWP successfully")
             return true 
-            console.log(docRef.id)
         } else {
             return false
         }
@@ -74,37 +90,6 @@ export const addAkSkin = async (competition) => {
       console.log("something went wrong: " + e)  
     }
 }
-
-
-
-//KEEP HERE FOR TESTING
-
-
-// export const getAllCompetitionsFromCollection = async () => {
-//     try {
-//         var competitions = []
-        
-//         const snapshot = await getDocs(collection(db, "competitions"))
-
-//         //here is a way to order by when getting the data from db
-//         // const snapshot = await getDocs( query( collection(db, "competitions"), orderBy("year", "desc")))
-
-
-//         snapshot.forEach((doc) => {
-//             // console.log(doc.id, "=> ", doc.data())
-
-//             competitions.push(doc.data())
-//             // competitions.push({...doc.data(), id: doc.id})   //this is to get the id for the competition if i want to edit anything 
-
-//         })
-//         return competitions
-//     } catch (e) {
-//         console.log("something went wrong" + e)
-//         return[]
-//     }
-// }
-
-
 
 
 

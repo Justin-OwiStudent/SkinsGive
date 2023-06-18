@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { uploadToStorage } from '../services/firebaseStorage';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-// import Markdown from 'react-native-markdown-display';
+
 
 const EnterCompetitionScreen = ({ navigation }) => {
 
@@ -24,7 +24,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
 
     const [name, setName] = useState("")
-    // const [gun, setGun] = useState("")
+   
 
     const createEntry = async () => {
         //AWP ADD
@@ -39,11 +39,14 @@ const EnterCompetitionScreen = ({ navigation }) => {
                 score: 0
             }
 
-            const success = await addAwpSkin(competition)
+            var skins = []
+            image && skins.push({imageUrl: image, name: name})
+
+            const success = await addAwpSkin(competition, skins)
             if (success) {
                 console.log("added AWP Skin successfully")
                 navigation.goBack()
-                uploadImageTest()
+                
             } else {
                 console.log("Whoops... adding Skin failed.")
                 Alert.alert("whoops", "something went wrong when trying to add Skin")
@@ -62,7 +65,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
             if (success) {
                 console.log("added M4A4 Skin Successfully")
                 navigation.goBack()
-                uploadImageTest()
+                
             } else {
                 console.log("Whoops... adding Skin failed.")
                 Alert.alert("whoops", "something went wrong when trying to add Skin")
@@ -82,7 +85,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
             if (success) {
                 console.log("added Ak-47 successfully")
                 navigation.goBack()
-                uploadImageTest()
+               
             } else {
                 console.log("Whoops... adding Skin failed.")
                 Alert.alert("whoops", "something went wrong when trying to add Skin")
@@ -93,36 +96,6 @@ const EnterCompetitionScreen = ({ navigation }) => {
     }
 
 
-    //ONE THAT WORKED
-    // const createEntry = async () => {
-    //     //cal firebase functionlaity
-    //     if (value === "AWP") {
-    //         var creatorInfo = getCurrentUser()
-
-    //         var competition = {
-    //             title,
-    //             gun,
-    //             value,
-    //             // creator: creatorInfo.displayName,
-    //             // userId: creatorInfo.uid,
-    //             score: 0
-    //         }
-
-    //         const success = await addCompetitionCollection(competition)
-    //         if (success) {
-    //             console.log("added comp successfully")
-    //             navigation.goBack()
-    //             uploadImageTest()
-    //         } else {
-    //             console.log("Whoops... adding project failed.")
-    //             Alert.alert("whoops", "something went wrong when trying to add project")
-    //         }
-    //     } else {
-    //         Alert.alert("whoops", "please add all competition information")
-    //     }
-
-
-    // }
 
 
 
@@ -130,13 +103,13 @@ const EnterCompetitionScreen = ({ navigation }) => {
     //IMAGE PICKER ---
     const [image, setImage] = useState(null)
 
-    // const [feature, setFeature] = useState("")
+    
 
     const pickImageFromLibrary = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [6, 4],
             quality: 0.7,
         });
 
@@ -147,10 +120,6 @@ const EnterCompetitionScreen = ({ navigation }) => {
         }
     }
 
-    const uploadImageTest = async () => {
-        const result = await uploadToStorage(image, "skins/testImage_" + feature);
-        console.log(result)
-    }
 
     const back = () => {
         navigation.goBack()
@@ -193,31 +162,17 @@ const EnterCompetitionScreen = ({ navigation }) => {
                     defaultValue={name}
                     onChangeText={(newValue) => setName(newValue)} />
 
-                {/* <Text style={styles.SkinNameLabel}>gun type:</Text>
-            <TextInput style={styles.SkinName}
-                keyboardType='default'
-                // defaultValue={gun}
-                // onChangeText={(newValue) => setGun(newValue)} 
-                /> */}
-
+            
 
 
                 <Text style={styles.SkinUploadLabel}>Select Image:</Text>
                 <View style={styles.SkinImage}>
-                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: 200, height: 200, marginTop: 5, borderRadius: 20 }} />}
+                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: 290, height: 200, marginTop: 5, borderRadius: 20 }} />}
                 </View>
-                {/* <TextInput style={styles.SkinImage} /> */}
+          
                 <View style={styles.inputGroup}>
-                    {/* <TextInput 
-                style={[styles.input, styles.SkinName]}
-                placeholder="Feature One Title"
-                onChangeText={newText => setFeature(newText)}
-                defaultValue={feature}
-                returnKeyType='next'/> */}
+                    
 
-                    {/* <View style={styles.SkinImage}>
-                    <Image url={image} />
-                </View> */}
                     {image ? (
                         <Pressable onPress={() => setImage(null)}>
                             <Ionicons name="trash-outline" size={32} color="red" />
@@ -236,7 +191,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
 
 
-                {/* <Button title="upload" onPress={uploadImageTest}/> */}
+              
 
                 <TouchableOpacity style={styles.upload} onPress={createEntry}>
                     <Text style={styles.Enter}>Enter Comp</Text>
@@ -307,7 +262,7 @@ const styles = StyleSheet.create({
     SkinImage: {
         backgroundColor: '#393B3F',
         height: 210,
-        width: 210,
+        width: 300,
         borderRadius: 20,
         color: 'black',
         marginLeft: 30,

@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Image style={styles.logo} source={require("../assets/Howl.png")} />
+            <Image style={styles.logo} source={require("../assets/LOGO.png")} />
             <Text style={styles.intro}>Lets get you Signed up !</Text>
 
             <View style={styles.inputView}>
@@ -67,12 +67,13 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         backgroundColor: "#202226",
-      height: "100%"
+      height: "110%"
     },
     logo: {
         width: 200,
         alignSelf: 'center',
         height: 100,
+        resizeMode: "contain"
 
     },
     intro: {

@@ -9,13 +9,9 @@ const M4DetailsScreen = ({ route, navigation }) => {
     console.log(Competition)
 
     const CompId = Competition.id;
-    console.log(CompId)
-    // console.log(Competition.s
 
     const [score, setScore] = useState(Competition.score);
     const [scoreUp, setScoreUp] = useState(Competition.score);
-
-
 
     const upscore = () => {
         currentScore = Competition.score += 1;
@@ -30,8 +26,9 @@ const M4DetailsScreen = ({ route, navigation }) => {
             score
         };
         await updateM4Score(CompetitionDetails, CompId).then(() => {
-            Alert.alert("Score updated!");
-            // navigation.goBack();
+            Alert.alert("You voted for: " + Competition.name);
+
+            navigation.goBack();
         })
     }
 

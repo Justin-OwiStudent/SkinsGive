@@ -1,5 +1,5 @@
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { updateScore } from '../services/firebasedb';
@@ -7,51 +7,40 @@ import { updateScore } from '../services/firebasedb';
 
 const Competitions = (props, {navigation}) => {
 
+    const [image, setImage] = useState("../assets/M4.png");
+
     const {data} = props
+    // console.log(data)
+
+useEffect(() => {
+    ChooseImage()
+}, [])
+
+const ChooseImage = () => {
+    if(data.value === "AWP") {
+        setImage("../assets/Awp.png")
+    } else if(data.value === "M4A4") {
+        setImage("../assets/M4.png")
+    } else if (data.value === "AK-47") {
+        setImage("../assets/AK.png")
+
+    }
+}
+   console.log(image)
+
+    const howl = "../assets/M4.png"
 
     const CompId = data.id;
     console.log(CompId)
 
-//     const [score, setScore] = useState("")
 
-//   const upscore = () => {
-//     data.score += 1;
-//     // currentScore += 1
-//     // data.score.save()
-//     // setScore(currentScore)
-//     // console.log(currentScore)
-//     // console.log(score)
-//     UpdateTheScore()
-
-//   }
-
-//   const downScore = () => {
-//     currentScore = data.score -= 1;
-//     // currentScore -- 1
-
-//     // data.score.save()
-//     setScore(currentScore)
-//     console.log(currentScore)
-//     console.log(score)
-//     UpdateTheScore()
-//   }
-
-
-//   const UpdateTheScore = async () => {
-//     var CompetitionDetails = {
-//        score
-//     };
-//     await updateScore(CompetitionDetails, CompId).then(() => {
-//         Alert.alert("Score updated!");
-//         // navigation.goBack();
-//     })
-// }
 
 
     //TODO: count the amount of entries and show on card
 
     //TODO: do the timestamp
 
+    // const image = 
 
   return (
     <View style={styles.card}>
@@ -59,7 +48,7 @@ const Competitions = (props, {navigation}) => {
             <Text style={styles.time}>{data.name}</Text>
         </View>
         <View style={styles.skinSection}>
-            <Image style={styles.skin} source={require("../assets/M4.png")}/>
+            <Image style={styles.skin} source={require(howl)}/>
             {/* <Text style={styles.skinName}> {data.name}</Text> */}
         </View>
         <View style={styles.enties}>

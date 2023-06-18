@@ -31,8 +31,9 @@ const AkDetailsScreen = ({ route, navigation }) => {
             score
         };
         await updateAkScore(CompetitionDetails, CompId).then(() => {
-            Alert.alert("Score updated!");
-            // navigation.goBack();
+            Alert.alert("You voted for: " + Competition.name);
+
+            navigation.goBack();
         })
     }
 

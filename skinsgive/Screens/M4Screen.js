@@ -24,7 +24,6 @@ const M4Screen = ({navigation}) => {
       console.log("getting data")
       const allCompetitions = await getM4()
       setM4(allCompetitions)
-      console.log(allCompetitions)
     //   setRefreshing(false)
     }
 

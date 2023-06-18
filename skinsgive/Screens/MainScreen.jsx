@@ -13,9 +13,6 @@ const MainScreen = ({ navigation }) => {
    const [refreshing, setRefreshing] = useState(false)
 
    const [competitions, setCompetitions] = useState([])
-   //  const [path, setPath] = useState([])
-
-
 
    // get data first time viewing screen
    useEffect(() => {
@@ -32,10 +29,6 @@ const MainScreen = ({ navigation }) => {
       setRefreshing(false)
    }
 
-   // const addNew = () => {
-   //    navigation.navigate("Enter")
-   // }
-
 
    return (
       <View style={styles.container}>
@@ -49,19 +42,6 @@ const MainScreen = ({ navigation }) => {
             </View>
 
             <Text style={styles.title}> Ongoing Competitions </Text>
-
-            {/* <TouchableOpacity style={styles.add} onPress={addNew}>
-            <Ionicons name="add-circle-outline" size={50} color="#A12895" />
-         </TouchableOpacity> */}
-
-
-            {/* {competitions.map((Competition, index) => (
-               <TouchableOpacity key={index}
-                  onPress={() => navigation.navigate("Details", { Competition })}
-                  activeOpacity={0.75}>
-                  <Competitions data={Competition} />
-               </TouchableOpacity>
-            ))} */}
 
 
 
@@ -90,25 +70,8 @@ const MainScreen = ({ navigation }) => {
                </View>
             </TouchableOpacity>
 
-
-            {/* <View style={styles.Comp}>
-
-            </View> */}
-
-
-
-
          </ScrollView>
 
-
-
-
-         {/* <View style={styles.navBar}> 
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-      <Image style={styles.navIcon} source={require("../assets/CompLogo.png")}/>
-
-    </View> */}
       </View>
    )
 }

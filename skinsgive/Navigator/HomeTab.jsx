@@ -21,21 +21,7 @@ const Tab = createMaterialBottomTabNavigator();
 const HomeTab = () => {
 
     return (
-        //     <Tab.Navigator
-        //     initialRouteName="Home"
-        //     activeColor="A12895"
-        //     inactiveColor="#393B3F"
-        //     barStyle={{ backgroundColor: '#393B3F' }}
-        //     >
-        //     <Tab.Screen name="Home"
-        //      component={MainScreen}
-        //      options={{
-        //         tabBarLabel: 'Home',
-        //         // tabBarIcon: 
-        //       }} />
-
-        //     <Tab.Screen name="Comp" component={CompetitionDetailsScreen} />
-        //   </Tab.Navigator>
+ 
 
         <Tab.Navigator
             initialRouteName="Home"
@@ -54,26 +40,7 @@ const HomeTab = () => {
                     ),
                 }} />
 
-            {/* <Tab.Screen name="Details" 
-            component={CompetitionDetailsScreen}
-            options={{
-                tabBarColor: '#A12895',
-                tabBarLabel: 'Details',
-                tabBarIcon: ({ color }) => (
-                <Ionicons name="flame-outline" size={30} color="black" />      
-                ),
-              }}/> */}
-              
-              {/* <Tab.Screen name="AwpDetails" 
-            component={AwpDetailScreen}
-            options={{
-                tabBarColor: '#A12895',
-                tabBarLabel: 'Details',
-                tabBarIcon: ({ color }) => (
-                <Ionicons name="flame-outline" size={30} color="black" />      
-                ),
-              }}/> */}
-
+      
             <Tab.Screen name="Profile"
                 component={ProfileScreen}
                 options={{
@@ -86,56 +53,7 @@ const HomeTab = () => {
                 }} />
         </Tab.Navigator>
 
-        // <Tab.Navigator
-        //     screenOptions={({ route }) => ({
-        //         headrStyle: {
-        //             backgroundColor: 'black'
-        //         },
-        //         headerTitleStyle: {
-
-        //         },
-        //         tabBarIcon: ({ focused, color, size }) => {
-        //             let iconname;
-
-        //             if (route.name === 'Projects') {
-        //                 iconname = focused
-        //                     ? 'list-circle'
-        //                     : 'list-circle-outline';
-        //             } else if (route.name === 'Profile') {
-        //                 iconname = focused
-        //                     ? 'person-circle'
-        //                     : 'person-circle-outline';
-        //             }
-        //             return <Ionicons name={iconname} size={size} color={color} />
-        //         },
-        //         tabBarActiveTintColor: 'black',
-        //         tabBarInactiveTintColor: 'gray',
-
-        //     })}>
-        //     <Tab.Screen name='Projetcs' component={ProjectScreen} options={{ title: 'AllProjects' }} />
-        //     <Tab.Screen name='Profile' component={ProfileScreen}
-        //         options={{
-        //             title: 'AllProjects',
-        //             headerRight: () => (
-        //                 <Pressable
-        //                     style={styles.logout}
-        //                     onPress={() => Alert.alert("Logout")}>
-        //                     <Ionicons
-        //                         name="exit-outline"
-        //                         size={28}
-        //                         color="red" />
-        //                 </Pressable>
-        //             //      <Button
-        //             //      onPress={() => alert('This is a button!')}
-        //             //      title="Info"
-        //             //      color="red"
-        //             //    />
-        //             ),
-        //         }} />
-
-
-
-        // </Tab.Navigator>
+       
     )
 }
 

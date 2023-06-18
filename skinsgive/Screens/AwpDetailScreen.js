@@ -7,11 +7,10 @@ import { updateAwpScore } from '../services/firebasedb';
 const AwpDetailScreen = ({ route, navigation }) => {
 
     const { Competition } = route.params;
-    console.log(Competition)
+    
 
     const CompId = Competition.id;
-    console.log(CompId)
-    // console.log(Competition.s
+ 
 
     const [score, setScore] = useState(Competition.score);
     const [scoreUp, setScoreUp] = useState(Competition.score);
@@ -32,8 +31,8 @@ const AwpDetailScreen = ({ route, navigation }) => {
             score
         };
         await updateAwpScore(CompetitionDetails, CompId).then(() => {
-            Alert.alert("Score updated!");
-            // navigation.goBack();
+            Alert.alert("You voted for: " + Competition.name);
+            navigation.goBack();
         })
     }
 
