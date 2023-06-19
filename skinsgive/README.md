@@ -19,10 +19,10 @@
 <p align="center">
 
   <a href="https://github.com/username/projectname">
-    <img src="path/to/logo" alt="Logo" width="140" height="140">
+    <img src="path/to/logo" alt="Logo" width="200" height="140">
   </a>
   
-  <h3 align="center">Project Name</h3>
+  <h3 align="center">Counter Skins</h3>
 
   <p align="center">
     Short Project Slogan / Description <br>

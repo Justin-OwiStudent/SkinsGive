@@ -19,7 +19,7 @@
 <p align="center">
 
   <a href="https://github.com/username/projectname">
-    <img src="Mockups/LOGO.png" alt="Logo" width="140" height="140">
+    <img src="Mockups/LOGO.png" alt="Logo" width="200" height="150">
   </a>
   
   <h3 align="center">Counter SKins</h3>
@@ -90,7 +90,7 @@ The following instructions will get you a copy of the project up and running on 
 
 ### Prerequisites
 
-Ensure that you have the latest version of [Visual Studio Code](path/to/where/they/can/download/software) and [Node](path/to/where/they/can/download/software) installed on your machine. The [Expo](path/to/where/they/can/download/plugin) plugin will also be required.
+Ensure that you have the latest version of [Visual Studio Code](https://code.visualstudio.com/download) and [Node](https://nodejs.org/en/download) installed on your machine. The [Expo](https://expo.dev/) plugin will also be required.
 
 ### How to install
 
@@ -145,17 +145,17 @@ starting off with this competition i looked at all kinds of CSGO websites and go
 
 ### Ideation
 
-![image5][image5]
-<br>
 ![image6][image6]
+
+
 
 ### Wireframes
 
 ![image7][image7]
 
-### User-flow
+<!-- ### User-flow
 
-![image8][image8]
+![image8][image8] -->
 
 <!-- DEVELOPMENT PROCESS -->
 ## Development Process
@@ -249,15 +249,15 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: /path/to/image.png
-[image2]: /path/to/image.png
-[image3]: /path/to/image.png
-[image4]: /path/to/image.png
-[image5]: /path/to/image.png
-[image6]: /path/to/image.png
-[image7]: /path/to/image.png
+[image2]: /Mockups/mockup5.png
+[image3]: /Mockups/mockup1.png
+[image4]: /Mockups/mockup2.png
+[image5]: /Mockups/mockup3.png
+[image6]: /Mockups/MoodBoard.png
+[image7]: /Mockups/Wireframes.png
 [image8]: /path/to/image.png
-[image9]: /path/to/image.png
-[image10]: /path/to/image.png
+[image9]: /Mockups/mockup4.png
+[image10]: /Mockups/mockup2.png
 
 
 <!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
