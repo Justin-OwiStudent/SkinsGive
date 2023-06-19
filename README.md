@@ -3,13 +3,13 @@
 <!-- Repository Information & Links-->
 <br />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Justin-OwiStudent/SkinsGive?color=%000000)
+<!-- ![GitHub repo size](https://img.shields.io/github/repo-size/Justin-OwiStudent/SkinsGive?color=%000000)
 ![GitHub watchers](https://img.shields.io/github/watchers/Justin-OwiStudent/SkinsGive?color=%000000)
 ![GitHub language count](https://img.shields.io/github/languages/count/Justin-OwiStudent/SkinsGive?color=%000000)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Justin-OwiStudent/SkinsGive?color=%000000)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Instagram][instagram-shield]][instagram-url]
-[![Behance][behance-shield]][behance-url]
+[![Behance][behance-shield]][behance-url] -->
 <!-- https://github.com/Justin-OwiStudent/SkinsGive -->
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Justin Koster</h5>
@@ -68,9 +68,9 @@
 * [Acknowledgements](#acknowledgements)
 
 <!--PROJECT DESCRIPTION-->
-## About the Project
+<!-- ## About the Project -->
 <!-- header image of project -->
-![image1][image1]
+<!-- ![image1][image1] -->
 
 ### Project Description
 
