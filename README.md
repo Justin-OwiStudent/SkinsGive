@@ -3,14 +3,14 @@
 <!-- Repository Information & Links-->
 <br />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/username/projectname?color=%000000)
-![GitHub watchers](https://img.shields.io/github/watchers/username/projectname?color=%000000)
-![GitHub language count](https://img.shields.io/github/languages/count/username/projectname?color=%000000)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/username/projectname?color=%000000)
+![GitHub repo size](https://img.shields.io/github/repo-size/Justin-OwiStudent/SkinsGive?color=%000000)
+![GitHub watchers](https://img.shields.io/github/watchers/Justin-OwiStudent/SkinsGive?color=%000000)
+![GitHub language count](https://img.shields.io/github/languages/count/Justin-OwiStudent/SkinsGive?color=%000000)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Justin-OwiStudent/SkinsGive?color=%000000)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Instagram][instagram-shield]][instagram-url]
 [![Behance][behance-shield]][behance-url]
-
+<!-- https://github.com/Justin-OwiStudent/SkinsGive -->
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Justin Koster</h5>
 <h5 align="center" style="padding:0;margin:0;">200100</h5>
@@ -18,22 +18,22 @@
 </br>
 <p align="center">
 
-  <a href="https://github.com/username/projectname">
-    <img src="Mockups/LOGO.png" alt="Logo" width="200" height="150">
+  <a href="https://github.com/Justin-OwiStudent/SkinsGive">
+    <img src="Mockups/LOGO.png" alt="Logo" width="250" height="150">
   </a>
   
   <h3 align="center">Counter SKins</h3>
 
   <p align="center">
     Counter skins is a mobile application where enthusiasts of Counter Strike can go and enter a skins competition, users can enter and vote for other skins, the competitions are time based, once the time is up the winner of the competition will be declared, and who knows, maybe well see your skin in the next Counter Strike update ! <br>
-      <a href="https://github.com/username/projectname"><strong>Explore the docs »</strong></a>
+      <a href="https://github.com/Justin-OwiStudent/SkinsGive/skinsgive"><strong>Explore the docs »</strong></a>
    <br />
    <br />
    <!-- <a href="path/to/demonstration/video">View Demo</a> -->
     ·
-    <a href="https://github.com/username/projectname/issues">Report Bug</a>
+    <a href="https://github.com/Justin-OwiStudent/SkinsGive/issues">Report Bug</a>
     ·
-    <a href="https://github.com/username/projectname/issues">Request Feature</a>
+    <a href="https://github.com/Justin-OwiStudent/SkinsGive/issues">Request Feature</a>
 </p>
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -78,9 +78,9 @@ Counter skins is a mobile application where enthusiasts of Counter Strike can go
 
 ### Built With
 
-* [React Native](path/to/technology/website)
-* [Node JS](path/to/technology/website)
-* [FireBase](path/to/technology/website)
+* [React Native](https://reactnative.dev/)
+* [Node JS](https://nodejs.org/en)
+* [FireBase](https://console.firebase.google.com/)
 
 <!-- GETTING STARTED -->
 <!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
@@ -224,7 +224,7 @@ Contributions are what makes the open-source community such an amazing place to 
 <!-- AUTHORS -->
 ## Authors
 
-* **Justin Ksoster** - [username](https://github.com/Justin-OwiStudent)
+* **Justin Koster** - [username](https://github.com/Justin-OwiStudent)
 
 <!-- LICENSE -->
 ## License
@@ -238,13 +238,13 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 * **Project Link** - https://github.com/Justin-OwiStudent/SkinsGive
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+<!-- ## Acknowledgements
 <!-- all resources that you used and Acknowledgements here -->
 * [Resource Name](path/to/resource)
 * [Resource Name](path/to/resource)
 * [Resource Name](path/to/resource)
 * [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
+* [Resource Name](path/to/resource) -->
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
