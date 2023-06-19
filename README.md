@@ -206,9 +206,9 @@ each competition is a collection and withing that i have subcollections which ho
 ![image10][image10]
 
 <!-- ROADMAP -->
-## Roadmap
+<!-- ## Roadmap
 
-See the [open issues](https://github.com/Justin-OwiStudent/SkinsGive/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Justin-OwiStudent/SkinsGive/issues) for a list of proposed features (and known issues). -->
 
 <!-- CONTRIBUTING -->
 <!-- ## Contributing
