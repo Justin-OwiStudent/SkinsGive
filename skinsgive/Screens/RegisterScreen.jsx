@@ -66,7 +66,7 @@ export default RegisterScreen
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: "#202226",
+        backgroundColor: "#20232A",
       height: "110%"
     },
     logo: {
@@ -78,28 +78,31 @@ const styles = StyleSheet.create({
     },
     intro: {
         textAlign: 'center',
-        color: 'white',
+        color: '#AEB3B9',
         marginTop: 20,
         marginBottom: 10,
-        fontSize: 20
+        fontSize: 16,
+        fontFamily: "MontserratRegular",
+        
+
     },
     inputView: {
         marginBottom: 10,
         // backgroundColor: 'red'
     },
     inputLabel: {
-        fontSize: 12,
+        fontSize: 10,
         marginTop: 10,
         paddingLeft: 50,
         marginBottom: 5,
-        color: 'white'
+        color: '#AEB3B9'
     },
     input: {
-        backgroundColor: '#393B3F',
-        height: 50,
+        backgroundColor: '#2B2F38',
+        height: 40,
         width: 300,
         borderRadius: 20,
-        color: 'white',
+        color: '#AEB3B9',
         alignSelf: 'center',
         paddingLeft: 20
     },
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     loginbtn: {
         width: 200,
         // height: 50,
-        backgroundColor: '#D32026',
+        backgroundColor: '#FED32C',
         borderRadius: 5,
         marginTop: 30,
         padding: 10,
@@ -116,19 +119,24 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     loginbtnText: {
-        color: 'white',
+        color: 'black',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: "MontserratRegular",
+
     },
     NoAccount: {
-        color: 'white'
+        color: '#AEB3B9',
+        fontFamily: "MontserratRegular",
+
     },
     goReg: {
-        color: '#D32026',
+        color: '#FED32C',
+        fontFamily: "MontserratBold",
+
 
     },
     dontHaveText: {
-        // textAlign: 'center'
         alignSelf: 'center',
         marginTop: 50
     }

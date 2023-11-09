@@ -17,13 +17,13 @@ const Tab = createMaterialBottomTabNavigator();
 const HomeTab = () => {
     return (
         <Tab.Navigator
-        initialRouteName="Home"
-        activeColor="white"
+        initialRouteName="Landing"
+        activeColor="black"
         inactiveColor="black"
         barStyle={{ backgroundColor: '#393B3F' }}
-        shifting={false}
+        shifting={true}
     >
-        <Tab.Screen name="Home"
+        <Tab.Screen name="Landing"
             component={MainScreen}
             options={{
                 tabBarColor: '#D32026',
@@ -41,6 +41,17 @@ const HomeTab = () => {
                 tabBarLabel: 'Profile',
                 tabBarIcon: ({ color }) => (
                     <Ionicons name="person-circle-outline" size={23} color="black" />
+                ),
+               
+            }} />
+
+            <Tab.Screen name="Enter"
+            component={EnterCompetitionScreen}
+            options={{
+                tabBarColor: '#D32026',
+                tabBarLabel: 'Add Entry',
+                tabBarIcon: ({ color }) => (
+                    <Ionicons name="add-circle-outline" size={23} color="black" />
                 ),
                
             }} />

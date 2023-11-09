@@ -2,7 +2,7 @@ import { Image, Pressable, RefreshControl, ScrollView, StyleSheet, Text, Touchab
 import React, { useCallback, useEffect, useState } from 'react'
 import CompetitionCards from '../components/CompetitionCards'
 import { useFocusEffect } from '@react-navigation/native'
-import { getAllCompetitionsFromCollection, getAllComps, getAwp } from '../services/firebasedb'
+import { getAllCompetitionsFromCollection, getAllComps, getAwp, getEntriesForCompetition, getEntriesForWinnigCompetition, getUserDoc, updateUserWins } from '../services/firebasedb'
 import { getAllSkins } from '../services/firebasedb'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Competitions from '../components/Competitions'
@@ -10,106 +10,155 @@ import { getCurrentUser } from '../services/firebaseAuth'
 import { LinearGradient } from 'expo-linear-gradient';
 
 
+
+
 const MainScreen = ({ navigation }) => {
+   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0 });
    const [refreshing, setRefreshing] = useState(false)
-   const [competitions, setCompetitions] = useState([])
-   // const [countdown, setCountdown] = useState([])
+   const [competitions, setCompetitions] = useState([]);
+   const [winningEntries, setWinningEntries] = useState({});
+   const [winner, setWinner] = useState("");
+   // const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining(competition.EndDate));
 
+   const user = getCurrentUser()
+   // console.log(user.uid)
 
-
-   // get data first time viewing screen
    useEffect(() => {
-      getAllCompeitions()
-   }, [])
+      getAllCompetitions();
+   }, []);
 
-   //get for all competitions
-   const getAllCompeitions = async () => {
+   // get for all competitions
+   const getAllCompetitions = async () => {
       setRefreshing(true);
-      const allCompetitions = await getAllComps();
-      setCompetitions(allCompetitions);
-    
-      // Check if competitions is an array and has at least one element
-      if (Array.isArray(allCompetitions) && allCompetitions.length > 0) {
-        // Access the EndDate of the first competition
-        const firstCompetitionEndDate = allCompetitions[0]?.EndDate;
-    
-        // Check if EndDate is defined before logging
-        if (firstCompetitionEndDate !== undefined) {
-          console.log(firstCompetitionEndDate);
-        } else {
-          console.log('EndDate is undefined');
-        }
-      } else {
-        console.log('Competitions is not an array or is empty');
+      try {
+         const allCompetitions = await getAllComps();
+         setCompetitions(allCompetitions);
+
+         if (Array.isArray(allCompetitions) && allCompetitions.length > 0) {
+            const competitionsWithTimeRemaining = await Promise.all(
+               allCompetitions.map(async (outerCompetition) => {
+                  const outerCompId = outerCompetition.id;
+                  const competitionEndDate = outerCompetition?.EndDate;
+                  const timeRemaining = calculateTimeRemaining(competitionEndDate);
+
+                  const winningEntries = timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes === 0
+                     ? await getEntriesForWinnigCompetition(outerCompId)
+                     : null;
+
+                  const winningEntry = calculateWinningEntry(winningEntries);
+                  setWinner(winningEntry?.creator)
+                  
+                  // updateWins();
+
+                  return {
+                     ...outerCompetition,
+                     timeRemaining: calculateTimeRemainingString(competitionEndDate),
+                     winningEntry: winningEntry,
+                  };
+               })
+            );
+
+            setWinningEntries(competitionsWithTimeRemaining.reduce((acc, competition) => {
+               acc[competition.id] = competition.winningEntry;
+               return acc;
+            }, {}));
+
+         } else {
+            console.log('Competitions is not an array or is empty');
+         }
+      } catch (error) {
+         console.error('Error fetching competitions:', error);
       }
-    
+
       setRefreshing(false);
+   };
+
+   // const updateWins = async () => {
+   //    try {
+   //      // Check if the winner is the current user
+   //      if (winner === user.displayName) {
+         
+   //        const userId = user.id
+   //        const userDoc = await getUserDoc(userId);
+    
+   //        // Update the "wins" field
+   //        await updateUserWins(userDoc.id, userDoc.wins + 1);
+   //      }
+   //    } catch (error) {
+   //      console.error('Error updating wins:', error);
+   //    }
+   //  };
+
+
+   const calculateWinningEntry = (entries) => {
+      if (!Array.isArray(entries)) {
+         return null;
+      }
+
+      let winningEntry = null;
+      let maxScore = -1;
+
+      entries.forEach((entry) => {
+         if (entry.score > maxScore) {
+            maxScore = entry.score;
+            winningEntry = entry;
+         }
+      });
+
+      return winningEntry;
+   };
+
+   const calculateTimeRemaining = (endDate) => {
+      const now = new Date();
+      const end = new Date(endDate.seconds * 1000); 
+
+      const timeDifference = end - now;
+
+      if (timeDifference <= 0) {
+         return { days: 0, hours: 0, minutes: 0 };
+      }
+
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+      return { days, hours, minutes };
+   };
+
+   const calculateTimeRemainingString = (endDate) => {
+      const timeRemaining = calculateTimeRemaining(endDate);
+      const { days, hours, minutes } = timeRemaining;
+
+      // Format the string as per your preference
+      return `${days} days, ${hours} hours, ${minutes} minutes remaining`;
+   };
+
+
+   const navigateToEntries = (competition) => {
+  
+      navigation.navigate('CompEntries', { competition });
+   };
+
+
+   const getCompetitionImage = (competitionId) => {
+      switch (competitionId) {
+        case 'AK-47':
+          return require("../assets/AK.png");
+        case 'AWP':
+          return require('../assets/Awp.png');
+        case 'M4A4':
+          return require('../assets/M4.png');
+       
+        default:
+          return require('../assets/Awp.png');
+      }
     };
-   // console.log(competitions.time)
-   // const remainingTime = competitions.time
-
-
-   //    // const width = Dimensions.get("window").width;
-   //   const unixTimestamp = remainingTime;
-
-   //   const [countdown, setCountdown] = useState({
-   //     days: 0,
-   //     hours: 0,
-   //     minutes: 0,
-   //     seconds: 0,
-   //   });
-   //   const [ loadEnd, setLoadEnd] = useState(false)
-
-   //   const {days, hours, minutes, seconds} = countdown
-
-   //   const onLoadEnd = () => {
-   //     setLoadEnd(prev => !prev);
-   //   }
-
-
-   //   useEffect(() => {
-   //     const calculateTimeDifference = () => {
-   //       let currentDate = new Date();
-   //       let timestampDate = new Date(unixTimestamp * 1000);
-   //       let timeDifference = Math.floor((timestampDate - currentDate) / 1000);
-
-   //       let days = Math.floor(timeDifference / (24 * 60 * 60));
-   //       let hours = Math.floor((timeDifference / (60 * 60)) % 24);
-   //       let minutes = Math.floor((timeDifference / 60) % 60);
-   //       let seconds = Math.floor(timeDifference % 60);
-   //       days < 0 ? (days = 0) : days < 10 ? (days = "0" + days) : days;
-   //       hours < 0 ? (hours = 0) : hours < 10 ? (hours = "0" + hours) : hours;
-   //       minutes < 0
-   //         ? (minutes = 0)
-   //         : minutes < 10
-   //         ? (minutes = "0" + minutes)
-   //         : minutes;
-   //       seconds < 0
-   //         ? (seconds = 0)
-   //         : seconds < 10
-   //         ? (seconds = "0" + seconds)
-   //         : seconds;
-   //       setCountdown({
-   //         days,
-   //         hours,
-   //         minutes,
-   //         seconds,
-   //       });
-   //     };
-
-   //     const timer = setInterval(calculateTimeDifference, 1000);
-   //     calculateTimeDifference(); // Initial calculation to set the countdown immediately
-
-   //     return () => clearInterval(timer);
-   //   }, []);
-
-
 
 
    return (
       <View style={styles.container}>
          <ScrollView style={styles.scroll} refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={getAllCompeitions} />
+            <RefreshControl refreshing={refreshing} onRefresh={getAllCompetitions} />
          }>
 
             <View style={styles.bar} >
@@ -117,80 +166,108 @@ const MainScreen = ({ navigation }) => {
 
             </View>
 
-            {/* <Text style={styles.title}> COUNTER SKINS </Text> */}
+
             <Text style={styles.Ongoing}> ONGOING COMPETITIONS </Text>
 
+            {competitions.map((competition, index) => (
+               <TouchableOpacity style={styles.CompCard} key={index}
+                  onPress={() => navigateToEntries(competition)}
+                  activeOpacity={0.75}>
+                  <LinearGradient
+                     colors={['transparent', '#3A3F4A']}
+                     style={styles.gradient}
+                  />
+
+                  {winningEntries[competition.id] ? (
+                     <View style={styles.WinnerBox}>
+                        <Text style={styles.winningEntryCreator}>
+                           {winningEntries[competition.id].creator}
+                        </Text>
+                        <Text style={styles.winningEntryText}>
+                           Winner
+                        </Text>
+                     </View>
+
+                  ) : (
+                     <>
+
+                        <Image style={styles.image} source={getCompetitionImage(competition.id)} />
+                        <View style={styles.CompTitleBox}>
+                           <Text style={styles.GunName}>{competition.id} </Text>
+                           <Text style={styles.CompetitionName}>Competition</Text>
+                        </View>
+                        <Text style={styles.timeRemaining}>
+                           {calculateTimeRemainingString(competition.EndDate)}
+                        </Text>
+                     </>
+                  )}
+               </TouchableOpacity>
+            ))}
+
+
             {/* {competitions.map((competition, index) => (
-                    <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("AWP")} activeOpacity={1}>
-                    <Image style={styles.image} source={require("../assets/Awp.png")} />
-                    <Text style={styles.CompName}>{competition.id} Competition</Text>
-                    <View style={styles.timer}>
-                       <Text style={styles.time}> 00:00:00 </Text>
-                    </View>
-                 </TouchableOpacity>
-                ))} */}
+              
+                  <TouchableOpacity style={styles.CompCard}  key={index}
+                  onPress={() => navigateToEntries(competition)}
+                  activeOpacity={0.75}>
+                     <LinearGradient
+                        colors={['transparent', '#3A3F4A']}
+                        style={styles.gradient}
+                     />
+                      <Text style={styles.timeRemaining}>
+                      {calculateTimeRemainingString(competition.EndDate)}
+                     </Text>
+                     <Image style={styles.image} source={require('../assets/Awp.png')} />
+                     <View style={styles.CompTitleBox}>
+                        <Text style={styles.GunName}>{competition.id} </Text>
+                        <Text style={styles.CompetitionName}>Competition</Text>
 
-<TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
-      <LinearGradient
-        colors={['transparent', '#3A3F4A']}
-        style={styles.gradient}
-      />
-      <Image style={styles.image} source={require('../assets/Awp.png')} />
-      <View style={styles.CompTitleBox}>
-         <Text style={styles.GunName}>AWP </Text>
-         <Text style={styles.CompetitionName}>Competition</Text>
+                     </View>
+                  </TouchableOpacity>
+               
+            ))} */}
 
-      </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('M4')}>
-      <LinearGradient
-        colors={['transparent', '#3A3F4A']}
-        style={styles.gradient}
-      />
-      <Image style={styles.image} source={require('../assets/M4.png')} />
-      <View style={styles.CompTitleBox}>
-         <Text style={styles.GunName}>M4A4 </Text>
-         <Text style={styles.CompetitionName}>Competition</Text>
-
-      </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
-      <LinearGradient
-        colors={['transparent', '#3A3F4A']}
-        style={styles.gradient}
-      />
-      <Image style={styles.image} source={require("../assets/AK.png")} />
-      <View style={styles.CompTitleBox}>
-         <Text style={styles.GunName}>AK-47 </Text>
-         <Text style={styles.CompetitionName}>Competition</Text>
-
-      </View>
-    </TouchableOpacity>
-            
-
-            {/* <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate('AWP')} activeOpacity={1}>
+            {/* <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
+               <LinearGradient
+                  colors={['transparent', '#3A3F4A']}
+                  style={styles.gradient}
+               />
                <Image style={styles.image} source={require('../assets/Awp.png')} />
-               <View style={styles.timer}>
-                  <Text style={styles.time}>AWP Competition</Text>
+               <View style={styles.CompTitleBox}>
+                  <Text style={styles.GunName}>AWP </Text>
+                  <Text style={styles.CompetitionName}>Competition</Text>
+
                </View>
             </TouchableOpacity>
 
+            <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('M4')}>
+               <LinearGradient
+                  colors={['transparent', '#3A3F4A']}
+                  style={styles.gradient}
+               />
+               <Image style={styles.image} source={require('../assets/M4.png')} />
+               <View style={styles.CompTitleBox}>
+                  <Text style={styles.GunName}>M4A4 </Text>
+                  <Text style={styles.CompetitionName}>Competition</Text>
 
-            <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("M4")} activeOpacity={1}>
-               <Image style={styles.image} source={require("../assets/M4.png")} />
-               <View style={styles.timer}>
-                  <Text style={styles.time}> M4A4 Competition   </Text>
                </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.Comp} onPress={() => navigation.navigate("AK")} activeOpacity={1}>
+            <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
+               <LinearGradient
+                  colors={['transparent', '#3A3F4A']}
+                  style={styles.gradient}
+               />
                <Image style={styles.image} source={require("../assets/AK.png")} />
-               <View style={styles.timer}>
-                  <Text style={styles.time}> AK-47 Competition   </Text>
+               <View style={styles.CompTitleBox}>
+                  <Text style={styles.GunName}>AK-47 </Text>
+                  <Text style={styles.CompetitionName}>Competition</Text>
+
                </View>
             </TouchableOpacity> */}
+
+
+
 
          </ScrollView>
 
@@ -201,20 +278,13 @@ const MainScreen = ({ navigation }) => {
 export default MainScreen
 
 const styles = StyleSheet.create({
-   Comp: {
-      width: "90%",
-      height: 130,
-      // backgroundColor: "#A12895",
-      backgroundColor: "#D32026",
-      alignSelf: "center",
-      marginTop: 20,
-      borderRadius: 20
-   },
+
    container: {
       padding: 15,
-      backgroundColor: "#20232A"
+      backgroundColor: "#20232A",
+      paddingBottom: 100
    },
- 
+
    bar: {
       width: 80,
       height: 80,
@@ -233,71 +303,30 @@ const styles = StyleSheet.create({
       resizeMode: 'cover'
 
    },
-   title: {
-      textAlign: 'center',
-      fontSize: 18,
-      color: 'white',
-      marginBottom: 5,
 
-   },
-   title2: {
-      textAlign: 'center',
-      fontSize: 18,
-      color: 'white',
-      marginBottom: 30,
-
-   },
    scroll: {
       width: '100%',
       height: '110%',
       marginTop: 20,
       borderRadius: 20
    },
-   navBar: {
+
+
+
+
+   timeRemaining: {
+      // backgroundColor: "red",
+      height: 20,
       width: 300,
-      height: 60,
-      backgroundColor: '#393B3F',
-      marginBottom: 1,
-      alignSelf: 'center',
-      borderRadius: 25,
-      zIndex: 999,
-      flexDirection: 'row',
-      paddingLeft: 25,
-      marginTop: 5,
-
-   },
-   navIcon: {
-      width: 60,
-      height: 60,
-      marginRight: 35
-   },
-   add: {
-      width: 50,
-      height: 50,
-      // borderRadius: 30,
-      // borderWidth: 2,
-      // borderColor: "black",
-      // backgroundColor: "#A12895"
-   },
-   
-   CompName: {
+      alignSelf: "center",
       textAlign: "center",
-      color: "black"
-   },
-   timer: {
+      fontFamily: 'MontserratRegular',
+      color: "#AEB3B9",
+      fontSize: 10,
+      marginTop: 10
 
-      height: 25,
-      backgroundColor: '#2E3034',
-      alignSelf: 'center',
-      marginTop: 10,
-      borderRadius: 20,
-      padding: 5
    },
-   time: {
-      textAlign: 'center',
-      color: 'white'
-   },
- 
+
 
 
 
@@ -322,23 +351,43 @@ const styles = StyleSheet.create({
    },
    CompCard: {
       width: "100%",
-      height: 150,
+      height: 170,
       backgroundColor: '#2B2F38',
       position: 'relative', // Make sure the position is relative
       alignSelf: "center",
       borderRadius: 10,
       marginBottom: 20
 
-    },
-    gradient: {
+   },
+   gradient: {
       position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
       height: '100%',
       borderRadius: 10
-    },
-    image: {
+   },
+   WinnerBox: {
+      width: "50%",
+      height: 170,
+      // backgroundColor: "red",
+      alignSelf: "center",
+      alignItems: "center",
+      justifyContent: "center"
+   },
+   winningEntryCreator: {
+      fontFamily: 'MontserratRegular',
+      fontSize: 20,
+      marginBottom: 10,
+      color: "#AEB3B9"
+
+   },
+   winningEntryText: {
+      fontFamily: 'MontserratBold',
+      fontSize: 30,
+      color: "#FED32C"
+   },
+   image: {
       width: 300,
       height: 100,
       padding: 20,
@@ -350,7 +399,7 @@ const styles = StyleSheet.create({
       // #2E3034
       // #A12895
    },
-    CompTitleBox: {
+   CompTitleBox: {
       width: 200,
       height: 30,
       // backgroundColor:"red",
@@ -358,20 +407,20 @@ const styles = StyleSheet.create({
       // marginTop: 20,
       flexDirection: "row",
       alignItems: "center",
-      justifyContent:"center"
-    },
-    GunName: {
+      justifyContent: "center"
+   },
+   GunName: {
       fontFamily: 'MontserratBold',
       fontSize: 20,
       color: "#AEB3B9"
-    },
-    CompetitionName: {
+   },
+   CompetitionName: {
       fontFamily: 'MontserratRegular',
       fontSize: 20,
       color: "#AEB3B9"
 
 
-    }
+   }
 
 
 })

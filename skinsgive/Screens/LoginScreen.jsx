@@ -68,7 +68,7 @@ export default LoginScreen
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: "#202226",
+        backgroundColor: "#20232A",
       height: "110%",
       
     },
@@ -82,29 +82,34 @@ const styles = StyleSheet.create({
     },
     intro: {
         textAlign: 'center',
-        color: 'white',
+        color: '#AEB3B9',
         marginTop: 20,
         marginBottom: 10,
-        fontSize: 18
+        fontSize: 16,
+        fontFamily: "MontserratRegular",
     },
     inputView: {
         marginBottom: 75,
     },
     inputLabel: {
-        fontSize: 12,
+        fontSize: 10,
         marginTop: 20,
         paddingLeft: 50,
         marginBottom: 5,
-        color: 'white'
+        color: '#AEB3B9',
+        fontFamily: "MontserratRegular"
+
     },
     input: {
-        backgroundColor: '#393B3F',
-        height: 50,
+        backgroundColor: '#2B2F38',
+        height: 40,
         width: 300,
         borderRadius: 20,
-        color: 'white',
+        color: '#AEB3B9',
         alignSelf: 'center',
-        paddingLeft: 20
+        paddingLeft: 20,
+        fontFamily: "MontserratRegular",
+
 
     },
 
@@ -124,12 +129,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         fontFamily: "MontserratRegular"
+        
     },
     NoAccount: {
-        color: 'white'
+        color: 'white',
+        fontFamily: "MontserratRegular",
+
     },
     goReg: {
         color: '#FED32C',
+        fontFamily: "MontserratBold",
+
 
     },
     dontHaveText: {

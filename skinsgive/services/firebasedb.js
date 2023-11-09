@@ -12,7 +12,7 @@ export const createUserInDb = async (email, rank, username, uid) => {
             email,
             rank,
             username,
-            createdAt: Timestamp.now()
+            createdAt: Timestamp.now(),
         })
        
 
@@ -21,6 +21,107 @@ export const createUserInDb = async (email, rank, username, uid) => {
     }
 
 }
+
+
+// const getUserDoc = async (userId) => {
+//     try {
+//       const userDocRef = db.collection('users').doc(userId);
+//       const userDoc = await userDocRef.get();
+  
+//       if (userDoc.exists) {
+//         return userDoc.data();
+//       } else {
+//         console.log('User document not found');
+//         return null;
+//       }
+//     } catch (error) {
+//       console.error('Error getting user document:', error);
+//       throw error; // You might want to handle the error accordingly in your application
+//     }
+//   };
+  
+//   export { getUserDoc };
+
+// const updateUserWins = async (userId, updatedWins) => {
+//     try {
+//       const userRef = db.collection('users').doc(userId);
+  
+//       await userRef.set({
+//         wins: updatedWins,
+//       }, { merge: true });
+  
+//       console.log('User wins updated successfully');
+//     } catch (error) {
+//       console.error('Error updating user wins:', error);
+//       throw error;
+//     }
+//   };
+  
+//   export { updateUserWins };
+  
+
+  
+
+
+
+const getEntriesForCompetition = async (competitionId) => {
+    try {
+      const entriesSnapshot = await getDocs(
+        collection(db, 'competitions', competitionId, 'Skins')
+      );
+  
+      // Directly return the data array
+      return entriesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    } catch (error) {
+      console.error('Error fetching entries:', error);
+      throw error;
+    }
+  };
+  
+  export { getEntriesForCompetition };
+
+  const getEntriesForWinnigCompetition = async (outerCompId) => {
+    try {
+      const entriesSnapshot = await getDocs(
+        collection(db, 'competitions', outerCompId, 'Skins')
+      );
+  
+      // Directly return the data array
+      return entriesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    } catch (error) {
+      console.error('Error fetching entries:', error);
+      throw error;
+    }
+  };
+  
+  export { getEntriesForWinnigCompetition };
+  
+  export const getCompetitionImage = async (competitionId, CompId) => {
+    try {
+        var skins = [];
+        const snapshot = await getDocs(collection(db, `competitions/${competitionId}/Skins/${CompId}/skin`));
+
+        snapshot.forEach((doc) => {
+            skins.push(doc.data());
+        });
+
+        return skins;
+        
+    } catch (e) {
+        console.log("something went wrong" + e);
+        return [];
+    }
+};
+
+  
+
+
 
 export const getAllComps = async () => {
     try {

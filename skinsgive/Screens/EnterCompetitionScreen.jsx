@@ -149,11 +149,13 @@ const EnterCompetitionScreen = ({ navigation }) => {
                 <Ionicons name="chevron-back-outline" size={30} color="white" />
             </TouchableOpacity>
 
+            
+            <ScrollView>
+            
             <View style={styles.SubmitSection}>
                 <Text style={styles.SubmitText}>Submit</Text>
                 <Text style={styles.SubmitEntryText}>Your Entry</Text>
             </View>
-
             <View style={styles.Guidelines}>
                 <Text style={styles.GuidelinesText}>Guidelines</Text>
 
@@ -225,97 +227,20 @@ const EnterCompetitionScreen = ({ navigation }) => {
                             <Pressable style={styles.uploadImgaeButton} onPress={() => pickImageFromLibrary(1)}>
                                 <Ionicons name="add-outline" size={65} color="#AEB3B9"  />
                             </Pressable>
-                            {/* <Pressable onPress={() => { }}>
-                                <Ionicons name="camera-outline" size={34} color="white" />
-                            </Pressable> */}
                         </>
                     )}
                     
                     
                 </View>
-
-
-          
-               
-           
-
             </View>
             
 
             <View style={styles.submitButton} onPress={createEntry}>
                             <Text style={styles.submitButtonText}>Submit</Text>
             </View>
-
-            
+            </ScrollView>
            
 
-            {/* <View style={styles.EnterDetails}>
-                <Text style={styles.WantEnter}>Want to take part in the M4 competition?</Text>
-                <Text style={styles.Followsteps}>Follow these easy steps:</Text>
-
-                <Text style={styles.steps}>
-                    1. Enter the full name of skin.
-                </Text>
-                <Text style={styles.steps}>
-                    2. Enter category for given skin.
-                </Text>
-                <Text style={styles.steps}>
-                    3. Upload high quality image of the skin.
-                </Text>
-
-                <Text style={styles.SkinNameLabel}>Gun type:</Text>
-                <DropDownPicker
-                    style={styles.dropdown}
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
-                    disableBorderRadius={true}
-                />
-
-                <Text style={styles.SkinNameLabel}>Skin name:</Text>
-                <TextInput style={styles.SkinName}
-                    keyboardType='default'
-                    defaultValue={name}
-                    onChangeText={(newValue) => setName(newValue)} />
-
-            
-
-
-                <Text style={styles.SkinUploadLabel}>Select Image:</Text>
-                <View style={styles.SkinImage}>
-                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: 290, height: 200, marginTop: 5, borderRadius: 20 }} />}
-                </View>
-          
-                <View style={styles.inputGroup}>
-                    
-
-                    {image ? (
-                        <Pressable onPress={() => setImage(null)}>
-                            <Ionicons name="trash-outline" size={32} color="red" />
-                        </Pressable>
-                    ) : (
-                        <>
-                            <Pressable style={styles.uploadImgaeButton} onPress={() => pickImageFromLibrary(1)}>
-                                <Ionicons name="images-outline" size={32} color="white" />
-                            </Pressable>
-                            <Pressable onPress={() => { }}>
-                                <Ionicons name="camera-outline" size={34} color="white" />
-                            </Pressable>
-                        </>
-                    )}
-                </View>
-
-
-                    {/* <Button title='upload' onPress={uploadTest}></Button> */}
-
-
-            {/* <TouchableOpacity style={styles.upload} onPress={createEntry}>
-                    <Text style={styles.Enter}>Enter Comp</Text>
-                </TouchableOpacity>
-            </View>  */}
         </View>
 
     )
@@ -328,7 +253,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#20232A",
         height: "100%",
         padding: 10,
-        paddingTop: 75
+        paddingTop: 75,
+        
     },
     SubmitSection: {
         marginLeft: 10,
@@ -430,7 +356,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
         borderRadius: 20,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 0
     },
     submitButtonText: {
         fontFamily: "MontserratRegular",

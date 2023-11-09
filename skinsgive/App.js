@@ -23,6 +23,8 @@ import * as Font from 'expo-font';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SniperScreen from './Screens/SniperScreen';
 import { useFonts, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
+import CompetitionEntries from './Screens/CompetitionEntries';
+import CompetitionDetails from './Screens/CompetitionDetails';
 
 
 
@@ -183,6 +185,16 @@ export default function App() {
            options={{headerShown: false}}
            />  
 
+          <Stack.Screen 
+           name="CompEntries"
+           component={CompetitionEntries}
+           options={{headerShown: false}}
+           /> 
+           <Stack.Screen 
+           name="CompDetails"
+           component={CompetitionDetails}
+           options={{headerShown: false}}
+           /> 
 
           <Stack.Screen 
            name="AWP"

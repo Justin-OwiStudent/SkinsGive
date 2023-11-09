@@ -58,19 +58,6 @@ const SniperScreen = ({ navigation }) => {
 
          </View>
 
-         {/* <Text style={styles.entries}> Amount of entries: </Text> */}
-
-         {/* <View style={styles.holder}>
-            <Text style={styles.entries}> Entries </Text>
-
-            <View style={styles.amount}><Text style={styles.amountOf}>{allcomps} </Text></View>
-          
-            <TouchableOpacity style={styles.add} onPress={addNew}>
-               <Ionicons name="add-circle-outline" size={30} color="white" />
-            </TouchableOpacity>
-         </View> */}
-
-
          <ScrollView >
             {awp.map((Competition, index) => (
                <TouchableOpacity key={index}

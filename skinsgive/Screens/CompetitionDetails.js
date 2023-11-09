@@ -1,73 +1,52 @@
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import Competitions from '../components/Competitions';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { getAwpImage, updateAwpScore } from '../services/firebasedb';
+import { useNavigation } from '@react-navigation/native';
+import { getCompetitionImage } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-const AwpDetailScreen = ({ route, navigation }) => {
-
-    const { Competition } = route.params;
-
-    const CompId = Competition.id;
-
-
-    const [score, setScore] = useState(Competition.score);
-    const [scoreUp, setScoreUp] = useState(Competition.score);
-    const [skins, setSkins] = useState([]);
-
-
-    //if currentuser === createduser, cant vote
+const CompetitionDetails = ({ route }) => {
+    const navigation = useNavigation();
+    const { competitionId, Competition } = route.params;
+    const CompId = Competition.id
+    const [skinImage, setSkinImage] = useState([]);
 
     useEffect(() => {
-        getCurrentImage()
-    }, [])
-
+      getCurrentImage();
+    }, []);
+  
     const getCurrentImage = async () => {
-        const result = await getAwpImage(CompId)
-        // console.log(result)
-        setSkins(result)
-    }
-
-
-
-    const upscore = () => {
-        currentScore = Competition.score += 1;
-        setScoreUp(currentScore)
-        setScore(scoreUp)
-        UpdateTheScore()
-    }
-
-
-    const UpdateTheScore = async () => {
-        var CompetitionDetails = {
-            score
-        };
-        await updateAwpScore(CompetitionDetails, CompId).then(() => {
-            Alert.alert("You voted for: " + Competition.name);
-            navigation.goBack();
-        })
-    }
+      try {
+        const result = await getCompetitionImage(competitionId, CompId);
+        setSkinImage(result);
+      } catch (error) {
+        console.error('Error fetching skin image:', error);
+      }
+    };
 
     const back = () => {
         navigation.goBack()
-    }
-
-
-    return (
-        <View style={styles.container}>
+     }
+  return (
+    <View style={styles.container}>
             <View style={styles.TopSection}>
+            <LinearGradient
+                    colors={['transparent', '#20232A']}
+                    style={styles.gradient}
+                />
                 
             <TouchableOpacity onPress={back} style={styles.back}>  
                 <Ionicons name="chevron-back-outline" size={30} color="white" />
             </TouchableOpacity>
                 
-                    {skins.map((skin, index) => (
+                    {skinImage.map((image, index) => (
                         <View key={index} style={styles.imageHere}>
                             
                             <Image style={styles.IMAGE}
-                                source={{ uri: skin.imageUrl }}
+                                source={{ uri: image.imageUrl }}
 
                             />
                             <LinearGradient
@@ -88,7 +67,7 @@ const AwpDetailScreen = ({ route, navigation }) => {
 
                     <View style={styles.RifleSection2}>
                         <Text style={styles.classTitle}>Exterior: </Text>
-                        <Text style={styles.classValue}>{Competition.value}</Text>
+                        <Text style={styles.classValue}></Text>
                     </View>
 
                     <View style={styles.RifleSection2}>
@@ -107,7 +86,7 @@ const AwpDetailScreen = ({ route, navigation }) => {
 
             <View style={styles.VoteViewSection}>
                         <View style={styles.VoteBox}>
-                            <Text style={styles.Number}>100</Text>
+                            <Text style={styles.Number}>{Competition.score}</Text>
                             <Text style={styles.NumberText}>Votes</Text>
 
                         </View>
@@ -118,10 +97,10 @@ const AwpDetailScreen = ({ route, navigation }) => {
             </View>
 
         </View>
-    )
+  )
 }
 
-export default AwpDetailScreen
+export default CompetitionDetails
 
 const styles = StyleSheet.create({
     container: {
@@ -146,7 +125,7 @@ const styles = StyleSheet.create({
     imageHere: {
         width: "100%",
         height: 350,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         position: "absolute",
         bottom: 0,
         left: 0,
@@ -242,103 +221,4 @@ const styles = StyleSheet.create({
         fontFamily: "MontserratBold",
         color: "#FED32C",
     }
-
-
-
-
-    // scoreBox: {
-    //     width: 50,
-    //     height: 50,
-    //     borderRadius: 30,
-    //     backgroundColor: "#D32026",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     position: "absolute",
-    //     right: -10,
-    //     top: -20
-    // },
-    // score: {
-    //     color: "white",
-    //     fontSize: 20,
-    //     fontWeight: "bold"
-    // },
-    // Creator: {
-    //     fontSize: 15,
-    //     marginTop: 5,
-    //     // fontWeight: "bold",
-    //     color: "white",
-
-    // },
-    // SkinName: {
-    //     fontSize: 25,
-    //     marginTop: 10,
-    //     fontWeight: "bold",
-    //     color: "white"
-    // },
-    // SkinType: {
-    //     fontSize: 15,
-    //     marginTop: 5,
-    //     fontWeight: "bold",
-    //     color: "white"
-    // },
-
-
-    // inputLabel: {
-    //     fontSize: 12,
-    //     marginTop: 20,
-    //     paddingLeft: 25,
-    //     marginBottom: 5,
-    //     color: '#D32026'
-    // },
-    // scorehere: {
-    //     width: '80%',
-    //     height: 30,
-    //     backgroundColor: '#393B3F',
-    //     alignSelf: 'center',
-    //     marginTop: 0,
-    //     borderRadius: 20
-    // },
-    // skinInfo: {
-    //     width: '90%',
-    //     height: 180,
-    //     backgroundColor: '#393B3F',
-    //     alignSelf: 'center',
-    //     marginTop: 40,
-    //     borderRadius: 20,
-    //     paddingTop: 20
-    // },
-    // info: {
-    //     marginTop: 5,
-    //     marginLeft: 5,
-    //     fontSize: 18,
-    //     color: '#D32026',
-    //     textAlign: "left"
-    // },
-    // title: {
-    //     textAlign: 'center',
-    //     fontSize: 22,
-    //     color: 'white',
-    //     marginBottom: 0,
-    // },
-    // infoText: {
-    //     fontSize: 15,
-    //     color: '#A12895',
-    // },
-    // voteHere: {
-    //     width: "80%",
-    //     height: 50,
-    //     backgroundColor: "#D32026",
-    //     alignSelf: "center",
-    //     marginTop: 25,
-    //     borderRadius: 15,
-    //     padding: 10
-    // },
-    // voteText: {
-    //     color: "white",
-    //     textAlign: "center",
-    //     fontSize: 25,
-
-    // },
-
-
 })
