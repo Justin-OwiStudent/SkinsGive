@@ -5,7 +5,7 @@ import { storage } from "../firebase";
 export const uploadToStorage = async (fileUri, refName) => {
 
     console.log("busy uploading...")
-    const blob = await new Promise((resolve, reject) => { //bloc is the image
+    const blob = await new Promise((resolve, reject) => { //blob is the image
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
           resolve(xhr.response);

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getAk } from '../services/firebasedb'
 import Competitions from '../components/Competitions'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import AKCard from '../components/AKCard';
 
 
 const AkScreen = ({navigation}) => {
@@ -36,16 +37,16 @@ const AkScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={back}>
-            <Ionicons name="arrow-back-outline" size={50} color="#A12895" />
+            <Ionicons name="arrow-back-outline" size={50} color="white" />
          </TouchableOpacity>
-      <Text style={styles.title}>AK-47 competition entries</Text>
+      <Text style={styles.title}>AK-47 COMPETITION ENTRIES</Text>
       <View style={styles.holder}>
             <Text style={styles.entries}> Entries </Text>
 
             <View style={styles.amount}><Text style={styles.amountOf}>{allcomps} </Text></View>
             {/* <Text style={styles.entries}> Entries </Text> */}
             <TouchableOpacity style={styles.add} onPress={addNew}>
-               <Ionicons name="add-circle-outline" size={50} color="#A12895" />
+               <Ionicons name="add-circle-outline" size={50} color="white" />
             </TouchableOpacity>
          </View>
          <ScrollView>
@@ -53,7 +54,7 @@ const AkScreen = ({navigation}) => {
                <TouchableOpacity key={index}
                   onPress={() => navigation.navigate("AkDetails", { Competition })}
                   activeOpacity={0.75}>
-                  <Competitions data={Competition} />
+                  <AKCard data={Competition} />
                </TouchableOpacity>
             ))}
          </ScrollView>
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 18,
-    color: '#A12895',
+    color: 'white',
     marginBottom: 30,
 
  },
@@ -84,13 +85,13 @@ const styles = StyleSheet.create({
  },
  entries: {
     fontSize: 20,
-    color: "#A12895",
+    color: "white",
     marginTop: 5
  },
  amount: {
     width: 30,
     height: 30,
-    backgroundColor: "#A12895",
+    backgroundColor: "white",
     borderRadius: 20,
 
  },

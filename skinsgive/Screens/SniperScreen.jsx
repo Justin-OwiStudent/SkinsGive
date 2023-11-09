@@ -3,25 +3,32 @@ import React, { useEffect, useState } from 'react'
 import { getAllAwps, getAllCompetitionsFromCollection, getAwp } from '../services/firebasedb'
 import Competitions from '../components/Competitions'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 const SniperScreen = ({ navigation }) => {
-   
-   //MAAK N POPUP VIR AS JY IN N COMP GAN VIR UX, iets soos "here you can vote for comps"
 
-   // maak n date, en dan doen calc van timestamp van skin met die timestamp van comp, comp timestamp maak ek in frontend
 
 
    const [awp, setAwp] = useState([])
+   const [features, setFeatures] = useState([])
 
 
    useEffect(() => {
       getAllCompeitions()
+      // getCurrentImage()
    }, [])
+
+
+   const getCurrentImage = async () => {
+      const result = await getAwpImage(CompId)
+      setFeatures(result)
+   }
 
    //get for all competitions
    const getAllCompeitions = async () => {
-     
+
       const allCompetitions = await getAwp()
       setAwp(allCompetitions)
 
@@ -39,24 +46,32 @@ const SniperScreen = ({ navigation }) => {
 
    return (
       <View style={styles.container}>
-         <TouchableOpacity onPress={back}>
-            <Ionicons name="arrow-back-outline" size={50} color="#A12895" />
-         </TouchableOpacity>
-         <Text style={styles.title}> AWP competition entries </Text>
+         <View style={styles.TopSection}>
+            <TouchableOpacity onPress={back}>
+               <Ionicons name="chevron-back-outline" size={30} color="white" />
+               {/* <ion-icon name="chevron-back-outline"></ion-icon> */}
+            </TouchableOpacity>
+            <Text style={styles.title}> Entries </Text>
+            <TouchableOpacity style={styles.add} onPress={addNew}>
+               <Ionicons name="add-circle-outline" size={30} color="#FED32C" />
+            </TouchableOpacity>
+
+         </View>
+
          {/* <Text style={styles.entries}> Amount of entries: </Text> */}
 
-         <View style={styles.holder}>
+         {/* <View style={styles.holder}>
             <Text style={styles.entries}> Entries </Text>
 
             <View style={styles.amount}><Text style={styles.amountOf}>{allcomps} </Text></View>
-            {/* <Text style={styles.entries}> Entries </Text> */}
+          
             <TouchableOpacity style={styles.add} onPress={addNew}>
-               <Ionicons name="add-circle-outline" size={50} color="#A12895" />
+               <Ionicons name="add-circle-outline" size={30} color="white" />
             </TouchableOpacity>
-         </View>
+         </View> */}
 
 
-         <ScrollView>
+         <ScrollView >
             {awp.map((Competition, index) => (
                <TouchableOpacity key={index}
                   onPress={() => navigation.navigate("AwpDetails", { Competition })}
@@ -72,16 +87,21 @@ const SniperScreen = ({ navigation }) => {
 export default SniperScreen
 
 const styles = StyleSheet.create({
+   TopSection: {
+      flexDirection: "row",
+      marginTop: 25,
+      justifyContent: "space-between"
+   },
    add: {
-      zIndex: 900,
-      marginLeft: 200
+     
    },
    title: {
       textAlign: 'center',
-      fontSize: 18,
-      color: '#A12895',
+      fontSize: 25,
+      color: '#FED32C',
       marginBottom: 30,
-
+      fontFamily: 'MontserratBold',
+      marginLeft: -20
    },
    container: {
       padding: 20,
@@ -91,13 +111,13 @@ const styles = StyleSheet.create({
    },
    entries: {
       fontSize: 20,
-      color: "#A12895",
+      color: "white",
       marginTop: 5
    },
    amount: {
       width: 30,
       height: 30,
-      backgroundColor: "#A12895",
+      backgroundColor: "#D32026",
       borderRadius: 20,
 
    },
@@ -108,6 +128,8 @@ const styles = StyleSheet.create({
       marginTop: 2
    },
    holder: {
-      flexDirection: "row"
-   }
+      flexDirection: "row",
+
+   },
+
 })

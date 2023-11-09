@@ -33,16 +33,16 @@ const LoginScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <View >
                 <Image style={styles.logo} source={require("../assets/LOGO.png")} />
-                <Text style={styles.intro}>Lets get you Logged in !</Text>
+                <Text style={styles.intro}>LET'S GET LOGGED IN!</Text>
 
                 <View style={styles.inputView}>
-                    <Text style={styles.inputLabel}>Username or E-mail</Text>
+                    <Text style={styles.inputLabel}>USERNAME & EMAIL</Text>
                     <TextInput style={styles.input}
                         defaultValue={email}
                         onChangeText={(newValue) => setEmail(newValue)}
                     />
 
-                    <Text style={styles.inputLabel}>Password</Text>
+                    <Text style={styles.inputLabel}>PASSWORD</Text>
                     <TextInput style={styles.input}
                         defaultValue={password}
                         onChangeText={(newValue) => setPassword(newValue)}
@@ -55,7 +55,7 @@ const LoginScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.dontHaveText}>
-                    <Text style={styles.NoAccount}>Dont have an Account? <Text style={styles.goReg} onPress={() => navigation.navigate('Register')}>Register</Text> </Text>
+                    <Text style={styles.NoAccount}>Don't have an Account? <Text style={styles.goReg} onPress={() => navigation.navigate('Register')}>Register</Text> </Text>
                 </View>
             </View>
 
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
         width: 200,
         alignSelf: 'center',
         height: 100,
-        resizeMode: "contain"
+        resizeMode: "contain",
+        marginTop: 50
 
     },
     intro: {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 20,
         marginBottom: 10,
-        fontSize: 20
+        fontSize: 18
     },
     inputView: {
         marginBottom: 75,
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 12,
         marginTop: 20,
-        paddingLeft: 25,
+        paddingLeft: 50,
         marginBottom: 5,
         color: 'white'
     },
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     loginbtn: {
         width: 200,
         // height: 50,
-        backgroundColor: '#A12895',
+        backgroundColor: '#FED32C',
         borderRadius: 5,
         marginTop: 30,
         padding: 10,
@@ -119,15 +120,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     loginbtnText: {
-        color: 'white',
+        color: 'black',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: "MontserratRegular"
     },
     NoAccount: {
         color: 'white'
     },
     goReg: {
-        color: '#A12895',
+        color: '#FED32C',
 
     },
     dontHaveText: {

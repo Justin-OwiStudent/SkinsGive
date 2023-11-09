@@ -2,11 +2,9 @@ import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } fr
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { getAwpImage, getM4Image, updateScore } from '../services/firebasedb';
-import { LinearGradient } from 'expo-linear-gradient';
+import { getAKImage, getAwpImage, getM4Image, updateScore } from '../services/firebasedb';
 
-const Competitions = (props, { navigation }) => {
-
+const AKCard = (props) => {
     const [image, setImage] = useState("../assets/M4.png");
 
     const [skins, setSkins] = useState([])
@@ -15,14 +13,14 @@ const Competitions = (props, { navigation }) => {
     // console.log(data)
 
     useEffect(() => {
-        ChooseImage()
+        // ChooseImage()
         getCurrentImage()
     }, [])
 
 
 
     const getCurrentImage = async () => {
-        const result = await getAwpImage(CompId)
+        const result = await getAKImage(CompId)
         console.log(result)
         setSkins(result)
     }
@@ -55,15 +53,10 @@ const Competitions = (props, { navigation }) => {
 
     return (
         <View style={styles.card}>
-             <LinearGradient
-        colors={['transparent', '#3A3F4A']}
-        style={styles.gradient}
-      />
-
-                { skins != [] ? (
-                    <View style={styles.ImageSection}>
-                        
-                       
+           
+            <View style={styles.skinSection}>
+            { skins != [] ? (
+                    <View>
                         {skins.map((skin, index) => (
                             <View key={index}>
                                 <Image style={styles.IMAGE}
@@ -74,156 +67,99 @@ const Competitions = (props, { navigation }) => {
                         ))}
                     </View>
                 ) : (<Text>No Image Added !</Text>) }
-
-            <View style={styles.Details}>
-            <Text style={styles.title}>{data.name}</Text>
-            </View>
-            <View style={styles.Created}>
-            <Text style={styles.Creator}>Creator: </Text>
-            <Text style={styles.CreatorName}>{data.creator}</Text>
-
-            </View>
-            
-            {/* <View style={styles.skinSection}>
-           
-                
-
+                {/* <ScrollView>
+            {features.map((feature, index) => (
+                <View key={index}>
+                <View/>
+                ))}
+            </ScrollView> */}
+                {/* <View>
+                {features.map((feature, index) => (
+                <View key={index}>
+                <View/>
+                ))}
             </View> */}
-            {/* <View style={styles.Details}>
+               
 
-            </View> */}
-            
-            {/* <View style={styles.NameBadge}>
+
+
+
+
+
+
+                {/* <Image style={styles.skin} source={require(howl)}/> */}
+
+
+
+                {/* <Text style={styles.skinName}> {data.name}</Text> */}
+            </View>
+            <View style={styles.timer}>
                 <Text style={styles.time}>{data.name}</Text>
             </View>
+           
             <View style={styles.enties}>
+
+
+                {/* <View style={styles.voting}> 
+<           TouchableOpacity  onPress={upscore}>
+                <Ionicons name="arrow-up-circle-outline" size={35} color="green" />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={downScore} >
+                <Ionicons name="arrow-down-circle-outline" size={35} color="red" />
+            </TouchableOpacity>
+</View> */}
+
+
                 <Text style={styles.scoreText}>Score: {data.score} </Text>
-            </View> */}
+
+                {/* <Text style={styles.entriesText}> Entries: {data.Entries}</Text> */}
+
+                {/* <TouchableOpacity style={styles.btn} activeOpacity={0.75}  onPress={addNew}  >
+                <Text style={styles.enterText}> Enter Competition</Text>
+            </TouchableOpacity> */}
+
+            </View>
         </View>
-    )
+  )
 }
 
-export default Competitions
+export default AKCard
 
 const styles = StyleSheet.create({
     card: {
-        flex: 1,
         width: 350,
         height: 250,
-        backgroundColor: '#2B2F38',
-        border: "black",
+        backgroundColor: '#2E3034',
         marginTop: 25,
-        borderRadius: 5,
-        // alignItems: "center"
+        borderRadius: 25
     },
-    gradient: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: '35%',
-        borderRadius: 10
-      },
-    ImageSection: {
-        width: 350,
-        height: 170,
-        // backgroundColor: "blue",
-        // marginTop: 20
-    },
-    IMAGE: {
-        borderRadius: 5,
-        // marginTop: 8,
-        // backgroundColor: "red",
-        width: 350,
-        height: 170,
+    timer: {
+        width: 200,
+        height: 30,
+        backgroundColor: '#D32026',
         alignSelf: 'center',
-    },
-    Details: {
-        width: 300,
-        height: 40,
-        // backgroundColor: "red",
         marginTop: 10,
-        marginLeft: 10,
-        borderRadius: 5,
-        position: "relative",
-        // alignItems: "center",
-        justifyContent: "center"
-    },
-    title: {
-        // textAlign: 'center',
-        color: '#AEB3B9',
-        fontSize: 25,
-        fontFamily: 'MontserratBold',
-
-
-    },
-    Created: {
-        flexDirection: "row",
-        marginLeft: 10,
-        
-
-    },
-    Creator: {
-        color: '#FED32C',
-        fontFamily: 'MontserratBold',
-        fontSize: 16
-    },
-    CreatorName:{
-        fontFamily: 'MontserratRegular',
-        color: '#AEB3B9',
-        fontSize: 16
-
-    },
-
-
-    ScoreBox: {
-        width: 40,
-        height: 40,
         borderRadius: 20,
-        backgroundColor: "#D32026",
-        position: "absolute",
-        // right: 0,
-        left: -10,
-        top: -20,
-        justifyContent: "center",
-        alignItems: "center"
+        padding: 6
     },
-   
-    scoreText: {
-        color: "white",
-        fontSize: 20
-        // marginTop: 0,
-        // position: "absolute",
-        // right: -20,
-        // top: 10
+    time: {
+        textAlign: 'center',
+        color: 'white'
+
     },
     skinSection: {
         width: 275,
         height: 155,
         // backgroundColor: '#393B3F',
-        // alignSelf: 'center',
-        // alignItems: "center",
+        alignSelf: 'center',
         marginTop: 10,
-        borderRadius: 10,
+        borderRadius: 20,
         border: 5
     },
-    
-   
-   
-    NameBadge: {
-        width: 200,
-        height: 30,
-        backgroundColor: '#D32026',
-        alignSelf: 'center',
-        // marginTop: 10,
-        borderRadius: 20,
-        padding: 6
-    },
-   
-  
     skin: {
         height: 150,
-        width: 100,
+        width: 300,
         alignSelf: 'center',
         marginBottom: 20,
         marginTop: 10,
@@ -263,14 +199,25 @@ const styles = StyleSheet.create({
     enterText: {
         color: 'white',
         textAlign: 'center',
-        marginTop: 10,
-        fontSize: 20
+        marginTop: 10
     },
-   
+    scoreText: {
+        color: "white",
+        marginTop: 0,
+        position: "absolute",
+        right: 20,
+        top: 10
+    },
     voting: {
         flexDirection: "row",
         position: "absolute",
         top: 20
     },
-   
+    IMAGE: {
+        borderRadius: 10,
+        marginTop: 8,
+        width: 240,
+        height: 140,
+        alignSelf: 'center',
+    }
 })

@@ -12,22 +12,116 @@ import { onAuthStateChanged } from 'firebase/auth';
 import CompetitionDetailsScreen from './Screens/CompetitionDetailsScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import { auth } from './firebase';
-import SniperScreen from './Screens/SniperScreen';
+// import SniperScreen from './Screens/SniperScreen';
 import M4Screen from './Screens/M4Screen';
 import AkScreen from './Screens/AkScreen';
 import AwpDetailScreen from './Screens/AwpDetailScreen';
 import M4DetailsScreen from './Screens/M4DetailsScreen';
 import AkDetailsScreen from './Screens/AkDetailsScreen';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import * as Font from 'expo-font';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SniperScreen from './Screens/SniperScreen';
+import { useFonts, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 
 
 
+
+const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  // const LoggedIn = false
-
+  
   const [LoggedIn, setLoggedIn] = useState(false) //variable to view screens for auth
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  const [loaded] = useFonts({
+    MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
+    MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
+    MontserratLight: require('./assets/fonts/Montserrat-Light.ttf'),
+
+
+  })
+
+  // useEffect(() => {
+  //   let isMounted = true;
+
+  //   async function loadFonts() {
+  //     try {
+  //       await Font.loadAsync({
+  //         'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+  //         'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+  //         'Montserrat-Light': require('./assets/fonts/Montserrat-Light.ttf'),
+
+  //         // Add other custom fonts here
+  //       });
+
+  //       if (isMounted) {
+  //         setFontLoaded(true);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error loading fonts:', error);
+  //     }
+  //   }
+
+  //   loadFonts();
+
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setLoggedIn(true);
+  //     } else {
+  //       setLoggedIn(false);
+  //     }
+  //   });
+
+  //   // Cleanup functions to handle unmounting
+  //   return () => {
+  //     isMounted = false;
+  //     unsubscribe();
+  //   };
+  // }, []); // Empty dependency array means this effect runs once after the initial render
+
+  // // Rest of your component code here
+
+  // if (!fontLoaded) {
+  //   return null; // Or return a loading indicator here
+  // }
+
+
+  // useEffect(() => {
+  //   let isMounted = true;
+
+  //   async function loadFonts() {
+  //     try {
+  //       await Font.loadAsync({
+  //         'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+  //         'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+
+  //         // Add other custom fonts here
+  //       });
+
+  //       if (isMounted) {
+  //         setFontLoaded(true);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error loading fonts:', error);
+  //     }
+  //   }
+
+  //   loadFonts();
+
+  //   // Cleanup function to handle unmounting
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, []); // Empty dependency array means this effect runs once after the initial render
+
+  // if (!fontLoaded) {
+  //   return null; // Or return a loading indicator here
+  // }
+ 
+
+  
 
   useEffect(() => {
 
@@ -46,9 +140,13 @@ export default function App() {
     
   }, [])
 
-
-
  
+
+
+
+ if(!loaded) {
+  return null;
+ }
 
   return (
     

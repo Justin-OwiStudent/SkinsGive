@@ -23,31 +23,31 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Image style={styles.logo} source={require("../assets/LOGO.png")} />
-            <Text style={styles.intro}>Lets get you Signed up !</Text>
+            <Text style={styles.intro}>LETS GET YOU SIGNED UP!</Text>
 
             <View style={styles.inputView}>
-                <Text style={styles.inputLabel}>Username </Text>
+                <Text style={styles.inputLabel}>USERNAME </Text>
                 <TextInput style={styles.input}
                     onChangeText={(newValue) => setUsername(newValue)}
                 
                 />
 
-                <Text style={styles.inputLabel}>E-mail</Text>
+                <Text style={styles.inputLabel}>EMAIL</Text>
                 <TextInput style={styles.input}
                     onChangeText={(newValue) => setEmail(newValue)}
                 />
 
-                <Text style={styles.inputLabel}>Rank</Text>
+                <Text style={styles.inputLabel}>RANK</Text>
                 <TextInput style={styles.input} 
                 onChangeText={(newValue) => setRank(newValue)}/>
 
-                <Text style={styles.inputLabel}>Password</Text>
+                <Text style={styles.inputLabel}>PASSWORD</Text>
                 <TextInput style={styles.input}
                     onChangeText={(newValue) => setPassword(newValue)}
                 />
 
-                <Text style={styles.inputLabel}>Confirm Password</Text>
-                <TextInput style={styles.input} />
+                {/* <Text style={styles.inputLabel}>Confirm Password</Text>
+                <TextInput style={styles.input} /> */}
             </View>
             <View>
                 <TouchableOpacity title="Register" style={styles.loginbtn} onPress={registerUser}>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     loginbtn: {
         width: 200,
         // height: 50,
-        backgroundColor: '#A12895',
+        backgroundColor: '#D32026',
         borderRadius: 5,
         marginTop: 30,
         padding: 10,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     goReg: {
-        color: '#A12895',
+        color: '#D32026',
 
     },
     dontHaveText: {

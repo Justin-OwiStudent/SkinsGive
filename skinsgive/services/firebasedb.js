@@ -22,6 +22,22 @@ export const createUserInDb = async (email, rank, username, uid) => {
 
 }
 
+export const getAllComps = async () => {
+    try {
+        var Competitions = []
+        
+        const snapshot = await getDocs(collection(db, "competitions"))
+
+        snapshot.forEach((doc) => {
+            Competitions.push({ ...doc.data(), id: doc.id })
+        })
+
+        return Competitions
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return[]
+    }
+}
 
 export const addAwpSkin = async (competition, skins = []) => {
     try {
@@ -29,22 +45,21 @@ export const addAwpSkin = async (competition, skins = []) => {
         console.log(skins)
         const docRef = await addDoc(collection(db, "competitions", "AWP", "Skins"), competition)
         console.log("added skin successfully..." + docRef.id)
-        if(docRef.id) {
+        if(docRef.id) { //added projects successfully
             skins.forEach(async (skin) => {
                 //first upload image
                 console.log("uploading skin..." + skin)
-                const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.name}`)
+                const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.title}`)
                 //add skins as sub collection to project
                 console.log("IMAGE: " + imageUrl)
                 const skinRef = await addDoc(collection(db, `competitions/AWP/Skins/${docRef.id}/skin`), {
-                    name: skin.name,
+                    title: skin.title,
                     imageUrl: imageUrl
                 })
 
                 console.log("added skin successfully..." + skinRef.id)
             })
 
-            // Alert.alert("Added AWP successfully")
             return true 
         } else {
             return false
@@ -55,15 +70,28 @@ export const addAwpSkin = async (competition, skins = []) => {
     }
 }
 
-//ADD M$
-export const addM4Skin = async (competition) => {
+export const addM4Skin = async (competition, skins = []) => {
     try {
-        // console.log(competition)
-        const docRef = await addDoc(collection(db, "competitions", "M4A4", "Skins"), competition)
-        console.log("added M4A4 successfully..." + docRef.id)
-        if(docRef.id) {
+       
+        console.log(skins)
+        const docRef = await addDoc(collection(db, "competitions", "MA", "Skins"), competition)
+        console.log("added skin successfully..." + docRef.id)
+        if(docRef.id) { //added projects successfully
+            skins.forEach(async (skin) => {
+                //first upload image
+                console.log("uploading skin..." + skin)
+                const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.title}`)
+                //add skins as sub collection to project
+                console.log("IMAGE: " + imageUrl)
+                const skinRef = await addDoc(collection(db, `competitions/MA/Skins/${docRef.id}/skin`), {
+                    title: skin.title,
+                    imageUrl: imageUrl
+                })
+
+                console.log("added skin successfully..." + skinRef.id)
+            })
+
             return true 
-            console.log(docRef.id)
         } else {
             return false
         }
@@ -73,13 +101,25 @@ export const addM4Skin = async (competition) => {
     }
 }
 
-//ak add
-export const addAkSkin = async (competition) => {
+export const addAkSkin = async (competition, skins = []) => {
     try {
         // console.log(competition)
-        const docRef = await addDoc(collection(db, "competitions", "AK-47", "Skins"), competition)
+        const docRef = await addDoc(collection(db, "competitions", "AK", "Skins"), competition)
         console.log("added AK-47 successfully..." + docRef.id)
         if(docRef.id) {
+            skins.forEach(async (skin) => {
+                //first upload image
+                console.log("uploading skin..." + skin)
+                const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.title}`)
+                //add skins as sub collection to project
+                console.log("IMAGE: " + imageUrl)
+                const skinRef = await addDoc(collection(db, `competitions/AK/Skins/${docRef.id}/skin`), {
+                    title: skin.title,
+                    imageUrl: imageUrl
+                })
+
+                console.log("added skin successfully..." + skinRef.id)
+            })
             return true 
             console.log(docRef.id)
         } else {
@@ -93,8 +133,7 @@ export const addAkSkin = async (competition) => {
 
 
 
-
-export const getAwp = async () => {
+export const getAwp = async (CompId) => {
     try {
         var Competitions = []
         
@@ -111,11 +150,45 @@ export const getAwp = async () => {
     }
 }
 
+export const getAwpCompetition = async (CompId) => {
+    try {
+        var Competitions = []
+        
+        const snapshot = await getDocs(collection(db, "competitions", "AWP"))
+
+        // console.log(snapshot)
+
+        return Competitions
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return[]
+    }
+}
+
+export const getAwpImage = async (CompId) => {
+    try {
+        var skins = []
+        const snapshot = await getDocs(collection(db, `competitions/AWP/Skins/${CompId}/skin`))
+        
+
+        snapshot.forEach( (doc) => {
+            skins.push(doc.data())
+            
+        })
+
+        return skins
+        
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return []
+    }
+}
+
 export const getM4 = async () => {
     try {
         var Competitions = []
         
-        const snapshot = await getDocs(collection(db, "competitions", "M4A4", "Skins"))
+        const snapshot = await getDocs(collection(db, "competitions", "MA", "Skins"))
 
         snapshot.forEach((doc) => {
             Competitions.push({ ...doc.data(), id: doc.id })
@@ -128,11 +201,30 @@ export const getM4 = async () => {
     }
 }
 
+export const getM4Image = async (CompId) => {
+    try {
+        var skins = []
+        const snapshot = await getDocs(collection(db, `competitions/MA/Skins/${CompId}/skin`))
+        
+
+        snapshot.forEach( (doc) => {
+            skins.push(doc.data())
+            
+        })
+
+        return skins
+        
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return []
+    }
+}
+
 export const getAk = async () => {
     try {
         var Competitions = []
         
-        const snapshot = await getDocs(collection(db, "competitions", "AK-47", "Skins"))
+        const snapshot = await getDocs(collection(db, "competitions", "AK", "Skins"))
 
         snapshot.forEach((doc) => {
             Competitions.push({ ...doc.data(), id: doc.id })
@@ -142,6 +234,25 @@ export const getAk = async () => {
     } catch (e) {
         console.log("something went wrong" + e)
         return[]
+    }
+}
+
+export const getAKImage = async (CompId) => {
+    try {
+        var skins = []
+        const snapshot = await getDocs(collection(db, `competitions/AK/Skins/${CompId}/skin`))
+        
+
+        snapshot.forEach( (doc) => {
+            skins.push(doc.data())
+            
+        })
+
+        return skins
+        
+    } catch (e) {
+        console.log("something went wrong" + e)
+        return []
     }
 }
 

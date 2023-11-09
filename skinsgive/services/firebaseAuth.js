@@ -42,7 +42,7 @@ export const signInUser = async (email, password) => {
     // ...
     console.log("User signed in" + user.email)
 
-    Alert.alert("your In", "successfully logged")
+    Alert.alert("Welcome", "successfully logged in")
 
   
   })
