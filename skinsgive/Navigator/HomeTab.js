@@ -3,14 +3,10 @@ import React from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MainScreen from '../Screens/MainScreen';
-import CompetitionDetailsScreen from '../Screens/CompetitionDetailsScreen';
+
 import EnterCompetitionScreen from '../Screens/EnterCompetitionScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
-import AwpDetailScreen from '../Screens/AwpDetailScreen';
 
-// const Tab = createMaterialBottomTabNavigator();
-
-// const Tab = createBottomTabNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 

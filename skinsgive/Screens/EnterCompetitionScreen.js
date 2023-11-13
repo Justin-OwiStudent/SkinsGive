@@ -235,9 +235,9 @@ const EnterCompetitionScreen = ({ navigation }) => {
             </View>
             
 
-            <View style={styles.submitButton} onPress={createEntry}>
+            <TouchableOpacity style={styles.submitButton} onPress={createEntry}>
                             <Text style={styles.submitButtonText}>Submit</Text>
-            </View>
+            </TouchableOpacity>
             </ScrollView>
            
 

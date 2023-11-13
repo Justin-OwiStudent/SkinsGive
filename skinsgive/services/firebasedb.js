@@ -256,7 +256,7 @@ export const addM4Skin = async (competition, skins = []) => {
     try {
        
         console.log(skins)
-        const docRef = await addDoc(collection(db, "competitions", "MA", "Skins"), competition)
+        const docRef = await addDoc(collection(db, "competitions", "M4A4", "Skins"), competition)
         console.log("added skin successfully..." + docRef.id)
         if(docRef.id) { //added projects successfully
             skins.forEach(async (skin) => {
@@ -265,7 +265,7 @@ export const addM4Skin = async (competition, skins = []) => {
                 const imageUrl = await uploadToStorage(skin.imageUrl, `skins/${docRef.id}_${skin.title}`)
                 //add skins as sub collection to project
                 console.log("IMAGE: " + imageUrl)
-                const skinRef = await addDoc(collection(db, `competitions/MA/Skins/${docRef.id}/skin`), {
+                const skinRef = await addDoc(collection(db, `competitions/M4A4/Skins/${docRef.id}/skin`), {
                     title: skin.title,
                     imageUrl: imageUrl
                 })
