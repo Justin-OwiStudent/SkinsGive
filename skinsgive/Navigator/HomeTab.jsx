@@ -26,10 +26,10 @@ const HomeTab = () => {
         <Tab.Screen name="Landing"
             component={MainScreen}
             options={{
-                tabBarColor: '#D32026',
+                tabBarColor: 'red',
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="home-outline" size={23} color="black" />
+                    <Ionicons name="home-outline" size={23} color="#FED32C" />
                 ),
             }} />
 
@@ -40,7 +40,7 @@ const HomeTab = () => {
                 tabBarColor: '#D32026',
                 tabBarLabel: 'Profile',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="person-circle-outline" size={23} color="black" />
+                    <Ionicons name="person-circle-outline" size={23} color="#FED32C" />
                 ),
                
             }} />
@@ -51,7 +51,7 @@ const HomeTab = () => {
                 tabBarColor: '#D32026',
                 tabBarLabel: 'Add Entry',
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="add-circle-outline" size={23} color="black" />
+                    <Ionicons name="add-circle-outline" size={23} color="#FED32C" />
                 ),
                
             }} />

@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'rea
 import React, { useEffect, useState } from 'react'
 import { getCurrentUser, signOutUser } from '../services/firebaseAuth'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { getAk, getAllComps, getAwp, getM4 } from '../services/firebasedb';
+import { GetUserDetails, getAk, getAllComps, getAwp, getM4 } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
 
 // import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated';
@@ -11,12 +11,29 @@ import { LinearGradient } from 'expo-linear-gradient';
 const ProfileScreen = () => {
     const [enteredCompetitions, setEnteredCompetitions] = useState(0);
     const [enteredComps, setEnteredComps] = useState(0);
+    const [userDetails, setUserDetails] = useState("");
+
 
     const user = getCurrentUser()
 
+    console.log(user.displayName)
+
     useEffect(() => {
         getAllCompetitions();
+        getUser();
     }, []);
+
+    const getUser = async () => {
+        try {
+          console.log('Getting data');
+          const UserDetails = await GetUserDetails(uid);
+          setUserDetails(UserEntries);
+          console.log(userDetails)
+        //   setData(UserEntries);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const getAllCompetitions = async () => {
         try {
@@ -68,7 +85,7 @@ const ProfileScreen = () => {
             <ScrollView style={styles.scrollEntries}>
 
 
-                {enteredComps && enteredComps.map((entered, index) => (
+                {/* {enteredComps && enteredComps.map((entered, index) => (
                     <TouchableOpacity style={styles.PastEntryCard} key={index}>
                         <LinearGradient
                             colors={['transparent', '#3A3F4A']}
@@ -77,7 +94,7 @@ const ProfileScreen = () => {
                         <Text style={styles.SkinName}>{entered.name}</Text>
                         <Text style={styles.SkinType}>{entered.value}</Text>
                     </TouchableOpacity>
-                ))}
+                ))} */}
 
                
 

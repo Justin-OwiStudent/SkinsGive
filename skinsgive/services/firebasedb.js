@@ -1,6 +1,8 @@
-import { Timestamp, addDoc, collection, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp, updateDoc } from "firebase/firestore"
+import { Timestamp, addDoc, collection,where, increment, doc, getDocs, orderBy, query, setDoc, ref, onValue, serverTimestamp, updateDoc } from "firebase/firestore"
 import { db } from "../firebase"
 import { uploadToStorage } from "./firebaseStorage";
+
+
 
 
 //--USER COLLCTION
@@ -21,6 +23,69 @@ export const createUserInDb = async (email, rank, username, uid) => {
     }
 
 }
+
+export const GetUserDetails = async (username) => {
+    try {
+        var UserDetails = []
+
+        const snapshot = await getDocs(collection(db, "users", username))
+
+        snapshot.forEach((doc) => {
+            UserDetails.push({ ...doc.data(), id: doc.id })
+        })
+
+        return UserDetails
+    } catch (error) {
+        console.log("Error fetching UserDetails", error)
+        return []
+    }
+
+}
+
+
+export const updateUserWins = async (username) => {
+  try {
+    // Create a query to find the user document with the matching username
+    const userQuery = query(collection(db, "users"), where("username", "==", username));
+    const userQuerySnapshot = await getDocs(userQuery);
+
+    if (!userQuerySnapshot.empty) {
+      // There should be only one user document with the same username
+      const userDoc = userQuerySnapshot.docs[0];
+
+      // Get the current "wins" value, or initialize it to 0 if it doesn't exist
+      const currentWins = userDoc.data().wins || 0;
+      const newWins = currentWins + 1;
+
+      // Update the "wins" field for the user
+      await updateDoc(userDoc.ref, {
+        wins: newWins
+      });
+
+      console.log("User wins updated successfully");
+    } else {
+      console.log("User document not found");
+    }
+  } catch (error) {
+    console.error("Error updating user wins:", error);
+  }
+};
+
+  
+  
+
+const fetchDataFromFirestore = async () => {
+    try {
+      // Perform a database query using the `db` object
+      const querySnapshot = await getDocs(collection(db, "users"));
+      // Process the query result
+      querySnapshot.forEach((doc) => {
+        console.log("Document data:", doc.data());
+      });
+    } catch (error) {
+      console.error("Error fetching data from Firestore:", error);
+    }
+  };
 
 
 // const getUserDoc = async (userId) => {
@@ -118,6 +183,22 @@ const getEntriesForCompetition = async (competitionId) => {
         return [];
     }
 };
+
+export const UpdateSkinScore = async (competitionId, CompId) => {
+    try {
+      // Reference to the specific skin document
+      const skinDocRef = doc(db, `competitions/${competitionId}/Skins/${CompId}`);
+  
+      // Use the `increment` function to increment the score by 1
+      await updateDoc(skinDocRef, {
+        score: increment(1)
+      });
+  
+      console.log("Updated Score successfully");
+    } catch (error) {
+      console.error("Error updating skin score:", error);
+    }
+  };
 
   
 

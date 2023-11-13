@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
+
 const MainScreen = ({ navigation }) => {
    const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0 });
    const [refreshing, setRefreshing] = useState(false)
@@ -46,9 +47,13 @@ const MainScreen = ({ navigation }) => {
                      : null;
 
                   const winningEntry = calculateWinningEntry(winningEntries);
-                  setWinner(winningEntry?.creator)
+                  console.log(winningEntry)
                   
-                  // updateWins();
+                  const username = winningEntry?.creator
+                  console.log(username)
+                  if (username) {
+                     updateUserWins(username);
+                   }
 
                   return {
                      ...outerCompetition,
@@ -63,6 +68,8 @@ const MainScreen = ({ navigation }) => {
                return acc;
             }, {}));
 
+            
+
          } else {
             console.log('Competitions is not an array or is empty');
          }
@@ -72,6 +79,9 @@ const MainScreen = ({ navigation }) => {
 
       setRefreshing(false);
    };
+
+   // console.log(winningEntries[0])
+   
 
    // const updateWins = async () => {
    //    try {
@@ -162,7 +172,7 @@ const MainScreen = ({ navigation }) => {
          }>
 
             <View style={styles.bar} >
-               <Image style={styles.logo} source={require("../assets/PROFILEPICTURE.png")} />
+               <Image style={styles.logo} source={require("../assets/CS_YELLOW.png")} />
 
             </View>
 
@@ -181,7 +191,7 @@ const MainScreen = ({ navigation }) => {
                   {winningEntries[competition.id] ? (
                      <View style={styles.WinnerBox}>
                         <Text style={styles.winningEntryCreator}>
-                           {winningEntries[competition.id].creator}
+                           {winningEntries[competition.id].creator}'s {winningEntries[competition.id].name}
                         </Text>
                         <Text style={styles.winningEntryText}>
                            Winner
@@ -204,71 +214,6 @@ const MainScreen = ({ navigation }) => {
                </TouchableOpacity>
             ))}
 
-
-            {/* {competitions.map((competition, index) => (
-              
-                  <TouchableOpacity style={styles.CompCard}  key={index}
-                  onPress={() => navigateToEntries(competition)}
-                  activeOpacity={0.75}>
-                     <LinearGradient
-                        colors={['transparent', '#3A3F4A']}
-                        style={styles.gradient}
-                     />
-                      <Text style={styles.timeRemaining}>
-                      {calculateTimeRemainingString(competition.EndDate)}
-                     </Text>
-                     <Image style={styles.image} source={require('../assets/Awp.png')} />
-                     <View style={styles.CompTitleBox}>
-                        <Text style={styles.GunName}>{competition.id} </Text>
-                        <Text style={styles.CompetitionName}>Competition</Text>
-
-                     </View>
-                  </TouchableOpacity>
-               
-            ))} */}
-
-            {/* <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
-               <LinearGradient
-                  colors={['transparent', '#3A3F4A']}
-                  style={styles.gradient}
-               />
-               <Image style={styles.image} source={require('../assets/Awp.png')} />
-               <View style={styles.CompTitleBox}>
-                  <Text style={styles.GunName}>AWP </Text>
-                  <Text style={styles.CompetitionName}>Competition</Text>
-
-               </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('M4')}>
-               <LinearGradient
-                  colors={['transparent', '#3A3F4A']}
-                  style={styles.gradient}
-               />
-               <Image style={styles.image} source={require('../assets/M4.png')} />
-               <View style={styles.CompTitleBox}>
-                  <Text style={styles.GunName}>M4A4 </Text>
-                  <Text style={styles.CompetitionName}>Competition</Text>
-
-               </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.CompCard} onPress={() => navigation.navigate('AWP')}>
-               <LinearGradient
-                  colors={['transparent', '#3A3F4A']}
-                  style={styles.gradient}
-               />
-               <Image style={styles.image} source={require("../assets/AK.png")} />
-               <View style={styles.CompTitleBox}>
-                  <Text style={styles.GunName}>AK-47 </Text>
-                  <Text style={styles.CompetitionName}>Competition</Text>
-
-               </View>
-            </TouchableOpacity> */}
-
-
-
-
          </ScrollView>
 
       </View>
@@ -286,16 +231,16 @@ const styles = StyleSheet.create({
    },
 
    bar: {
-      width: 80,
-      height: 80,
+      width: 150,
+      height: 100,
       borderRadius: 50,
-      backgroundColor: '#ffff',
+      // backgroundColor: '#ffff',
       alignSelf: 'center',
       marginBottom: 15,
       marginTop: 25,
       resizeMode: 'contain',
-      borderWidth: 2,
-      borderColor: '#D32026',
+      // borderWidth: 2,
+      // borderColor: '#D32026',
    },
    logo: {
       width: '100%',
@@ -326,22 +271,6 @@ const styles = StyleSheet.create({
       marginTop: 10
 
    },
-
-
-
-
-   // CompCard: {
-   //    width: "95%",
-   //    height: 250,
-   //    backgroundColor: "#2B2F38",
-   //    alignSelf: "center"
-   // },
-   // gradient: {
-   //    flex: 1,
-   //    justifyContent: 'flex-end',
-   //    borderRadius: 20
-   // },
-
    Ongoing: {
       // fontFamily: 'Montserrat-Regular',
       fontSize: 15,
@@ -424,6 +353,3 @@ const styles = StyleSheet.create({
 
 
 })
-
-//TODO: make colours a global style 
-//TODO: make the navbar a global style (do research on navbar)

@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Competitions from '../components/Competitions';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { getCompetitionImage } from '../services/firebasedb';
+import { UpdateSkinScore, getCompetitionImage } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -13,6 +13,7 @@ const CompetitionDetails = ({ route }) => {
     const { competitionId, Competition } = route.params;
     const CompId = Competition.id
     const [skinImage, setSkinImage] = useState([]);
+    const [score, setScore] = useState(Competition.score); // Initialize the score state
 
     useEffect(() => {
       getCurrentImage();
@@ -26,10 +27,18 @@ const CompetitionDetails = ({ route }) => {
         console.error('Error fetching skin image:', error);
       }
     };
-
+  
     const back = () => {
-        navigation.goBack()
-     }
+      navigation.goBack();
+    };
+  
+    const updateScoreAndUI = async () => {
+      await UpdateSkinScore(competitionId, CompId);
+      setScore((prevScore) => prevScore + 1); // Increment the score in the local state
+      Alert.alert("You voted for: ", Competition.name);
+    };
+
+
   return (
     <View style={styles.container}>
             <View style={styles.TopSection}>
@@ -39,7 +48,7 @@ const CompetitionDetails = ({ route }) => {
                 />
                 
             <TouchableOpacity onPress={back} style={styles.back}>  
-                <Ionicons name="chevron-back-outline" size={30} color="white" />
+                <Ionicons name="chevron-back-outline" size={30} color="#FED32C" />
             </TouchableOpacity>
                 
                     {skinImage.map((image, index) => (
@@ -79,14 +88,14 @@ const CompetitionDetails = ({ route }) => {
                         <Text style={styles.classTitle}>Creator: </Text>
                         <Text style={styles.classValue}>{Competition.creator}</Text>
                     </View>
-                    <TouchableOpacity style={styles.voteButton}>
+                    <TouchableOpacity style={styles.voteButton} onPress={updateScoreAndUI}>
                         <Text style={styles.voteText}>Vote</Text>
                     </TouchableOpacity>
             </View>
 
             <View style={styles.VoteViewSection}>
                         <View style={styles.VoteBox}>
-                            <Text style={styles.Number}>{Competition.score}</Text>
+                            <Text style={styles.Number}>{score}</Text>
                             <Text style={styles.NumberText}>Votes</Text>
 
                         </View>
@@ -120,27 +129,26 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         position: "absolute",
         top: 70,
-        zIndex: 999
+        zIndex: 999,
+        backgroundColor: "#2B2F38",
+        borderRadius: 20,
+        width: 40,
+        height: 35,
+        alignItems: "center",
+        justifyContent: "center"
     },
     imageHere: {
         width: "100%",
         height: 350,
-        // backgroundColor: 'red',
         position: "absolute",
         bottom: 0,
         left: 0,
-        // marginTop: 20,
         borderRadius: 5,
-        // paddingTop: 20,
-        // alignItems: 'center',
-        
     },
     IMAGE: {
         width: "95%",
         height: 350,
         borderRadius: 5,
-
-        // alignSelf: 'center'
     },
     gradient: {
         position: 'absolute',
@@ -148,7 +156,6 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: '100%',
-        // borderRadius: 10
     },
     DetailSection: {
         width: "90%",
