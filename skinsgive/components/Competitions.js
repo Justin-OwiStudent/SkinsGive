@@ -12,6 +12,8 @@ const Competitions = (props, { navigation }) => {
     const [skins, setSkins] = useState([])
 
     const { data } = props
+    const CompId = data.id;
+    console.log(CompId)
     // console.log(data)
 
     useEffect(() => {
@@ -41,8 +43,7 @@ const Competitions = (props, { navigation }) => {
 
     const howl = "../assets/M4.png"
 
-    const CompId = data.id;
-    console.log(CompId)
+    
 
 
 

@@ -9,8 +9,6 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 const EnterCompetitionScreen = ({ navigation }) => {
 
-
-
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -20,13 +18,8 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
     ]);
 
-
-
     const [name, setName] = useState("")
     const [exterior, setExterior] = useState("")
-
-
-
 
     const createEntry = async () => {
         //AWP ADD
@@ -108,10 +101,6 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
 
     }
-
-
-
-
 
 
     //IMAGE PICKER ---
@@ -364,97 +353,4 @@ const styles = StyleSheet.create({
         fontSize: 16
     }
 
-
-    // EnterDetails: {
-    //     alignSelf: 'flex-start',
-    //     marginTop: 10,
-
-    //     // backgroundColor: "#A12895",
-
-    // },
-    // WantEnter: {
-
-    //     color: 'white',
-    //     marginBottom: 20,
-    //     marginLeft: 20
-    // },
-    // Followsteps: {
-    //     color: 'white',
-    //     marginBottom: 20,
-    //     marginLeft: 20
-
-    // },
-    // steps: {
-    //     color: 'white',
-    //     textAlign: "left",
-    //     marginLeft: 25
-
-    // },
-
-    // SkinNameLabel: {
-    //     fontSize: 12,
-    //     marginTop: 20,
-    //     paddingLeft: 30,
-    //     marginBottom: 5,
-    //     color: 'white'
-    // },
-    // SkinName: {
-    //     backgroundColor: '#393B3F',
-    //     height: 50,
-    //     width: 300,
-    //     borderRadius: 20,
-    //     color: 'white',
-    //     marginLeft: 30,
-    //     paddingLeft: 15
-    // },
-    // SkinUploadLabel: {
-    //     fontSize: 12,
-    //     marginTop: 20,
-    //     paddingLeft: 30,
-    //     marginBottom: 15,
-    //     color: 'white'
-    // },
-    // SkinImage: {
-    //     backgroundColor: '#393B3F',
-    //     height: 210,
-    //     width: 300,
-    //     borderRadius: 20,
-    //     color: 'black',
-    //     marginLeft: 30,
-    //     marginBottom: 20
-    // },
-    // upload: {
-    //     width: 150,
-    //     height: 50,
-    //     backgroundColor: '#D32026',
-    //     marginLeft: 30,
-    //     marginTop: 20,
-    //     borderRadius: 20,
-    //     borderWidth: 2,
-    //     borderColor: "black"
-    // },
-    // uploadImgaeButton: {
-    //     marginBottom: 20
-    // },
-    // inputGroup: {
-    //     display: "flex",
-    //     flexDirection: "row",
-    //     // justifyContent: "space-between",
-    //     gap: 15,
-    //     alignItems: "left",
-    //     marginLeft: 50
-    // },
-    // Enter: {
-    //     color: "white",
-    //     textAlign: "center",
-    //     marginTop: 15
-    // },
-    // dropdown: {
-    //     backgroundColor: '#393B3F',
-    //     width: 300,
-    //     height: 50,
-    //     marginLeft: 30,
-    //     color: 'white',
-
-    // }
 })

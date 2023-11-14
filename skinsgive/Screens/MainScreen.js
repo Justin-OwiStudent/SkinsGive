@@ -80,25 +80,6 @@ const MainScreen = ({ navigation }) => {
       setRefreshing(false);
    };
 
-   // console.log(winningEntries[0])
-   
-
-   // const updateWins = async () => {
-   //    try {
-   //      // Check if the winner is the current user
-   //      if (winner === user.displayName) {
-         
-   //        const userId = user.id
-   //        const userDoc = await getUserDoc(userId);
-    
-   //        // Update the "wins" field
-   //        await updateUserWins(userDoc.id, userDoc.wins + 1);
-   //      }
-   //    } catch (error) {
-   //      console.error('Error updating wins:', error);
-   //    }
-   //  };
-
 
    const calculateWinningEntry = (entries) => {
       if (!Array.isArray(entries)) {
