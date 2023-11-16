@@ -18,7 +18,7 @@
 </br>
 <p align="center">
 
-  <a href="https://github.com/Justin-OwiStudent/SkinsGive">
+  <a href="https://github.com/RetroPixelz/SkinsGive">
     <img src="Mockups/LOGO.png" alt="Logo" width="250" height="150">
   </a>
   
@@ -26,14 +26,14 @@
 
   <p align="center">
     Counter skins is a mobile application where enthusiasts of Counter Strike can go and enter a skins competition, users can enter and vote for other skins, the competitions are time based, once the time is up the winner of the competition will be declared, and who knows, maybe well see your skin in the next Counter Strike update ! <br>
-      <a href="https://github.com/Justin-OwiStudent/SkinsGive/skinsgive"><strong>Explore the docs »</strong></a>
+      <a href="https://github.com/RetroPixelz/SkinsGive/skinsgive"><strong>Explore the docs »</strong></a>
    <br />
    <br />
    <!-- <a href="path/to/demonstration/video">View Demo</a> -->
     ·
-    <a href="https://github.com/Justin-OwiStudent/SkinsGive/issues">Report Bug</a>
+    <a href="https://github.com/RetroPixelz/SkinsGive/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Justin-OwiStudent/SkinsGive/issues">Request Feature</a>
+    <a href="https://github.com/RetroPixelz/SkinsGive/issues">Request Feature</a>
 </p>
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -48,18 +48,11 @@
 * [Concept Process](#concept-process)
    * [Ideation](#ideation)
    * [Wireframes](#wireframes)
-   * [User-flow](#user-flow)
 * [Development Process](#development-process)
    * [Implementation Process](#implementation-process)
         * [Highlights](#highlights)
         * [Challenges](#challenges)
-   * [Reviews and Testing](#peer-reviews)
-        * [Feedback from Reviews](#feedback-from-reviews)
-        * [Unit Tests](#unit-tests)
    * [Future Implementation](#peer-reviews)
-* [Final Outcome](#final-outcome)
-    * [Mockups](#mockups)
-    * [Video Demonstration](#video-demonstration)
 * [Conclusion](#conclusion)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -119,22 +112,33 @@ Run the following in the command-line to install all the required dependencies:
 <!-- You can add the links to all of your imagery at the bottom of the file as references -->
 ## Features and Functionality
 
-![image2][image2]
+<p align="center">
+<img src="assets/Mockup2.png" alt="Image 3" width="500" height="400">
+</p>
+
 ### Feature 1
 
 Login and Registration, here you are presented with the first Screen of the application where you can create a new account or sign in if you already have an account.
 
-![image3][image3]
+<p align="center">
+<img src="assets/Mockup1.png" alt="Image 3" width="500" height="400">
+</p>
+
 ### Feature 2
 
 Here you are presented with the competitions available for you as the user to enter, for this application it usually hosts only up to 3 competitions.
 
-![image4][image4]
+<p align="center">
+<img src="assets/Mockup3.png" alt="Image 3" width="500" height="400">
+</p>
+
 ### Feature 3
 
 The Competitions and how to enter them, here we have the competition entries based on the chosen competition and then also we have the form and a way for you as the user to enter the competition,
 
-![image5][image5]
+<p align="center">
+<img src="assets/Mockup4.png" alt="Image 3" width="500" height="400">
+</p>
 
 
 <!-- CONCEPT PROCESS -->
@@ -143,15 +147,19 @@ The Competitions and how to enter them, here we have the competition entries bas
 
 starting off with this competition i looked at all kinds of CSGO websites and got the general feel for them, they all had bold colors that definitly attracted your eye. i created a moodboard, then went on to create the high and low fidelity wireframes and then proceeded to implement everything!
 
-### Ideation
+### Mood Board
 
-![image6][image6]
+<p align="center">
+<img src="assets/MoodBoard.png" alt="Image 3" width="500" height="400">
+</p>
 
 
 
 ### Wireframes
 
-![image7][image7]
+<p align="center">
+<img src="assets/Wireframes.png" alt="Image 3" width="500" height="400">
+</p>
 
 <!-- ### User-flow
 
@@ -196,35 +204,10 @@ each competition is a collection and withing that i have subcollections which ho
 * Rank displaying based on user rank.
 * more refined and appealing UI 
 
-<!-- MOCKUPS -->
-## Final Outcome
-
-### Mockups
-
-![image9][image9]
-<br>
-![image10][image10]
-
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-See the [open issues](https://github.com/Justin-OwiStudent/SkinsGive/issues) for a list of proposed features (and known issues). -->
-
-<!-- CONTRIBUTING -->
-<!-- ## Contributing
-
-Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request -->
-
 <!-- AUTHORS -->
 ## Authors
 
-* **Justin Koster** - [username](https://github.com/Justin-OwiStudent)
+* **Justin Koster** - [username](https://github.com/RetroPixelz)
 
 <!-- LICENSE -->
 ## License
@@ -235,17 +218,11 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 ## Contact
 
 * **Justin Koster** - [email@address](200100@virtualwindow.co.za) 
-* **Project Link** - https://github.com/Justin-OwiStudent/SkinsGive
+* **Project Link** - https://github.com/RetroPixelz/SkinsGive
 
 <!-- ACKNOWLEDGEMENTS -->
 <!-- ## Acknowledgements
 <!-- all resources that you used and Acknowledgements here -->
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource)
-* [Resource Name](path/to/resource) -->
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: /path/to/image.png
@@ -256,14 +233,3 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 [image6]: /Mockups/MoodBoard.png
 [image7]: /Mockups/Wireframes.png
 [image8]: /path/to/image.png
-<!--[image9]: /Mockups/mockup4.png-->
-<!--[image10]: /Mockups/mockup2.png-->
-
-
-<!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/nameonlinkedin/
-[instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=flat-square&logo=instagram&colorB=555
-[instagram-url]: https://www.instagram.com/instagram_handle/
-[behance-shield]: https://img.shields.io/badge/-Behance-black.svg?style=flat-square&logo=behance&colorB=555
-[behance-url]: https://www.behance.net/name-on-behance/
