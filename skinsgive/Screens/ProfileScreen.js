@@ -5,35 +5,29 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { GetUserDetails, getAk, getAllComps, getAwp, getM4 } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
 
-// import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated';
-
-
 const ProfileScreen = () => {
     const [enteredCompetitions, setEnteredCompetitions] = useState(0);
     const [enteredComps, setEnteredComps] = useState(0);
+    const [userWins, setUserWins] = useState(0);
+
     const [userDetails, setUserDetails] = useState("");
 
 
     const user = getCurrentUser()
+    const uid = user.uid;
 
-    console.log(user.displayName)
+    console.log(user.wins)
+    const displayName = user.displayName
+
+   
 
     useEffect(() => {
         getAllCompetitions();
-        getUser();
+        const wins = user?.wins !== undefined ? user.wins : 0;
+        setUserWins(wins);
     }, []);
 
-    const getUser = async () => {
-        try {
-          console.log('Getting data');
-          const UserDetails = await GetUserDetails(uid);
-          setUserDetails(UserEntries);
-          console.log(userDetails)
-        //   setData(UserEntries);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+   console.log(userWins)
 
     const getAllCompetitions = async () => {
         try {
@@ -46,9 +40,10 @@ const ProfileScreen = () => {
             const ak = allThree;
 
             const allComps = ak.concat(m4, awp);
+           
 
-            const userEnteredComps = allComps.filter(comp => comp.creator === user.displayName);
-
+            const userEnteredComps = allComps.filter(comp => comp.creator === displayName);
+            console.log(userEnteredComps)
             setEnteredCompetitions(userEnteredComps.length);
             setEnteredComps(userEnteredComps);
             console.log(enteredComps)
@@ -72,7 +67,7 @@ const ProfileScreen = () => {
 
                 </View>
                 <View style={styles.entries}>
-                    <Text style={styles.amount}>7</Text>
+                    <Text style={styles.amount}>{userWins}</Text>
                     <Text style={styles.amountTitle}>Wins</Text>
                 </View>
             </View>
@@ -81,11 +76,11 @@ const ProfileScreen = () => {
                 <Text style={styles.logoutText}>Logout</Text>
             </TouchableOpacity>
 
-            <Text style={styles.PastEntries}>Past Entries</Text>
+            {/* <Text style={styles.PastEntries}>Past Entries</Text>
             <ScrollView style={styles.scrollEntries}>
 
 
-                {/* {enteredComps && enteredComps.map((entered, index) => (
+                {enteredComps && enteredComps.map((entered, index) => (
                     <TouchableOpacity style={styles.PastEntryCard} key={index}>
                         <LinearGradient
                             colors={['transparent', '#3A3F4A']}
@@ -94,16 +89,8 @@ const ProfileScreen = () => {
                         <Text style={styles.SkinName}>{entered.name}</Text>
                         <Text style={styles.SkinType}>{entered.value}</Text>
                     </TouchableOpacity>
-                ))} */}
-
-               
-
-
-            </ScrollView>
-
-
-
-
+                ))}
+            </ScrollView> */}
         </View>
     )
 }

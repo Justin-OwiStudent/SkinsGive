@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Image style={styles.logo} source={require("../assets/LOGO.png")} />
+            <Image style={styles.logo} source={require("../assets/CS_YELLOW.png")} />
             <Text style={styles.intro}>LETS GET YOU SIGNED UP!</Text>
 
             <View style={styles.inputView}>

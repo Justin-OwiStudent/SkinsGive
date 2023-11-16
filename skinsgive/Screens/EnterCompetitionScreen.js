@@ -22,85 +22,45 @@ const EnterCompetitionScreen = ({ navigation }) => {
     const [exterior, setExterior] = useState("")
 
     const createEntry = async () => {
-        //AWP ADD
-        if (value === "AWP") {
-            var creatorInfo = getCurrentUser()
-
-            var competition = {
-                name,
-                value,
-                exterior,
-                creator: creatorInfo.displayName,
-                userId: creatorInfo.uid,
-                score: 0
-            }
-
-            //create array for all skin images, for sub collection
-            var skins = []
-            image && skins.push({ imageUrl: image, title: name })
-
-            const success = await addAwpSkin(competition, skins)
-            if (success) {
-                console.log("added AWP Skin successfully")
-                navigation.goBack()
-
-            } else {
-                console.log("Whoops... adding Skin failed.")
-                Alert.alert("whoops", "something went wrong when trying to add Skin")
-            }
-        } else if (value === "M4A4") {
-            var creatorInfo = getCurrentUser()
-
-            var competition = {
-                name,
-                value,
-                exterior,
-                creator: creatorInfo.displayName,
-                userId: creatorInfo.uid,
-                score: 0
-            }
-
-            //create array for all skin images, for sub collection
-            var skins = []
-            image && skins.push({ imageUrl: image, title: name })
-
-            const success = await addM4Skin(competition, skins)
-            if (success) {
-                console.log("added M4A4 Skin Successfully")
-                navigation.goBack()
-
-            } else {
-                console.log("Whoops... adding Skin failed.")
-                Alert.alert("whoops", "something went wrong when trying to add Skin")
-            }
-        } else if (value === "AK-47") {
-            var creatorInfo = getCurrentUser()
-
-            var competition = {
-                name,
-                value,
-                exterior,
-                creator: creatorInfo.displayName,
-                userId: creatorInfo.uid,
-                score: 0
-            }
-
-            var skins = []
-            image && skins.push({ imageUrl: image, title: name })
-
-            const success = await addAkSkin(competition)
-            if (success) {
-                console.log("added Ak-47 successfully")
-                navigation.goBack()
-
-            } else {
-                console.log("Whoops... adding Skin failed.")
-                Alert.alert("whoops", "something went wrong when trying to add Skin")
-            }
+        const creatorInfo = getCurrentUser();
+    
+        const competition = {
+            name,
+            value,
+            exterior,
+            creator: creatorInfo.displayName,
+            userId: creatorInfo.uid,
+            score: 0,
+        };
+    
+        const skins = image ? [{ imageUrl: image, title: name }] : [];
+    
+        let success = false;
+    
+        switch (value) {
+            case 'AWP':
+                success = await addAwpSkin(competition, skins);
+                break;
+            case 'M4A4':
+                success = await addM4Skin(competition, skins);
+                break;
+            case 'AK-47':
+                success = await addAkSkin(competition, skins);
+                break;
+            default:
+                console.log('Unknown skin type');
+                break;
         }
-
-
-    }
+    
+        if (success) {
+            console.log(`Added ${value} skin successfully`);
+            navigation.goBack();
+        } else {
+            console.log('Whoops... adding Skin failed.');
+            Alert.alert('Whoops', 'Something went wrong when trying to add Skin');
+        }
+    };
+    
 
 
     //IMAGE PICKER ---
@@ -109,19 +69,24 @@ const EnterCompetitionScreen = ({ navigation }) => {
 
 
     const pickImageFromLibrary = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [6, 4],
-            quality: 0.7,
-        });
-
-        console.log(result);
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: true,
+                aspect: [6, 4],
+                quality: 0.9,
+            });
+    
+            if (!result.cancelled) {
+                setImage(result.assets[0].uri);
+            } else {
+                console.log('Image picker cancelled');
+            }
+        } catch (error) {
+            console.error('Error picking image from library:', error);
         }
-    }
+    };
+    
 
     const uploadTest = async () => {
         const result = await uploadToStorage(image, "skin/testImage_" + name);
@@ -206,7 +171,7 @@ const EnterCompetitionScreen = ({ navigation }) => {
             
             <Text style={styles.SkinUploadLabel}>Upload your design</Text>
                 <View style={styles.SkinImage}>
-                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: "100%", height: "100%",  borderRadius: 20 }} />}
+                    {image && <Image source={{ uri: image }} style={{ alignSelf: "center", width: "100%", height: "100%",  borderRadius: 20, resizeMode: "contain" }} />}
                     {image ? (
                         <Pressable style={styles.TrashIcon} onPress={() => setImage(null)}>
                             <Ionicons name="close-outline" size={32} color="red" />

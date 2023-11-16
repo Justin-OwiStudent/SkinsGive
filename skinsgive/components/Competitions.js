@@ -2,19 +2,20 @@ import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } fr
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { getAwpImage, getM4Image, updateScore } from '../services/firebasedb';
+import { getAwpImage, getCompetitionImage, getM4Image, updateScore } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
-const Competitions = (props, { navigation }) => {
-
+const Competitions = (props, { navigation, competitionId}) => {
+    
     const [image, setImage] = useState("../assets/M4.png");
 
     const [skins, setSkins] = useState([])
 
     const { data } = props
     const CompId = data.id;
-    console.log(CompId)
-    // console.log(data)
+    competitionId = props.competitionId
+   
 
     useEffect(() => {
         ChooseImage()
@@ -24,8 +25,8 @@ const Competitions = (props, { navigation }) => {
 
 
     const getCurrentImage = async () => {
-        const result = await getAwpImage(CompId)
-        console.log(result)
+        const result = await getCompetitionImage(competitionId, CompId)
+      
         setSkins(result)
     }
 
@@ -39,20 +40,6 @@ const Competitions = (props, { navigation }) => {
 
         }
     }
-    console.log(image)
-
-    const howl = "../assets/M4.png"
-
-    
-
-
-
-
-    //TODO: count the amount of entries and show on card
-
-    //TODO: do the timestamp
-
-    // const image = 
 
     return (
         <View style={styles.card}>
@@ -69,6 +56,7 @@ const Competitions = (props, { navigation }) => {
                             <View key={index}>
                                 <Image style={styles.IMAGE}
                                     source={{ uri: skin.imageUrl }}
+                                    resizeMode="contain"
                                 // style={{height: 140, width: 190}}
                                 />
                             </View>
@@ -85,21 +73,6 @@ const Competitions = (props, { navigation }) => {
 
             </View>
             
-            {/* <View style={styles.skinSection}>
-           
-                
-
-            </View> */}
-            {/* <View style={styles.Details}>
-
-            </View> */}
-            
-            {/* <View style={styles.NameBadge}>
-                <Text style={styles.time}>{data.name}</Text>
-            </View>
-            <View style={styles.enties}>
-                <Text style={styles.scoreText}>Score: {data.score} </Text>
-            </View> */}
         </View>
     )
 }
@@ -126,10 +99,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
       },
     ImageSection: {
-        width: 350,
+        width: "100%",
         height: 170,
-        // backgroundColor: "blue",
-        // marginTop: 20
+        
     },
     IMAGE: {
         borderRadius: 5,
@@ -138,6 +110,7 @@ const styles = StyleSheet.create({
         width: 350,
         height: 170,
         alignSelf: 'center',
+        
     },
     Details: {
         width: 300,

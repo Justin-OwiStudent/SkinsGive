@@ -10,25 +10,19 @@ import { getCurrentUser } from '../services/firebaseAuth'
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-
-
-
 const MainScreen = ({ navigation }) => {
    const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0 });
    const [refreshing, setRefreshing] = useState(false)
    const [competitions, setCompetitions] = useState([]);
    const [winningEntries, setWinningEntries] = useState({});
    const [winner, setWinner] = useState("");
-   // const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining(competition.EndDate));
-
+   
    const user = getCurrentUser()
-   // console.log(user.uid)
 
    useEffect(() => {
       getAllCompetitions();
    }, []);
 
-   // get for all competitions
    const getAllCompetitions = async () => {
       setRefreshing(true);
       try {
@@ -120,7 +114,6 @@ const MainScreen = ({ navigation }) => {
       const timeRemaining = calculateTimeRemaining(endDate);
       const { days, hours, minutes } = timeRemaining;
 
-      // Format the string as per your preference
       return `${days} days, ${hours} hours, ${minutes} minutes remaining`;
    };
 

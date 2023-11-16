@@ -249,15 +249,15 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: /path/to/image.png
-[image2]: /Mockups/mockup5.png
-[image3]: /Mockups/mockup1.png
-[image4]: /Mockups/mockup2.png
-[image5]: /Mockups/mockup3.png
+<!--[image2]: /Mockups/mockup5.png-->
+[image3]: /Mockups/Mockup1.png
+[image4]: /Mockups/Mockup2.png
+[image5]: /Mockups/Mockup3.png
 [image6]: /Mockups/MoodBoard.png
 [image7]: /Mockups/Wireframes.png
 [image8]: /path/to/image.png
-[image9]: /Mockups/mockup4.png
-[image10]: /Mockups/mockup2.png
+<!--[image9]: /Mockups/mockup4.png-->
+<!--[image10]: /Mockups/mockup2.png-->
 
 
 <!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->

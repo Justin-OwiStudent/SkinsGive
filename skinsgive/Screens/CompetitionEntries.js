@@ -60,7 +60,7 @@ const CompetitionEntries = ({ route }) => {
           <TouchableOpacity key={index}
           onPress={() => navigateToCompDetails(Competition)}
           activeOpacity={0.75}>
-             <Competitions data={Competition} />
+             <Competitions data={Competition} competitionId={competitionId}/>
           </TouchableOpacity>
        ))}
     </ScrollView>

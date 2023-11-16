@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Competitions from '../components/Competitions';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { UpdateSkinScore, getCompetitionImage } from '../services/firebasedb';
+import { UpdateSkinScore, getCompetitionImage, getSkinEntry } from '../services/firebasedb';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -14,29 +14,62 @@ const CompetitionDetails = ({ route }) => {
     const CompId = Competition.id
     const [skinImage, setSkinImage] = useState([]);
     const [score, setScore] = useState(Competition.score); // Initialize the score state
+    const [Views, setViews] = useState(Competition.views);
 
     useEffect(() => {
-      getCurrentImage();
-    }, []);
-  
-    const getCurrentImage = async () => {
-      try {
-        const result = await getCompetitionImage(competitionId, CompId);
-        setSkinImage(result);
-      } catch (error) {
-        console.error('Error fetching skin image:', error);
-      }
-    };
-  
-    const back = () => {
-      navigation.goBack();
-    };
-  
-    const updateScoreAndUI = async () => {
-      await UpdateSkinScore(competitionId, CompId);
-      setScore((prevScore) => prevScore + 1); // Increment the score in the local state
-      Alert.alert("You voted for: ", Competition.name);
-    };
+        getCurrentImage();
+        getViews();
+      }, []);
+    
+      
+
+      const getViews = async () => {
+        try {
+          const skinEntry = await getSkinEntry(competitionId, CompId); // Add 'await' here
+          if (skinEntry) {
+            // Display the skin details
+            console.log("Skin Details:", skinEntry);
+            setViews(skinEntry.views)
+          } else {
+            console.log("Skin not found.");
+          }
+        } catch (error) {
+          console.error("Error getting views", error);
+        }
+      };
+      
+
+      const getCurrentImage = async () => {
+        try {
+          const result = await getCompetitionImage(competitionId, CompId);
+          setSkinImage(result);
+        } catch (error) {
+          console.error('Error fetching skin image:', error);
+        }
+      };
+    
+      const back = () => {
+        navigation.goBack();
+      };
+    
+      const getSkinDescription = (skinValue) => {
+        switch (skinValue) {
+          case 'AWP':
+            return 'This is an AWP skin. Description for AWP goes here.';
+          case 'M4A4':
+            return 'This is an M4A4 skin. Description for M4A4 goes here.';
+          case 'AK-47':
+            return 'This is an AK-47 skin. Description for AK-47 goes here.';
+          default:
+            return 'Unknown skin type. No description available.';
+        }
+      };
+    
+      const updateScoreAndUI = async () => {
+        await UpdateSkinScore(competitionId, CompId);
+        setScore((prevScore) => prevScore + 1); // Increment the score in the local state
+        Alert.alert('You voted for: ', Competition.name);
+      };
 
 
   return (
@@ -56,6 +89,8 @@ const CompetitionDetails = ({ route }) => {
                             
                             <Image style={styles.IMAGE}
                                 source={{ uri: image.imageUrl }}
+                                resizeMode="contain"
+
 
                             />
                             <LinearGradient
@@ -76,11 +111,11 @@ const CompetitionDetails = ({ route }) => {
 
                     <View style={styles.RifleSection2}>
                         <Text style={styles.classTitle}>Exterior: </Text>
-                        <Text style={styles.classValue}></Text>
+                        <Text style={styles.classValue}>{Competition.exterior}</Text>
                     </View>
 
                     <View style={styles.RifleSection2}>
-                        <Text style={styles.classValue}>kjhjweqrkjwherkjwherkjwehrkjwehrkwjehrkwjehrkjwehrkjwherkjwherkjwehrkjwehrkjwherkwjehrkwejrh:</Text>
+                        <Text style={styles.classValue}>{getSkinDescription(Competition.value)}</Text>
                         
                     </View>
 
@@ -100,7 +135,7 @@ const CompetitionDetails = ({ route }) => {
 
                         </View>
                         <View style={styles.VoteBox}>
-                            <Text style={styles.Number}>100</Text>
+                            <Text style={styles.Number}>{Views}</Text>
                             <Text style={styles.NumberText}>Views</Text>
                         </View>
             </View>
@@ -159,7 +194,7 @@ const styles = StyleSheet.create({
     },
     DetailSection: {
         width: "90%",
-        height: 320,
+        // height: 320,
         backgroundColor: "#2B2F38",
         alignSelf: "center",
         marginTop: 20,
