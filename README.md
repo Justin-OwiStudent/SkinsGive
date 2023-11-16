@@ -113,7 +113,7 @@ Run the following in the command-line to install all the required dependencies:
 ## Features and Functionality
 
 <p align="center">
-<img src="assets/Mockup2.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/Mockup2.png" alt="Image 3" width="500" height="400">
 </p>
 
 ### Feature 1
@@ -121,7 +121,7 @@ Run the following in the command-line to install all the required dependencies:
 Login and Registration, here you are presented with the first Screen of the application where you can create a new account or sign in if you already have an account.
 
 <p align="center">
-<img src="assets/Mockup1.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/Mockup1.png" alt="Image 3" width="500" height="400">
 </p>
 
 ### Feature 2
@@ -129,7 +129,7 @@ Login and Registration, here you are presented with the first Screen of the appl
 Here you are presented with the competitions available for you as the user to enter, for this application it usually hosts only up to 3 competitions.
 
 <p align="center">
-<img src="assets/Mockup3.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/Mockup3.png" alt="Image 3" width="500" height="400">
 </p>
 
 ### Feature 3
@@ -137,7 +137,7 @@ Here you are presented with the competitions available for you as the user to en
 The Competitions and how to enter them, here we have the competition entries based on the chosen competition and then also we have the form and a way for you as the user to enter the competition,
 
 <p align="center">
-<img src="assets/Mockup4.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/Mockup4.png" alt="Image 3" width="500" height="400">
 </p>
 
 
@@ -150,7 +150,7 @@ starting off with this competition i looked at all kinds of CSGO websites and go
 ### Mood Board
 
 <p align="center">
-<img src="assets/MoodBoard.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/MoodBoard.png" alt="Image 3" width="500" height="400">
 </p>
 
 
@@ -158,7 +158,7 @@ starting off with this competition i looked at all kinds of CSGO websites and go
 ### Wireframes
 
 <p align="center">
-<img src="assets/Wireframes.png" alt="Image 3" width="500" height="400">
+<img src="Mockups/Wireframes.png" alt="Image 3" width="500" height="400">
 </p>
 
 <!-- ### User-flow
